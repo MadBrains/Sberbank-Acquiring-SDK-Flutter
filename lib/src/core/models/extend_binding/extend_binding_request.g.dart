@@ -1,0 +1,31 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'extend_binding_request.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+ExtendBindingRequest _$ExtendBindingRequestFromJson(Map<String, dynamic> json) {
+  return ExtendBindingRequest(
+    bindingId: json['bindingId'] as String,
+    newExpiry: json['newExpiry'] as int,
+    language: json['language'] as String,
+  );
+}
+
+Map<String, dynamic> _$ExtendBindingRequestToJson(
+    ExtendBindingRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('bindingId', instance.bindingId);
+  writeNotNull('newExpiry', instance.newExpiry);
+  writeNotNull('language', instance.language);
+  return val;
+}
