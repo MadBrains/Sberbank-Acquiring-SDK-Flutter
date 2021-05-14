@@ -9,10 +9,10 @@ part of 'get_receipt_status_request.dart';
 GetReceiptStatusRequest _$GetReceiptStatusRequestFromJson(
     Map<String, dynamic> json) {
   return GetReceiptStatusRequest(
-    orderId: json['orderId'] as String,
-    orderNumber: json['orderNumber'] as String,
-    uuid: json['uuid'] as String,
-    language: json['language'] as String,
+    orderId: json['orderId'] as String?,
+    orderNumber: json['orderNumber'] as String?,
+    uuid: json['uuid'] as String?,
+    language: json['language'] as String?,
   );
 }
 

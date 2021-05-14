@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 
 import '../../../constants.dart';
 import '../base/acquiring_request.dart';
@@ -13,7 +12,7 @@ part 'bind_card_request.g.dart';
 class BindCardRequest extends AcquiringRequest {
   /// {@macro bind_card_request}
   BindCardRequest({
-    @required this.bindingId,
+    required this.bindingId,
   });
 
   /// {@macro fromJson}
@@ -27,14 +26,14 @@ class BindCardRequest extends AcquiringRequest {
   Map<String, dynamic> toJson() => _$BindCardRequestToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.bindingId: bindingId,
       };
 
   @override
   BindCardRequest copyWith({
-    String bindingId,
+    String? bindingId,
   }) {
     return BindCardRequest(
       bindingId: bindingId ?? this.bindingId,
@@ -51,5 +50,5 @@ class BindCardRequest extends AcquiringRequest {
   /// 1. Данный заказ может быть оплачен только с помощью связки;
   /// 2. Плательщик будет перенаправлен на платёжную страницу, где требуется только ввод CVC.
   @JsonKey(name: JsonKeys.bindingId)
-  final String bindingId;
+  final String? bindingId;
 }

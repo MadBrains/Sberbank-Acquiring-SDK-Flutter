@@ -11,8 +11,8 @@ part 'bind_card_response.g.dart';
 class BindCardResponse extends AcquiringResponse {
   /// {@macro bind_card_response}
   BindCardResponse({
-    String errorCode,
-    String errorMessage,
+    String? errorCode,
+    String? errorMessage,
   }) : super(
           errorCode: errorCode,
           errorMessage: errorMessage,
@@ -26,7 +26,7 @@ class BindCardResponse extends AcquiringResponse {
   Map<String, dynamic> toJson() => _$BindCardResponseToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
       };
 }

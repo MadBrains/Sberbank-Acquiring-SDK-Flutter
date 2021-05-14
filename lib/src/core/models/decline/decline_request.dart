@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 
 import '../../../constants.dart';
 import '../base/acquiring_request.dart';
@@ -13,7 +12,7 @@ part 'decline_request.g.dart';
 class DeclineRequest extends AcquiringRequest {
   /// {@macro decline_request}
   DeclineRequest({
-    @required this.merchantLogin,
+    required this.merchantLogin,
     this.language,
     this.orderId,
     this.orderNumber,
@@ -30,7 +29,7 @@ class DeclineRequest extends AcquiringRequest {
   Map<String, dynamic> toJson() => _$DeclineRequestToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.merchantLogin: merchantLogin,
         JsonKeys.language: language,
@@ -40,10 +39,10 @@ class DeclineRequest extends AcquiringRequest {
 
   @override
   DeclineRequest copyWith({
-    String merchantLogin,
-    String language,
-    String orderId,
-    String orderNumber,
+    String? merchantLogin,
+    String? language,
+    String? orderId,
+    String? orderNumber,
   }) {
     return DeclineRequest(
       merchantLogin: merchantLogin ?? this.merchantLogin,
@@ -55,7 +54,6 @@ class DeclineRequest extends AcquiringRequest {
 
   @override
   void validate() {
-    assert(merchantLogin != null);
     assert(orderId != null || orderNumber != null);
   }
 
@@ -67,14 +65,14 @@ class DeclineRequest extends AcquiringRequest {
   /// Язык в кодировке ISO 639-1.
   /// Если не указан, будет использован язык, указанный в настройках магазина как язык по умолчанию.
   @JsonKey(name: JsonKeys.language)
-  final String language;
+  final String? language;
 
   /// Номер заказа в платежной системе. Уникален в пределах системы.
   /// Отсутствует если регистрация заказа на удалась по причине ошибки, детализированной в ErrorCode.
   @JsonKey(name: JsonKeys.orderId)
-  final String orderId;
+  final String? orderId;
 
   /// Номер заказа в системе магазина.
   @JsonKey(name: JsonKeys.orderNumber)
-  final String orderNumber;
+  final String? orderNumber;
 }

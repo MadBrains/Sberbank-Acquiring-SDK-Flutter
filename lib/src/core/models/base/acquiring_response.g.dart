@@ -8,8 +8,8 @@ part of 'acquiring_response.dart';
 
 AcquiringResponse _$AcquiringResponseFromJson(Map<String, dynamic> json) {
   return AcquiringResponse(
-    errorCode: json['errorCode'] as String,
-    errorMessage: json['errorMessage'] as String,
+    errorCode: json['errorCode'] as String?,
+    errorMessage: json['errorMessage'] as String?,
   );
 }
 

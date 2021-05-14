@@ -28,7 +28,7 @@ class PaymentAmountInfo extends BaseResponse {
   Map<String, dynamic> toJson() => _$PaymentAmountInfoToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.approvedAmount: approvedAmount,
         JsonKeys.depositedAmount: depositedAmount,
@@ -39,21 +39,21 @@ class PaymentAmountInfo extends BaseResponse {
 
   /// Сумма, подтверждённая к списанию
   @JsonKey(name: JsonKeys.approvedAmount)
-  final int approvedAmount;
+  final int? approvedAmount;
 
   /// Сумма в минимальных единицах валюты (например, в копейках), подтверждённая для списания с карты
   @JsonKey(name: JsonKeys.depositedAmount)
-  final int depositedAmount;
+  final int? depositedAmount;
 
   /// Сумма возврата в минимальных единицах валюты
   @JsonKey(name: JsonKeys.refundedAmount)
-  final int refundedAmount;
+  final int? refundedAmount;
 
   /// {@macro payment_state}
   @JsonKey(name: JsonKeys.paymentState)
-  final PaymentState paymentState;
+  final PaymentState? paymentState;
 
   /// Сумма комиссии в минимальных единицах валюты
   @JsonKey(name: JsonKeys.feeAmount)
-  final int feeAmount;
+  final int? feeAmount;
 }

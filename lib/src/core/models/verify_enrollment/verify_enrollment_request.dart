@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 
 import '../../../constants.dart';
 import '../base/acquiring_request.dart';
@@ -13,7 +12,7 @@ part 'verify_enrollment_request.g.dart';
 class VerifyEnrollmentRequest extends AcquiringRequest {
   /// {@macro verify_enrollment_request}
   VerifyEnrollmentRequest({
-    @required this.pan,
+    required this.pan,
   });
 
   /// {@macro fromJson}
@@ -27,14 +26,14 @@ class VerifyEnrollmentRequest extends AcquiringRequest {
   Map<String, dynamic> toJson() => _$VerifyEnrollmentRequestToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.pan: pan,
       };
 
   @override
   VerifyEnrollmentRequest copyWith({
-    String pan,
+    String? pan,
   }) {
     return VerifyEnrollmentRequest(
       pan: pan ?? this.pan,
@@ -42,9 +41,7 @@ class VerifyEnrollmentRequest extends AcquiringRequest {
   }
 
   @override
-  void validate() {
-    assert(pan != null);
-  }
+  void validate() {}
 
   /// Маскированный номер карты, которая использовалась для оплаты.
   /// Указан только после оплаты заказа.

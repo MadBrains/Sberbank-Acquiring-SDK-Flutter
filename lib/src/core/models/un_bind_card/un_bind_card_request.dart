@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 
 import '../../../constants.dart';
 import '../base/acquiring_request.dart';
@@ -13,7 +12,7 @@ part 'un_bind_card_request.g.dart';
 class UnBindCardRequest extends AcquiringRequest {
   /// {@macro un_bind_card_request}
   UnBindCardRequest({
-    @required this.bindingId,
+    required this.bindingId,
   });
 
   /// {@macro fromJson}
@@ -27,14 +26,14 @@ class UnBindCardRequest extends AcquiringRequest {
   Map<String, dynamic> toJson() => _$UnBindCardRequestToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.bindingId: bindingId,
       };
 
   @override
   UnBindCardRequest copyWith({
-    String bindingId,
+    String? bindingId,
   }) {
     return UnBindCardRequest(
       bindingId: bindingId ?? this.bindingId,
@@ -42,9 +41,7 @@ class UnBindCardRequest extends AcquiringRequest {
   }
 
   @override
-  void validate() {
-    assert(bindingId != null);
-  }
+  void validate() {}
 
   /// Идентификатор созданной ранее связки. Может использоваться, только если у продавца есть разрешение на работу со связками.
   /// Если этот параметр передаётся в данном запросе, то это означает:

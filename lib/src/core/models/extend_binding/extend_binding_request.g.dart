@@ -10,13 +10,16 @@ ExtendBindingRequest _$ExtendBindingRequestFromJson(Map<String, dynamic> json) {
   return ExtendBindingRequest(
     bindingId: json['bindingId'] as String,
     newExpiry: json['newExpiry'] as int,
-    language: json['language'] as String,
+    language: json['language'] as String?,
   );
 }
 
 Map<String, dynamic> _$ExtendBindingRequestToJson(
     ExtendBindingRequest instance) {
-  final val = <String, dynamic>{};
+  final val = <String, dynamic>{
+    'bindingId': instance.bindingId,
+    'newExpiry': instance.newExpiry,
+  };
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -24,8 +27,6 @@ Map<String, dynamic> _$ExtendBindingRequestToJson(
     }
   }
 
-  writeNotNull('bindingId', instance.bindingId);
-  writeNotNull('newExpiry', instance.newExpiry);
   writeNotNull('language', instance.language);
   return val;
 }

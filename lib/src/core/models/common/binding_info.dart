@@ -26,7 +26,7 @@ class BindingInfo extends BaseResponse {
   Map<String, dynamic> toJson() => _$BindingInfoToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.clientId: clientId,
         JsonKeys.bindingId: bindingId,
@@ -38,17 +38,17 @@ class BindingInfo extends BaseResponse {
   /// Используется для реализации функционала связок.
   /// Может присутствовать, если магазину разрешено создание связок.
   @JsonKey(name: JsonKeys.clientId)
-  final String clientId;
+  final String? clientId;
 
   /// Идентификатор связки, созданной ранее.
   @JsonKey(name: JsonKeys.bindingId)
-  final String bindingId;
+  final String? bindingId;
 
   /// Дата и время авторизации в формате UNIX-времени (POSIX-времени).
   @JsonKey(name: JsonKeys.authDateTime)
-  final String authDateTime;
+  final String? authDateTime;
 
   /// Идентификатор терминала в процессинге, через который осуществлялась оплата.
   @JsonKey(name: JsonKeys.terminalId)
-  final String terminalId;
+  final String? terminalId;
 }

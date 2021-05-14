@@ -28,7 +28,7 @@ class GetOrderStatusExtendedRequest extends AcquiringRequest {
   Map<String, dynamic> toJson() => _$GetOrderStatusExtendedRequestToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.orderId: orderId,
         JsonKeys.orderNumber: orderNumber,
@@ -37,9 +37,9 @@ class GetOrderStatusExtendedRequest extends AcquiringRequest {
 
   @override
   GetOrderStatusExtendedRequest copyWith({
-    String orderId,
-    String orderNumber,
-    String language,
+    String? orderId,
+    String? orderNumber,
+    String? language,
   }) {
     return GetOrderStatusExtendedRequest(
       orderId: orderId ?? this.orderId,
@@ -56,15 +56,15 @@ class GetOrderStatusExtendedRequest extends AcquiringRequest {
   /// Номер заказа в платежной системе. Уникален в пределах системы.
   /// Отсутствует если регистрация заказа на удалась по причине ошибки, детализированной в ErrorCode.
   @JsonKey(name: JsonKeys.orderId)
-  final String orderId;
+  final String? orderId;
 
   /// Номер (идентификатор) заказа в системе магазина, уникален для каждого магазина в пределах системы.
   /// Если номер заказа генерируется на стороне платёжного шлюза, этот параметр передавать необязательно.
   @JsonKey(name: JsonKeys.orderNumber)
-  final String orderNumber;
+  final String? orderNumber;
 
   /// Язык в кодировке ISO 639-1.
   /// Если не указан, будет использован язык, указанный в настройках магазина как язык по умолчанию.
   @JsonKey(name: JsonKeys.language)
-  final String language;
+  final String? language;
 }

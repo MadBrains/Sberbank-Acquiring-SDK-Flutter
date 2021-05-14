@@ -1,3 +1,7 @@
+## [2.0.0] 
+
+* Null safe support
+
 ## [1.0.1] 
 
 * Fix pana errors

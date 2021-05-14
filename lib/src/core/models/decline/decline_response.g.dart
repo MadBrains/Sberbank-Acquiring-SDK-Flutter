@@ -8,9 +8,9 @@ part of 'decline_response.dart';
 
 DeclineResponse _$DeclineResponseFromJson(Map<String, dynamic> json) {
   return DeclineResponse(
-    errorCode: json['errorCode'] as String,
-    errorMessage: json['errorMessage'] as String,
-    userMessage: json['userMessage'] as String,
+    errorCode: json['errorCode'] as String?,
+    errorMessage: json['errorMessage'] as String?,
+    userMessage: json['userMessage'] as String?,
   );
 }
 

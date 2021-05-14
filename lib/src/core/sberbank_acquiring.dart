@@ -10,8 +10,11 @@ import 'sberbank_acquiring_config.dart';
 /// {@endtemplate}
 class SberbankAcquiring {
   /// {@macro sberbank_acquiring}
-  SberbankAcquiring(SberbankAcquiringConfig config)
+  SberbankAcquiring(this.config)
       : _network = NetworkClient(config);
+
+  /// {@macro sberbank_acquiring_config}
+  final SberbankAcquiringConfig config;
 
   final NetworkClient _network;
 

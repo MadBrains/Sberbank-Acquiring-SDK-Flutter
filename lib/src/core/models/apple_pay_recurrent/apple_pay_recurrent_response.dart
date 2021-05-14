@@ -15,8 +15,8 @@ part 'apple_pay_recurrent_response.g.dart';
 class ApplePayRecurrentResponse extends AcquiringResponse {
   /// {@macro apple_pay_recurrent_response}
   ApplePayRecurrentResponse({
-    String errorCode,
-    String errorMessage,
+    String? errorCode,
+    String? errorMessage,
     this.success,
     this.data,
     this.error,
@@ -34,7 +34,7 @@ class ApplePayRecurrentResponse extends AcquiringResponse {
   Map<String, dynamic> toJson() => _$ApplePayRecurrentResponseToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.success: success,
         JsonKeys.data: data,
@@ -46,19 +46,19 @@ class ApplePayRecurrentResponse extends AcquiringResponse {
   /// - `true` (истина) - запрос обработан успешно;
   /// - `false` (ложь) - запрос не прошёл.
   @JsonKey(name: JsonKeys.success)
-  final bool success;
+  final bool? success;
 
   /// Номер заказа в платёжной системе.
   /// Уникален в пределах системы.
   /// Отсутствует, если регистрация заказа на удалась по причине ошибки.
   @JsonKey(name: JsonKeys.data)
-  final Data data;
+  final Data? data;
 
   /// {@macro error_info}
   @JsonKey(name: JsonKeys.error)
-  final ErrorInfo error;
+  final ErrorInfo? error;
 
   /// {@macro order_status}
   @JsonKey(name: JsonKeys.orderStatus)
-  final OrderStatusInfo orderStatus;
+  final OrderStatusInfo? orderStatus;
 }

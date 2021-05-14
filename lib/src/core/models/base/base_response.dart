@@ -18,7 +18,7 @@ class BaseResponse extends ComparerMap {
       _$BaseResponseFromJson(json);
 
   @override
-  Map<String, Object> get equals => <String, Object>{};
+  Map<String, Object?> get equals => <String, Object?>{};
 
   /// {@template toJson}
   /// Преобразование модели в json

@@ -11,8 +11,8 @@ part 'deposit_response.g.dart';
 class DepositResponse extends AcquiringResponse {
   /// {@macro deposit_response}
   DepositResponse({
-    String errorCode,
-    String errorMessage,
+    String? errorCode,
+    String? errorMessage,
   }) : super(
           errorCode: errorCode,
           errorMessage: errorMessage,
@@ -26,7 +26,7 @@ class DepositResponse extends AcquiringResponse {
   Map<String, dynamic> toJson() => _$DepositResponseToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
       };
 }

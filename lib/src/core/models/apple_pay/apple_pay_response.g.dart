@@ -8,9 +8,9 @@ part of 'apple_pay_response.dart';
 
 ApplePayResponse _$ApplePayResponseFromJson(Map<String, dynamic> json) {
   return ApplePayResponse(
-    errorCode: json['errorCode'] as String,
-    errorMessage: json['errorMessage'] as String,
-    success: json['success'] as bool,
+    errorCode: json['errorCode'] as String?,
+    errorMessage: json['errorMessage'] as String?,
+    success: json['success'] as bool?,
     data: json['data'] == null
         ? null
         : Data.fromJson(json['data'] as Map<String, dynamic>),

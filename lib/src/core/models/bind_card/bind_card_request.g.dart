@@ -8,7 +8,7 @@ part of 'bind_card_request.dart';
 
 BindCardRequest _$BindCardRequestFromJson(Map<String, dynamic> json) {
   return BindCardRequest(
-    bindingId: json['bindingId'] as String,
+    bindingId: json['bindingId'] as String?,
   );
 }
 

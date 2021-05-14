@@ -13,8 +13,8 @@ part 'get_bindings_response.g.dart';
 class GetBindingsResponse extends AcquiringResponse {
   /// {@macro get_bindings_response}
   GetBindingsResponse({
-    String errorCode,
-    String errorMessage,
+    String? errorCode,
+    String? errorMessage,
     this.bindings,
   }) : super(
           errorCode: errorCode,
@@ -29,12 +29,12 @@ class GetBindingsResponse extends AcquiringResponse {
   Map<String, dynamic> toJson() => _$GetBindingsResponseToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.bindings: bindings,
       };
 
   /// Списк связок
   @JsonKey(name: JsonKeys.bindings)
-  final List<Binding> bindings;
+  final List<Binding>? bindings;
 }

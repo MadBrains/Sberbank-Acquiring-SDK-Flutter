@@ -10,12 +10,15 @@ RefundRequest _$RefundRequestFromJson(Map<String, dynamic> json) {
   return RefundRequest(
     amount: json['amount'] as int,
     orderId: json['orderId'] as String,
-    jsonParams: json['jsonParams'] as Map<String, dynamic>,
+    jsonParams: json['jsonParams'] as Map<String, dynamic>?,
   );
 }
 
 Map<String, dynamic> _$RefundRequestToJson(RefundRequest instance) {
-  final val = <String, dynamic>{};
+  final val = <String, dynamic>{
+    'amount': instance.amount,
+    'orderId': instance.orderId,
+  };
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -23,8 +26,6 @@ Map<String, dynamic> _$RefundRequestToJson(RefundRequest instance) {
     }
   }
 
-  writeNotNull('amount', instance.amount);
-  writeNotNull('orderId', instance.orderId);
   writeNotNull('jsonParams', instance.jsonParams);
   return val;
 }

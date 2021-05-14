@@ -8,10 +8,10 @@ part of 'binding.dart';
 
 Binding _$BindingFromJson(Map<String, dynamic> json) {
   return Binding(
-    bindingId: json['bindingId'] as String,
-    maskedPan: json['maskedPan'] as String,
-    expiryDate: json['expiryDate'] as int,
-    clientId: json['clientId'] as String,
+    bindingId: json['bindingId'] as String?,
+    maskedPan: json['maskedPan'] as String?,
+    expiryDate: json['expiryDate'] as int?,
+    clientId: json['clientId'] as String?,
   );
 }
 

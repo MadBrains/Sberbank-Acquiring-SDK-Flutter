@@ -12,8 +12,8 @@ part 'decline_response.g.dart';
 class DeclineResponse extends AcquiringResponse {
   /// {@macro decline_response}
   DeclineResponse({
-    String errorCode,
-    String errorMessage,
+    String? errorCode,
+    String? errorMessage,
     this.userMessage,
   }) : super(
           errorCode: errorCode,
@@ -28,12 +28,12 @@ class DeclineResponse extends AcquiringResponse {
   Map<String, dynamic> toJson() => _$DeclineResponseToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.userMessage: userMessage,
       };
 
   /// Сообщению пользователю с описанием кода результата.
   @JsonKey(name: JsonKeys.userMessage)
-  final String userMessage;
+  final String? userMessage;
 }

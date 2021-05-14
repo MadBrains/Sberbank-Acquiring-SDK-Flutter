@@ -9,9 +9,9 @@ part of 'apple_pay_recurrent_response.dart';
 ApplePayRecurrentResponse _$ApplePayRecurrentResponseFromJson(
     Map<String, dynamic> json) {
   return ApplePayRecurrentResponse(
-    errorCode: json['errorCode'] as String,
-    errorMessage: json['errorMessage'] as String,
-    success: json['success'] as bool,
+    errorCode: json['errorCode'] as String?,
+    errorMessage: json['errorMessage'] as String?,
+    success: json['success'] as bool?,
     data: json['data'] == null
         ? null
         : Data.fromJson(json['data'] as Map<String, dynamic>),

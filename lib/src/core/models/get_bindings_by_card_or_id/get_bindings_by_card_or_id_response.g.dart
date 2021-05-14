@@ -9,12 +9,11 @@ part of 'get_bindings_by_card_or_id_response.dart';
 GetBindingsByCardOrIdResponse _$GetBindingsByCardOrIdResponseFromJson(
     Map<String, dynamic> json) {
   return GetBindingsByCardOrIdResponse(
-    errorCode: json['errorCode'] as String,
-    errorMessage: json['errorMessage'] as String,
-    bindings: (json['bindings'] as List)
-        ?.map((e) =>
-            e == null ? null : Binding.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    errorCode: json['errorCode'] as String?,
+    errorMessage: json['errorMessage'] as String?,
+    bindings: (json['bindings'] as List<dynamic>?)
+        ?.map((e) => Binding.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

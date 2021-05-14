@@ -8,11 +8,11 @@ part of 'data.dart';
 
 Data _$DataFromJson(Map<String, dynamic> json) {
   return Data(
-    orderId: json['orderId'] as String,
-    bindingId: json['bindingId'] as String,
-    acsUrl: json['acsUrl'] as String,
-    paReq: json['paReq'] as String,
-    termUrl: json['termUrl'] as String,
+    orderId: json['orderId'] as String?,
+    bindingId: json['bindingId'] as String?,
+    acsUrl: json['acsUrl'] as String?,
+    paReq: json['paReq'] as String?,
+    termUrl: json['termUrl'] as String?,
   );
 }
 

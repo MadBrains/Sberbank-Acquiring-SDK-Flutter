@@ -12,15 +12,7 @@ UnBindCardRequest _$UnBindCardRequestFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$UnBindCardRequestToJson(UnBindCardRequest instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('bindingId', instance.bindingId);
-  return val;
-}
+Map<String, dynamic> _$UnBindCardRequestToJson(UnBindCardRequest instance) =>
+    <String, dynamic>{
+      'bindingId': instance.bindingId,
+    };

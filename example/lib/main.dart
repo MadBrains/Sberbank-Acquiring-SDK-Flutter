@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
   );
 
-  OrderStatus orderStatus;
+  OrderStatus? orderStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -73,12 +73,15 @@ class _MyHomePageState extends State<MyHomePage> {
       pageView: 'MOBILE',
     ));
 
-    if (!register.hasError) {
+    final String? formUrl = register.formUrl;
+
+    if (!register.hasError && formUrl != null) {
       Navigator.of(context).push(
         MaterialPageRoute<void>(
           builder: (BuildContext context) => Scaffold(
             body: WebViewPayment(
-              formUrl: register.formUrl,
+              config: acquiring.config,
+              formUrl: formUrl,
               returnUrl: 'https://test.ru/return.html',
               failUrl: 'https://test.ru/fail.html',
               onLoad: (bool v) {
@@ -87,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onError: () {
                 debugPrint('WebView Error');
               },
-              onFinished: (String v) async {
+              onFinished: (String? v) async {
                 final GetOrderStatusExtendedResponse status =
                     await acquiring.getOrderStatusExtended(
                         GetOrderStatusExtendedRequest(orderId: v));
@@ -105,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> tokenPayment() async {
     if (await madPay.checkPayments()) {
-      final String token = (await madPay.processingPayment(
+      final String? token = (await madPay.processingPayment(
         google: GoogleParameters(
           gatewayName: 'sberbank',
           gatewayMerchantId: 'example_id',
@@ -122,53 +125,55 @@ class _MyHomePageState extends State<MyHomePage> {
           PaymentNetwork.visa,
         ],
       ))
-          .token;
+          ?.token;
 
-      String orderId = '';
+      if (token != null) {
+        String orderId = '';
 
-      if (Platform.isIOS) {
-        final ApplePayResponse applePay = await acquiring.applePay(
-          ApplePayRequest(
-            merchant: 'test',
-            language: 'ru',
-            paymentToken: token,
-          ),
-        );
+        if (Platform.isIOS) {
+          final ApplePayResponse applePay = await acquiring.applePay(
+            ApplePayRequest(
+              merchant: 'test',
+              language: 'ru',
+              paymentToken: token,
+            ),
+          );
 
-        if (applePay.success) {
-          orderId = applePay.data.orderId;
+          if (applePay.success == true) {
+            orderId = applePay.data?.orderId ?? '';
+          }
         }
-      }
 
-      if (Platform.isAndroid) {
-        final GooglePayResponse googlePay = await acquiring.googlePay(
-          GooglePayRequest(
-            merchant: 'test',
-            language: 'ru',
-            amount: items
-                .map((PaymentItem v) => v.price)
-                .reduce((double i1, double i2) => i1 + i2)
-                .toInt(),
-            paymentToken: token,
-            failUrl: 'https://test.ru/fail',
-            returnUrl: 'https://test.ru/return',
-          ),
-        );
+        if (Platform.isAndroid) {
+          final GooglePayResponse googlePay = await acquiring.googlePay(
+            GooglePayRequest(
+              merchant: 'test',
+              language: 'ru',
+              amount: items
+                  .map((PaymentItem v) => v.price)
+                  .reduce((double i1, double i2) => i1 + i2)
+                  .toInt(),
+              paymentToken: token,
+              failUrl: 'https://test.ru/fail',
+              returnUrl: 'https://test.ru/return',
+            ),
+          );
 
-        if (googlePay.success) {
-          orderId = googlePay.data.orderId;
+          if (googlePay.success == true) {
+            orderId = googlePay.data?.orderId ?? '';
+          }
         }
-      }
 
-      if (orderId.isNotEmpty) {
-        final GetOrderStatusExtendedResponse status = await acquiring
-            .getOrderStatusExtended(GetOrderStatusExtendedRequest(
-          orderId: orderId,
-          language: 'ru',
-        ));
+        if (orderId.isNotEmpty) {
+          final GetOrderStatusExtendedResponse status = await acquiring
+              .getOrderStatusExtended(GetOrderStatusExtendedRequest(
+            orderId: orderId,
+            language: 'ru',
+          ));
 
-        orderStatus = status.orderStatus;
-        setState(() {});
+          orderStatus = status.orderStatus;
+          setState(() {});
+        }
       }
     }
   }

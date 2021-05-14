@@ -24,7 +24,7 @@ class BankInfo extends BaseResponse {
   Map<String, dynamic> toJson() => _$BankInfoToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.bankName: bankName,
         JsonKeys.bankCountryCode: bankCountryCode,
@@ -33,14 +33,14 @@ class BankInfo extends BaseResponse {
 
   /// Наименование банка-эмитента.
   @JsonKey(name: JsonKeys.bankName)
-  final String bankName;
+  final String? bankName;
 
   /// Код страны банка-эмитента.
   @JsonKey(name: JsonKeys.bankCountryCode)
-  final String bankCountryCode;
+  final String? bankCountryCode;
 
   /// Наименование страны банка-эмитента на языке, переданном в параметре language в запросе,
   /// или на языке пользователя, вызвавшего метод, если язык в запросе не указан.
   @JsonKey(name: JsonKeys.bankCountryName)
-  final String bankCountryName;
+  final String? bankCountryName;
 }

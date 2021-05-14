@@ -21,7 +21,7 @@ class AcquiringResponse extends BaseResponse {
       _$AcquiringResponseFromJson(json);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         JsonKeys.errorCode: errorCode,
         JsonKeys.errorMessage: errorMessage,
       };
@@ -36,9 +36,9 @@ class AcquiringResponse extends BaseResponse {
   ///
   /// Если ошибки не произошло, передается значение «0»
   @JsonKey(name: JsonKeys.errorCode)
-  final String errorCode;
+  final String? errorCode;
 
   /// Краткое описание ошибки
   @JsonKey(name: JsonKeys.errorMessage)
-  final String errorMessage;
+  final String? errorMessage;
 }

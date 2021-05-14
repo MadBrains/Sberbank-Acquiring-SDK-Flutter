@@ -11,8 +11,8 @@ part 'extend_binding_response.g.dart';
 class ExtendBindingResponse extends AcquiringResponse {
   /// {@macro extend_binding_response}
   ExtendBindingResponse({
-    String errorCode,
-    String errorMessage,
+    String? errorCode,
+    String? errorMessage,
   }) : super(
           errorCode: errorCode,
           errorMessage: errorMessage,
@@ -26,7 +26,7 @@ class ExtendBindingResponse extends AcquiringResponse {
   Map<String, dynamic> toJson() => _$ExtendBindingResponseToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
       };
 }

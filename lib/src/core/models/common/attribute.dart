@@ -23,7 +23,7 @@ class Attribute extends BaseResponse {
   Map<String, dynamic> toJson() => _$AttributeToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.name: name,
         JsonKeys.value: value,
@@ -31,9 +31,9 @@ class Attribute extends BaseResponse {
 
   /// Название дополнительного параметра.
   @JsonKey(name: JsonKeys.name)
-  final String name;
+  final String? name;
 
   /// Значение дополнительного параметра - до 1024 символов.
   @JsonKey(name: JsonKeys.value)
-  final String value;
+  final String? value;
 }

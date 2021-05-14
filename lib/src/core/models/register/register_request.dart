@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 
 import '../../../constants.dart';
 import '../base/acquiring_request.dart';
@@ -18,18 +17,18 @@ part 'register_request.g.dart';
 class RegisterRequest extends AcquiringRequest {
   /// {@macro register_request}
   RegisterRequest({
+    required this.amount,
+    required this.returnUrl,
     this.preAuth = false,
     this.orderNumber,
-    @required this.amount,
     this.currency,
-    @required this.returnUrl,
     this.failUrl,
     this.description,
     this.language,
     this.pageView,
     this.clientId,
     this.merchantLogin,
-    Map<String, dynamic> jsonParams,
+    Map<String, dynamic>? jsonParams,
     this.sessionTimeoutSecs,
     this.expirationDate,
     this.bindingId,
@@ -39,11 +38,14 @@ class RegisterRequest extends AcquiringRequest {
     this.app2app,
     this.back2app,
   }) : jsonParams = jsonParams ?? <String, dynamic>{} {
-    if (app2app != null) {
-      this.jsonParams.addAll(app2app.toJson());
+    final AppToApp? _app2app = app2app;
+    if (_app2app != null) {
+      this.jsonParams.addAll(_app2app.toJson());
     }
-    if (back2app != null) {
-      this.jsonParams.addAll(back2app.toJson());
+
+    final BackToApp? _back2app = back2app;
+    if (_back2app != null) {
+      this.jsonParams.addAll(_back2app.toJson());
     }
   }
 
@@ -53,13 +55,13 @@ class RegisterRequest extends AcquiringRequest {
 
   @override
   String get apiMethod =>
-      preAuth ? ApiMethods.registerPreAuth : ApiMethods.register;
+      preAuth == true ? ApiMethods.registerPreAuth : ApiMethods.register;
 
   @override
   Map<String, dynamic> toJson() => _$RegisterRequestToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.preAuth: preAuth,
         JsonKeys.orderNumber: orderNumber,
@@ -83,26 +85,26 @@ class RegisterRequest extends AcquiringRequest {
 
   @override
   RegisterRequest copyWith({
-    bool preAuth,
-    String orderNumber,
-    int amount,
-    int currency,
-    String returnUrl,
-    String failUrl,
-    String description,
-    String language,
-    String pageView,
-    String clientId,
-    String merchantLogin,
-    Map<String, dynamic> jsonParams,
-    int sessionTimeoutSecs,
-    String expirationDate,
-    String bindingId,
-    Features features,
-    String email,
-    int phone,
-    AppToApp app2app,
-    BackToApp back2app,
+    bool? preAuth,
+    String? orderNumber,
+    int? amount,
+    int? currency,
+    String? returnUrl,
+    String? failUrl,
+    String? description,
+    String? language,
+    String? pageView,
+    String? clientId,
+    String? merchantLogin,
+    Map<String, dynamic>? jsonParams,
+    int? sessionTimeoutSecs,
+    String? expirationDate,
+    String? bindingId,
+    Features? features,
+    String? email,
+    int? phone,
+    AppToApp? app2app,
+    BackToApp? back2app,
   }) {
     return RegisterRequest(
       preAuth: preAuth ?? this.preAuth,
@@ -161,12 +163,12 @@ class RegisterRequest extends AcquiringRequest {
   ///
   /// Если параметр не указан в запросе, происходит одностадийная оплата.
   @JsonKey(ignore: true)
-  final bool preAuth;
+  final bool? preAuth;
 
   /// Номер (идентификатор) заказа в системе магазина, уникален для каждого магазина в пределах системы.
   /// Если номер заказа генерируется на стороне платёжного шлюза, этот параметр передавать необязательно.
   @JsonKey(name: JsonKeys.orderNumber)
-  final String orderNumber;
+  final String? orderNumber;
 
   /// Сумма возврата в минимальных единицах валюты.
   @JsonKey(name: JsonKeys.amount)
@@ -174,7 +176,7 @@ class RegisterRequest extends AcquiringRequest {
 
   /// Код валюты платежа ISO 4217. Если не указано, то используется значение по умолчанию.
   @JsonKey(name: JsonKeys.currency)
-  final int currency;
+  final int? currency;
 
   /// Адрес, на который требуется перенаправить пользователя в случае успешной оплаты.
   /// Адрес должен быть указан полностью, включая используемый протокол (например, https://test.ru вместо test.ru).
@@ -186,18 +188,18 @@ class RegisterRequest extends AcquiringRequest {
   /// Адрес должен быть указан полностью, включая используемый протокол (например, https://test.ru вместо test.ru).
   /// В противном случае пользователь будет перенаправлен по адресу следующего вида: http://<адрес_платёжного_шлюза>/<адрес_продавца>.
   @JsonKey(name: JsonKeys.failUrl)
-  final String failUrl;
+  final String? failUrl;
 
   /// Описание заказа в свободной форме.
   ///
   /// Чтобы получить возможность отправлять это поле в процессинг, обратитесь в техническую поддержку.
   @JsonKey(name: JsonKeys.description)
-  final String description;
+  final String? description;
 
   /// Язык в кодировке ISO 639-1.
   /// Если не указан, будет использован язык, указанный в настройках магазина как язык по умолчанию.
   @JsonKey(name: JsonKeys.language)
-  final String language;
+  final String? language;
 
   /// По значению данного параметра определяется, какие страницы платёжного интерфейса должны загружаться для клиента. Возможны следующие значения.
   /// - DESKTOP – для загрузки страниц, вёрстка которых предназначена для отображения на экранах ПК (в архиве страниц платёжного интерфейса будет осуществляться поиск страниц с названиями payment_<locale>.html и errors_<locale>.html).
@@ -209,7 +211,7 @@ class RegisterRequest extends AcquiringRequest {
   ///
   /// Если параметр отсутствует, либо не соответствует формату, то по умолчанию считается pageView=DESKTOP.
   @JsonKey(name: JsonKeys.pageView)
-  final String pageView;
+  final String? pageView;
 
   /// Номер (идентификатор) клиента в системе магазина.
   /// Используется для реализации функционала связок.
@@ -217,11 +219,11 @@ class RegisterRequest extends AcquiringRequest {
   ///
   /// Указание этого параметра при платежах по связке необходимо - в противном случае платёж будет неуспешен.
   @JsonKey(name: JsonKeys.clientId)
-  final String clientId;
+  final String? clientId;
 
   /// Чтобы зарегистрировать заказ от имени дочернего продавца, укажите его логин в этом параметре.
   @JsonKey(name: JsonKeys.merchantLogin)
-  final String merchantLogin;
+  final String? merchantLogin;
 
   /// Дополнительные параметры запроса. Формат вида: {«Имя1»: «Значение1», «Имя2»: «Значение2»}.
   @JsonKey(name: JsonKeys.jsonParams, toJson: _jsonParamsToString)
@@ -233,28 +235,28 @@ class RegisterRequest extends AcquiringRequest {
   ///
   /// Если в запросе присутствует параметр expirationDate, то значение параметра sessionTimeoutSecs не учитывается.
   @JsonKey(name: JsonKeys.sessionTimeoutSecs)
-  final int sessionTimeoutSecs;
+  final int? sessionTimeoutSecs;
 
   /// Дата и время окончания жизни заказа. Формат: yyyy-MM-ddTHH:mm:ss.
   ///
   /// Если этот параметр не передаётся в запросе, то для определения времени окончания жизни заказа используется sessionTimeoutSecs.
   @JsonKey(name: JsonKeys.expirationDate)
-  final String expirationDate;
+  final String? expirationDate;
 
   /// Идентификатор созданной ранее связки. Может использоваться, только если у продавца есть разрешение на работу со связками.
   /// Если этот параметр передаётся в данном запросе, то это означает:
   /// 1. Данный заказ может быть оплачен только с помощью связки;
   /// 2. Плательщик будет перенаправлен на платёжную страницу, где требуется только ввод CVC.
   @JsonKey(name: JsonKeys.bindingId)
-  final String bindingId;
+  final String? bindingId;
 
   /// {@macro features}
   @JsonKey(name: JsonKeys.features)
-  final Features features;
+  final Features? features;
 
   /// Адрес электронной почты покупателя.
   @JsonKey(name: JsonKeys.email)
-  final String email;
+  final String? email;
 
   /// Номер телефона клиента. Может быть следующего формата: `^((+7|7|8)?([0-9]){10})$`.
   ///
@@ -264,15 +266,15 @@ class RegisterRequest extends AcquiringRequest {
   /// - 9000000000
   /// - 79000000000
   @JsonKey(name: JsonKeys.phone)
-  final int phone;
+  final int? phone;
 
   /// {@macro app_to_app}
   @JsonKey(name: JsonKeys.app2app, ignore: true)
-  final AppToApp app2app;
+  final AppToApp? app2app;
 
   /// {@macro back_to_app}
   @JsonKey(name: JsonKeys.back2app, ignore: true)
-  final BackToApp back2app;
+  final BackToApp? back2app;
 }
 
 /// {@template app_to_app}
@@ -282,9 +284,9 @@ class RegisterRequest extends AcquiringRequest {
 class AppToApp extends BaseRequest {
   /// {@macro app_to_app}
   AppToApp({
-    @required this.app2app,
-    @required this.osType,
-    @required this.deepLink,
+    required this.app2app,
+    required this.osType,
+    required this.deepLink,
   });
 
   /// {@macro fromJson}
@@ -295,13 +297,13 @@ class AppToApp extends BaseRequest {
   Map<String, dynamic> toJson() => _$AppToAppToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{...super.equals};
+  Map<String, Object?> get equals => <String, Object?>{...super.equals};
 
   @override
   AppToApp copyWith({
-    bool app2app,
-    OSType osType,
-    String deepLink,
+    bool? app2app,
+    OSType? osType,
+    String? deepLink,
   }) {
     return AppToApp(
       app2app: app2app ?? this.app2app,
@@ -311,11 +313,7 @@ class AppToApp extends BaseRequest {
   }
 
   @override
-  void validate() {
-    assert(app2app != null);
-    assert(osType != null);
-    assert(deepLink != null);
-  }
+  void validate() {}
 
   /// Атрибут, указывающий на способ оплаты через приложение СБОЛ (app2app).
   ///
@@ -347,7 +345,7 @@ class AppToApp extends BaseRequest {
 class BackToApp extends BaseRequest {
   /// {@macro back_to_app}
   BackToApp({
-    @required this.back2app,
+    required this.back2app,
   });
 
   /// {@macro fromJson}
@@ -358,11 +356,11 @@ class BackToApp extends BaseRequest {
   Map<String, dynamic> toJson() => _$BackToAppToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{...super.equals};
+  Map<String, Object?> get equals => <String, Object?>{...super.equals};
 
   @override
   BackToApp copyWith({
-    bool back2app,
+    bool? back2app,
   }) {
     return BackToApp(
       back2app: back2app ?? this.back2app,
@@ -370,9 +368,7 @@ class BackToApp extends BaseRequest {
   }
 
   @override
-  void validate() {
-    assert(back2app != null);
-  }
+  void validate() {}
 
   /// Атрибут, указывающий на способ оплаты по сценарию back2app
   @JsonKey(name: JsonKeys.back2app)

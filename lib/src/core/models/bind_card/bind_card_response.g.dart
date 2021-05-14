@@ -8,8 +8,8 @@ part of 'bind_card_response.dart';
 
 BindCardResponse _$BindCardResponseFromJson(Map<String, dynamic> json) {
   return BindCardResponse(
-    errorCode: json['errorCode'] as String,
-    errorMessage: json['errorMessage'] as String,
+    errorCode: json['errorCode'] as String?,
+    errorMessage: json['errorMessage'] as String?,
   );
 }
 

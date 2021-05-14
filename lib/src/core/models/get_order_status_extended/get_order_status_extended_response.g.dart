@@ -9,38 +9,35 @@ part of 'get_order_status_extended_response.dart';
 GetOrderStatusExtendedResponse _$GetOrderStatusExtendedResponseFromJson(
     Map<String, dynamic> json) {
   return GetOrderStatusExtendedResponse(
-    errorCode: json['errorCode'] as String,
-    errorMessage: json['errorMessage'] as String,
-    orderNumber: json['orderNumber'] as String,
+    errorCode: json['errorCode'] as String?,
+    errorMessage: json['errorMessage'] as String?,
+    orderNumber: json['orderNumber'] as String?,
     orderStatus:
         _$enumDecodeNullable(_$OrderStatusEnumMap, json['orderStatus']),
-    actionCode: json['actionCode'] as int,
-    actionCodeDescription: json['actionCodeDescription'] as String,
-    amount: json['amount'] as int,
-    currency: json['currency'] as String,
-    date: json['date'] as int,
-    depositedDate: json['depositedDate'] as int,
-    orderDescription: json['orderDescription'] as String,
-    ip: json['ip'] as String,
-    authRefNum: json['authRefNum'] as String,
-    refundedDate: json['refundedDate'] as String,
+    actionCode: json['actionCode'] as int?,
+    actionCodeDescription: json['actionCodeDescription'] as String?,
+    amount: json['amount'] as int?,
+    currency: json['currency'] as String?,
+    date: json['date'] as int?,
+    depositedDate: json['depositedDate'] as int?,
+    orderDescription: json['orderDescription'] as String?,
+    ip: json['ip'] as String?,
+    authRefNum: json['authRefNum'] as String?,
+    refundedDate: json['refundedDate'] as String?,
     paymentWay: _$enumDecodeNullable(_$PaymentWayEnumMap, json['paymentWay']),
-    merchantOrderParams: (json['merchantOrderParams'] as List)
-        ?.map((e) =>
-            e == null ? null : Attribute.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    attributes: (json['attributes'] as List)
-        ?.map((e) =>
-            e == null ? null : Attribute.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    transactionAttributes: (json['transactionAttributes'] as List)
-        ?.map((e) =>
-            e == null ? null : Attribute.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    merchantOrderParams: (json['merchantOrderParams'] as List<dynamic>?)
+        ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    attributes: (json['attributes'] as List<dynamic>?)
+        ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    transactionAttributes: (json['transactionAttributes'] as List<dynamic>?)
+        ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
+        .toList(),
     cardAuthInfo: json['cardAuthInfo'] == null
         ? null
         : CardAuthInfo.fromJson(json['cardAuthInfo'] as Map<String, dynamic>),
-    terminalId: json['terminalId'] as String,
+    terminalId: json['terminalId'] as String?,
     paymentAmountInfo: json['paymentAmountInfo'] == null
         ? null
         : PaymentAmountInfo.fromJson(
@@ -98,36 +95,41 @@ Map<String, dynamic> _$GetOrderStatusExtendedResponseToJson(
   return val;
 }
 
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
+K _$enumDecode<K, V>(
+  Map<K, V> enumValues,
+  Object? source, {
+  K? unknownValue,
 }) {
   if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
+    throw ArgumentError(
+      'A value must be provided. Supported values: '
+      '${enumValues.values.join(', ')}',
+    );
   }
 
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
+  return enumValues.entries.singleWhere(
+    (e) => e.value == source,
+    orElse: () {
+      if (unknownValue == null) {
+        throw ArgumentError(
+          '`$source` is not one of the supported values: '
+          '${enumValues.values.join(', ')}',
+        );
+      }
+      return MapEntry(unknownValue, enumValues.values.first);
+    },
+  ).key;
 }
 
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
+K? _$enumDecodeNullable<K, V>(
+  Map<K, V> enumValues,
   dynamic source, {
-  T unknownValue,
+  K? unknownValue,
 }) {
   if (source == null) {
     return null;
   }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
+  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
 const _$OrderStatusEnumMap = {

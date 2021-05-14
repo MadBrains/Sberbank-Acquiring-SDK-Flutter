@@ -25,7 +25,7 @@ class PayerData extends BaseResponse {
   Map<String, dynamic> toJson() => _$PayerDataToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.bankName: email,
         JsonKeys.transactionAttributes: transactionAttributes,
@@ -33,9 +33,9 @@ class PayerData extends BaseResponse {
 
   /// Адрес электронной почты покупателя.
   @JsonKey(name: JsonKeys.email)
-  final String email;
+  final String? email;
 
   /// Сведения о деталях заказа.
   @JsonKey(name: JsonKeys.transactionAttributes)
-  final List<Attribute> transactionAttributes;
+  final List<Attribute>? transactionAttributes;
 }
