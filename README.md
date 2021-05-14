@@ -70,4 +70,4 @@ The [Example][example] is in the corresponding folder
 
 [documentation]: https://securepayments.sberbank.ru/wiki/doku.php/integration:paymentpage:paymentpage_design
 [acquiring]: https://securepayments.sberbank.ru/wiki/doku.php/main_page
-[example]: https://github.com/MadBrains/Sberbank-Acquiring-Flutter/tree/main/example/
+[example]: https://github.com/MadBrains/Sberbank-Acquiring-SDK-Flutter/tree/main/example/

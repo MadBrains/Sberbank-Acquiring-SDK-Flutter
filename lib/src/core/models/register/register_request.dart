@@ -287,6 +287,10 @@ class AppToApp extends BaseRequest {
     @required this.deepLink,
   });
 
+  /// {@macro fromJson}
+  factory AppToApp.fromJson(Map<String, dynamic> json) =>
+      _$AppToAppFromJson(json);
+
   @override
   Map<String, dynamic> toJson() => _$AppToAppToJson(this);
 
@@ -345,6 +349,10 @@ class BackToApp extends BaseRequest {
   BackToApp({
     @required this.back2app,
   });
+
+  /// {@macro fromJson}
+  factory BackToApp.fromJson(Map<String, dynamic> json) =>
+      _$BackToAppFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$BackToAppToJson(this);
