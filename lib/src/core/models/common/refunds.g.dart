@@ -8,10 +8,10 @@ part of 'refunds.dart';
 
 Refunds _$RefundsFromJson(Map<String, dynamic> json) {
   return Refunds(
-    referenceNumber: json['referenceNumber'] as int,
-    actionCode: json['actionCode'] as int,
-    amount: json['amount'] as int,
-    date: json['date'] as String,
+    referenceNumber: json['referenceNumber'] as int?,
+    actionCode: json['actionCode'] as int?,
+    amount: json['amount'] as int?,
+    date: json['date'] as String?,
   );
 }
 

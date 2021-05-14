@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 
 import '../../../constants.dart';
 import '../base/acquiring_request.dart';
@@ -13,7 +12,7 @@ part 'get_bindings_request.g.dart';
 class GetBindingsRequest extends AcquiringRequest {
   /// {@macro get_bindings_request}
   GetBindingsRequest({
-    @required this.clientId,
+    required this.clientId,
   });
 
   /// {@macro fromJson}
@@ -27,14 +26,14 @@ class GetBindingsRequest extends AcquiringRequest {
   Map<String, dynamic> toJson() => _$GetBindingsRequestToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.clientId: clientId,
       };
 
   @override
   GetBindingsRequest copyWith({
-    String clientId,
+    String? clientId,
   }) {
     return GetBindingsRequest(
       clientId: clientId ?? this.clientId,
@@ -42,9 +41,7 @@ class GetBindingsRequest extends AcquiringRequest {
   }
 
   @override
-  void validate() {
-    assert(clientId != null);
-  }
+  void validate() {}
 
   /// Номер (идентификатор) клиента в системе магазина.
   /// Используется для реализации функционала связок.

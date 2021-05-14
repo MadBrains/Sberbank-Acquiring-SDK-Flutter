@@ -13,8 +13,8 @@ part 'verify_enrollment_response.g.dart';
 class VerifyEnrollmentResponse extends AcquiringResponse {
   /// {@macro verify_enrollment_response}
   VerifyEnrollmentResponse({
-    String errorCode,
-    String errorMessage,
+    String? errorCode,
+    String? errorMessage,
     this.enrolled,
     this.emitterName,
     this.emitterCountryCode,
@@ -31,7 +31,7 @@ class VerifyEnrollmentResponse extends AcquiringResponse {
   Map<String, dynamic> toJson() => _$VerifyEnrollmentResponseToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.enrolled: enrolled,
         JsonKeys.emitterName: emitterName,
@@ -40,13 +40,13 @@ class VerifyEnrollmentResponse extends AcquiringResponse {
 
   /// {@macro enrolled}
   @JsonKey(name: JsonKeys.enrolled)
-  final Enrolled enrolled;
+  final Enrolled? enrolled;
 
   /// Наименование банка-эмитента.
   @JsonKey(name: JsonKeys.emitterName)
-  final String emitterName;
+  final String? emitterName;
 
   /// Код страны банка-эмитента.
   @JsonKey(name: JsonKeys.emitterCountryCode)
-  final int emitterCountryCode;
+  final int? emitterCountryCode;
 }

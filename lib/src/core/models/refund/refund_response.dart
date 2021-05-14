@@ -11,8 +11,8 @@ part 'refund_response.g.dart';
 class RefundResponse extends AcquiringResponse {
   /// {@macro refund_response}
   RefundResponse({
-    String errorCode,
-    String errorMessage,
+    String? errorCode,
+    String? errorMessage,
   }) : super(
           errorCode: errorCode,
           errorMessage: errorMessage,
@@ -26,7 +26,7 @@ class RefundResponse extends AcquiringResponse {
   Map<String, dynamic> toJson() => _$RefundResponseToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
       };
 }

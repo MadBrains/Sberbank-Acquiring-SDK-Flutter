@@ -42,7 +42,7 @@ class NetworkClient {
           if (rawResponse.statusCode == 200) {
             _config.logger.log(message: rawResponse.body, name: 'RawResponse');
 
-            Response _response;
+            Response? _response;
             final dynamic json = jsonDecode(rawResponse.body);
 
             if (json is Map) {
@@ -72,25 +72,28 @@ class NetworkClient {
   }
 
   dynamic _modifyRequest(AcquiringRequest request) {
-    final Map<String, String> temp = request.toJson().map<String, String>(
-        (String k, dynamic v) => MapEntry<String, String>(k, v?.toString()));
+    final Map<String, String?> temp = request.toJson().map<String, String?>(
+        (String k, dynamic v) => MapEntry<String, String?>(k, v?.toString()));
 
-    // temp.removeWhere((_, String v) => v == null || v.isEmpty);
+    temp.removeWhere((_, String? v) => v == null || v.isEmpty);
 
     if (_config.proxyUrl != null) return temp;
 
     if (request.apiMethod != ApiMethods.applePay &&
         request.apiMethod != ApiMethods.googlePay) {
-      if (_config.userName != null || _config.password != null) {
+      final String? userName = _config.userName;
+      final String? password = _config.password;
+      if (userName != null && password != null) {
         temp.addAll(<String, String>{
-          JsonKeys.userName: _config.userName,
-          JsonKeys.password: _config.password,
+          JsonKeys.userName: userName,
+          JsonKeys.password: password,
         });
       }
 
-      if (_config.token != null) {
+      final String? token = _config.token;
+      if (token != null) {
         temp.addAll(<String, String>{
-          JsonKeys.token: _config.token,
+          JsonKeys.token: token,
         });
       }
     }

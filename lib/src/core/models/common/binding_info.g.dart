@@ -8,10 +8,10 @@ part of 'binding_info.dart';
 
 BindingInfo _$BindingInfoFromJson(Map<String, dynamic> json) {
   return BindingInfo(
-    clientId: json['clientId'] as String,
-    bindingId: json['bindingId'] as String,
-    authDateTime: json['authDateTime'] as String,
-    terminalId: json['terminalId'] as String,
+    clientId: json['clientId'] as String?,
+    bindingId: json['bindingId'] as String?,
+    authDateTime: json['authDateTime'] as String?,
+    terminalId: json['terminalId'] as String?,
   );
 }
 

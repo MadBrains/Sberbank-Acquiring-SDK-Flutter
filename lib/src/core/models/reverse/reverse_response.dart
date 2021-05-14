@@ -11,8 +11,8 @@ part 'reverse_response.g.dart';
 class ReverseResponse extends AcquiringResponse {
   /// {@macro reverse_response}
   ReverseResponse({
-    String errorCode,
-    String errorMessage,
+    String? errorCode,
+    String? errorMessage,
   }) : super(
           errorCode: errorCode,
           errorMessage: errorMessage,
@@ -26,7 +26,7 @@ class ReverseResponse extends AcquiringResponse {
   Map<String, dynamic> toJson() => _$ReverseResponseToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
       };
 }

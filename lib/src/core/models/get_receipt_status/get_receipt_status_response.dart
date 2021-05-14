@@ -15,8 +15,8 @@ part 'get_receipt_status_response.g.dart';
 class GetReceiptStatusResponse extends AcquiringResponse {
   /// {@macro get_receipt_status_response}
   GetReceiptStatusResponse({
-    String errorCode,
-    String errorMessage,
+    String? errorCode,
+    String? errorMessage,
     this.orderNumber,
     this.orderId,
     this.daemonCode,
@@ -35,7 +35,7 @@ class GetReceiptStatusResponse extends AcquiringResponse {
   Map<String, dynamic> toJson() => _$GetReceiptStatusResponseToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.orderNumber: orderNumber,
         JsonKeys.orderId: orderId,
@@ -46,23 +46,23 @@ class GetReceiptStatusResponse extends AcquiringResponse {
 
   /// Номер (идентификатор) заказа в системе магазина, уникален для каждого магазина в пределах системы.
   @JsonKey(name: JsonKeys.orderNumber)
-  final String orderNumber;
+  final String? orderNumber;
 
   /// Номер заказа в платежной системе. Уникален в пределах системы.
   @JsonKey(name: JsonKeys.orderId)
-  final String orderId;
+  final String? orderId;
 
   /// Наименование сервера.
   @JsonKey(name: JsonKeys.daemonCode)
-  final String daemonCode;
+  final String? daemonCode;
 
   /// Регистрационный номер контрольно-кассовой техники.
   @JsonKey(name: JsonKeys.ecrRegistrationNumber)
-  final String ecrRegistrationNumber;
+  final String? ecrRegistrationNumber;
 
   /// {@macro receipt}
   @JsonKey(name: JsonKeys.receipt)
-  final Receipt receipt;
+  final Receipt? receipt;
 }
 
 /// {@template receipt}
@@ -95,7 +95,7 @@ class Receipt extends BaseResponse {
   Map<String, dynamic> toJson() => _$ReceiptToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.receiptStatus: receiptStatus,
         JsonKeys.uuid: uuid,
@@ -114,55 +114,55 @@ class Receipt extends BaseResponse {
 
   /// {@macro receipt_status}
   @JsonKey(name: JsonKeys.receiptStatus)
-  final ReceiptStatus receiptStatus;
+  final ReceiptStatus? receiptStatus;
 
   /// Идентификатор чека в фискализаторе.
   @JsonKey(name: JsonKeys.uuid)
-  final String uuid;
+  final String? uuid;
 
   /// Номер смены.
   @JsonKey(name: JsonKeys.shiftNumber)
-  final int shiftNumber;
+  final int? shiftNumber;
 
   /// Номер чека в смене.
   @JsonKey(name: JsonKeys.receiptNumber)
-  final int receiptNumber;
+  final int? receiptNumber;
 
   /// Дата и время чека в фискальном накопителе.
   @JsonKey(name: JsonKeys.receiptDatetime)
-  final String receiptDatetime;
+  final String? receiptDatetime;
 
   /// Номер фискального накопителя.
   @JsonKey(name: JsonKeys.fnNumber)
-  final String fnNumber;
+  final String? fnNumber;
 
   /// Регистрационный номер контрольно-кассовой техники.
   @JsonKey(name: JsonKeys.ecrRegistrationNumber)
-  final String ecrRegistrationNumber;
+  final String? ecrRegistrationNumber;
 
   /// Фискальный номер документа.
   @JsonKey(name: JsonKeys.fiscalDocumentNumber)
-  final int fiscalDocumentNumber;
+  final int? fiscalDocumentNumber;
 
   /// Фискальный признак документа.
   @JsonKey(name: JsonKeys.fiscalDocumentAttribute)
-  final String fiscalDocumentAttribute;
+  final String? fiscalDocumentAttribute;
 
   /// Итоговая сумма чека в рублях.
   @JsonKey(name: JsonKeys.amountTotal)
-  final String amountTotal;
+  final String? amountTotal;
 
   /// Заводской номер контрольно-кассовой техники.
   @JsonKey(name: JsonKeys.serialNumber)
-  final String serialNumber;
+  final String? serialNumber;
 
   /// Адрес сайта ФНС.
   @JsonKey(name: JsonKeys.fnsSite)
-  final String fnsSite;
+  final String? fnsSite;
 
   /// {@macro ofd}
   @JsonKey(name: JsonKeys.ofd)
-  final OFD ofd;
+  final OFD? ofd;
 }
 
 /// {@template ofd}
@@ -184,7 +184,7 @@ class OFD extends BaseResponse {
   Map<String, dynamic> toJson() => _$OFDToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.name: name,
         JsonKeys.website: website,
@@ -193,13 +193,13 @@ class OFD extends BaseResponse {
 
   /// Наименование оператора фискальных данных.
   @JsonKey(name: JsonKeys.name)
-  final String name;
+  final String? name;
 
   /// Сайт оператора фискальных данных.
   @JsonKey(name: JsonKeys.website)
-  final String website;
+  final String? website;
 
   /// Идентификационный номер налогоплательщика оператора фискальных данных.
   @JsonKey(name: JsonKeys.inn)
-  final String inn;
+  final String? inn;
 }

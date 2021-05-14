@@ -17,7 +17,7 @@ Acquiring SDK позволяет интегрировать [Интернет-Э
 Для подключения добавьте в файл pubspec.yaml зависимости:
 ```yaml
 dependencies:
-  sberbank_acquiring: 1.0.0
+  sberbank_acquiring: 2.0.0
 ```
 
 ## Подготовка к работе

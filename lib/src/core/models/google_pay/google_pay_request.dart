@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 
 import '../../../constants.dart';
 import '../base/acquiring_request.dart';
@@ -13,21 +12,21 @@ part 'google_pay_request.g.dart';
 class GooglePayRequest extends AcquiringRequest {
   /// {@macro google_pay_request}
   GooglePayRequest({
-    @required this.merchant,
+    required this.merchant,
+    required this.paymentToken,
+    required this.amount,
+    required this.returnUrl,
+    this.failUrl,
     this.orderNumber,
     this.description,
     this.language,
     this.additionalParameters,
     this.preAuth,
     this.clientId,
-    @required this.paymentToken,
     this.ip,
-    @required this.amount,
     this.currencyCode,
     this.email,
     this.phone,
-    @required this.returnUrl,
-    @required this.failUrl,
   });
 
   /// {@macro fromJson}
@@ -46,7 +45,7 @@ class GooglePayRequest extends AcquiringRequest {
   Map<String, dynamic> toJson() => _$GooglePayRequestToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.merchant: merchant,
         JsonKeys.orderNumber: orderNumber,
@@ -67,21 +66,21 @@ class GooglePayRequest extends AcquiringRequest {
 
   @override
   GooglePayRequest copyWith({
-    String merchant,
-    String orderNumber,
-    String description,
-    String language,
-    Map<String, dynamic> additionalParameters,
-    bool preAuth,
-    String clientId,
-    String paymentToken,
-    String ip,
-    int amount,
-    String currencyCode,
-    String email,
-    int phone,
-    String returnUrl,
-    String failUrl,
+    String? merchant,
+    String? orderNumber,
+    String? description,
+    String? language,
+    Map<String, dynamic>? additionalParameters,
+    bool? preAuth,
+    String? clientId,
+    String? paymentToken,
+    String? ip,
+    int? amount,
+    String? currencyCode,
+    String? email,
+    int? phone,
+    String? returnUrl,
+    String? failUrl,
   }) {
     return GooglePayRequest(
       merchant: merchant ?? this.merchant,
@@ -103,14 +102,7 @@ class GooglePayRequest extends AcquiringRequest {
   }
 
   @override
-  void validate() {
-    assert(merchant != null);
-    assert(orderNumber != null);
-    assert(paymentToken != null);
-    assert(amount != null);
-    assert(returnUrl != null);
-    assert(failUrl != null);
-  }
+  void validate() {}
 
   /// Логин продавца в платёжном шлюзе
   @JsonKey(name: JsonKeys.merchant)
@@ -119,23 +111,23 @@ class GooglePayRequest extends AcquiringRequest {
   /// Номер (идентификатор) заказа в системе магазина, уникален для каждого магазина в пределах системы.
   /// Если номер заказа генерируется на стороне платёжного шлюза, этот параметр передавать необязательно.
   @JsonKey(name: JsonKeys.orderNumber)
-  final String orderNumber;
+  final String? orderNumber;
 
   /// Описание заказа в свободной форме.
   @JsonKey(name: JsonKeys.description)
-  final String description;
+  final String? description;
 
   /// Язык в кодировке ISO 639-1.
   /// Если не указан, будет использован язык, указанный в настройках магазина как язык по умолчанию.
   @JsonKey(name: JsonKeys.language)
-  final String language;
+  final String? language;
 
   /// Дополнительные параметры заказа, которые сохраняются для просмотра из личного кабинета продавца.
   ///
   /// Если у продавца настроена фискализация, при указании в качестве дополнительных параметров email (адрес электронной почты покупателя)
   /// и/или phone (номер сотового телефона покупателя) эти параметры в первую очередь используются для отправки фискального чека.
   @JsonKey(name: JsonKeys.additionalParameters)
-  final Map<String, dynamic> additionalParameters;
+  final Map<String, dynamic>? additionalParameters;
 
   /// Параметр, определяющий необходимость предварительной авторизации (блокирования средств на счёте клиента до их списания).
   /// Доступны следующие значения:
@@ -144,7 +136,7 @@ class GooglePayRequest extends AcquiringRequest {
   ///
   /// Если параметр не указан в запросе, происходит одностадийная оплата.
   @JsonKey(name: JsonKeys.preAuth)
-  final bool preAuth;
+  final bool? preAuth;
 
   /// Номер (идентификатор) клиента в системе магазина.
   /// Используется для реализации функционала связок.
@@ -152,7 +144,7 @@ class GooglePayRequest extends AcquiringRequest {
   ///
   /// Указание этого параметра при платежах по связке необходимо - в противном случае платёж будет неуспешен.
   @JsonKey(name: JsonKeys.clientId)
-  final String clientId;
+  final String? clientId;
 
   /// Токен, полученный от Google Pay и закодированный в Base64.
   ///
@@ -162,7 +154,7 @@ class GooglePayRequest extends AcquiringRequest {
 
   /// IP-адрес покупателя. IPv6 поддерживается во всех запросах (до 39 символов).
   @JsonKey(name: JsonKeys.ip)
-  final String ip;
+  final String? ip;
 
   /// Сумма платежа в минимальных единицах валюты.
   @JsonKey(name: JsonKeys.amount)
@@ -171,14 +163,14 @@ class GooglePayRequest extends AcquiringRequest {
   /// Цифровой код валюты платежа ISO 4217.
   /// Если не указан, считается равным коду валюты по умолчанию.
   @JsonKey(name: JsonKeys.currencyCode)
-  final String currencyCode;
+  final String? currencyCode;
 
   /// Адрес электронной почты покупателя.
   /// Можно указать несколько адресов электронной почты через запятую и без пробелов - в этом случае чек будет отправлен на все указанные адреса.
   ///
   /// Обязателен, если у интернет-магазина настроена фискализация и не указан номер телефона.
   @JsonKey(name: JsonKeys.email)
-  final String email;
+  final String? email;
 
   /// Номер телефона клиента. Может быть следующего формата: ^((+7|7|8)?([0-9]){10})$. Допустимое количество цифр: от 7 до 15.
   /// Примеры:
@@ -191,7 +183,7 @@ class GooglePayRequest extends AcquiringRequest {
   ///
   /// Обязателен, если у интернет-магазина настроена фискализация и не указан адрес электронной почты.
   @JsonKey(name: JsonKeys.phone)
-  final int phone;
+  final int? phone;
 
   /// Адрес, на который требуется перенаправить пользователя в случае успешной оплаты.
   /// Адрес должен быть указан полностью, включая используемый протокол (например, https://test.ru вместо test.ru).
@@ -203,5 +195,5 @@ class GooglePayRequest extends AcquiringRequest {
   /// Адрес должен быть указан полностью, включая используемый протокол (например, https://test.ru вместо test.ru).
   /// В противном случае пользователь будет перенаправлен по адресу следующего вида: http://<адрес_платёжного_шлюза>/<адрес_продавца>.
   @JsonKey(name: JsonKeys.failUrl)
-  final String failUrl;
+  final String? failUrl;
 }

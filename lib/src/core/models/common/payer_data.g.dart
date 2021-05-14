@@ -8,11 +8,10 @@ part of 'payer_data.dart';
 
 PayerData _$PayerDataFromJson(Map<String, dynamic> json) {
   return PayerData(
-    email: json['email'] as String,
-    transactionAttributes: (json['transactionAttributes'] as List)
-        ?.map((e) =>
-            e == null ? null : Attribute.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    email: json['email'] as String?,
+    transactionAttributes: (json['transactionAttributes'] as List<dynamic>?)
+        ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

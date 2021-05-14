@@ -13,16 +13,8 @@ DepositRequest _$DepositRequestFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$DepositRequestToJson(DepositRequest instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('amount', instance.amount);
-  writeNotNull('orderId', instance.orderId);
-  return val;
-}
+Map<String, dynamic> _$DepositRequestToJson(DepositRequest instance) =>
+    <String, dynamic>{
+      'amount': instance.amount,
+      'orderId': instance.orderId,
+    };

@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'utils/logger.dart';
 
 /// {@template sberbank_acquiring_config}
@@ -19,21 +18,17 @@ class SberbankAcquiringConfig {
   /// [logger]:
   /// {@macro logger}
   factory SberbankAcquiringConfig({
-    @required String userName,
-    @required String password,
+    required String userName,
+    required String password,
     bool debug = true,
     BaseLogger logger = const Logger(),
-  }) {
-    assert(userName != null);
-    assert(password != null);
-
-    return SberbankAcquiringConfig._(
-      userName: userName,
-      password: password,
-      debug: debug,
-      logger: logger,
-    );
-  }
+  }) =>
+      SberbankAcquiringConfig._(
+        userName: userName,
+        password: password,
+        debug: debug,
+        logger: logger,
+      );
 
   /// {@macro sberbank_acquiring}
   ///
@@ -46,18 +41,15 @@ class SberbankAcquiringConfig {
   /// [logger]:
   /// {@macro logger}
   factory SberbankAcquiringConfig.token({
-    @required String token,
+    required String token,
     bool debug = true,
     BaseLogger logger = const Logger(),
-  }) {
-    assert(token != null);
-
-    return SberbankAcquiringConfig._(
-      token: token,
-      debug: debug,
-      logger: logger,
-    );
-  }
+  }) =>
+      SberbankAcquiringConfig._(
+        token: token,
+        debug: debug,
+        logger: logger,
+      );
 
   /// {@macro sberbank_acquiring}
   ///
@@ -70,39 +62,36 @@ class SberbankAcquiringConfig {
   /// [logger]:
   /// {@macro logger}
   factory SberbankAcquiringConfig.proxy({
-    @required String proxyUrl,
+    required String proxyUrl,
     bool debug = true,
     BaseLogger logger = const Logger(),
-  }) {
-    assert(proxyUrl != null);
-
-    return SberbankAcquiringConfig._(
-      proxyUrl: proxyUrl,
-      debug: debug,
-      logger: logger,
-    );
-  }
+  }) =>
+      SberbankAcquiringConfig._(
+        proxyUrl: proxyUrl,
+        debug: debug,
+        logger: logger,
+      );
 
   SberbankAcquiringConfig._({
     this.userName,
     this.password,
     this.token,
     this.proxyUrl,
-    this.debug,
-    this.logger,
+    this.debug = true,
+    this.logger = const Logger(),
   });
 
   /// {@template user_name}
   /// Логин служебной учётной записи продавца.
   /// При передаче логина и пароля для аутентификации в платёжном шлюзе параметр token передавать не нужно.
   /// {@endtemplate}
-  final String userName;
+  final String? userName;
 
   /// {@template password}
   /// Пароль служебной учётной записи продавца.
   /// При передаче логина и пароля для аутентификации в платёжном шлюзе параметр token передавать не нужно.
   /// {@endtemplate}
-  final String password;
+  final String? password;
 
   /// {@template token}
   /// Значение, которое используется для аутентификации продавца при отправке запросов в платёжный шлюз.
@@ -110,7 +99,7 @@ class SberbankAcquiringConfig {
   ///
   /// Чтобы получить открытый ключ, обратитесь в техническую поддержку.
   /// {@endtemplate}
-  final String token;
+  final String? token;
 
   /// {@template proxyUrl}
   /// Все запросы будут идти не на `Sberbank Acquiring API`,
@@ -121,7 +110,7 @@ class SberbankAcquiringConfig {
   ///
   /// В формате: `https://server.com/`
   /// {@endtemplate}
-  final String proxyUrl;
+  final String? proxyUrl;
 
   /// {@template debug}
   /// Параметр для работы с debug сервером

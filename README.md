@@ -19,7 +19,7 @@ Acquiring SDK allows you to integrate [Sberbank Internet Acquiring][acquiring] i
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  sberbank_acquiring: 1.0.0
+  sberbank_acquiring: 2.0.0
 ```
 
 ## Before usage

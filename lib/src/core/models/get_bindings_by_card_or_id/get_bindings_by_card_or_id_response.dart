@@ -14,8 +14,8 @@ part 'get_bindings_by_card_or_id_response.g.dart';
 class GetBindingsByCardOrIdResponse extends AcquiringResponse {
   /// {@macro get_bindings_by_card_or_id_response}
   GetBindingsByCardOrIdResponse({
-    String errorCode,
-    String errorMessage,
+    String? errorCode,
+    String? errorMessage,
     this.bindings,
   }) : super(
           errorCode: errorCode,
@@ -30,12 +30,12 @@ class GetBindingsByCardOrIdResponse extends AcquiringResponse {
   Map<String, dynamic> toJson() => _$GetBindingsByCardOrIdResponseToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.bindings: bindings,
       };
 
   /// {@macro binding}
   @JsonKey(name: JsonKeys.bindings)
-  final List<Binding> bindings;
+  final List<Binding>? bindings;
 }

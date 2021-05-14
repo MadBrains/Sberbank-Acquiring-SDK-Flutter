@@ -8,10 +8,10 @@ part of 'register_response.dart';
 
 RegisterResponse _$RegisterResponseFromJson(Map<String, dynamic> json) {
   return RegisterResponse(
-    errorCode: json['errorCode'] as String,
-    errorMessage: json['errorMessage'] as String,
-    orderId: json['orderId'] as String,
-    formUrl: json['formUrl'] as String,
+    errorCode: json['errorCode'] as String?,
+    errorMessage: json['errorMessage'] as String?,
+    orderId: json['orderId'] as String?,
+    formUrl: json['formUrl'] as String?,
     externalParams: json['externalParams'] == null
         ? null
         : RegisterExternalParams.fromJson(
@@ -39,9 +39,9 @@ Map<String, dynamic> _$RegisterResponseToJson(RegisterResponse instance) {
 RegisterExternalParams _$RegisterExternalParamsFromJson(
     Map<String, dynamic> json) {
   return RegisterExternalParams(
-    sbolDeepLink: json['sbolDeepLink'] as String,
-    sbolBankInvoiceId: json['sbolBankInvoiceId'] as String,
-    sbolInactive: json['sbolInactive'] as bool,
+    sbolDeepLink: json['sbolDeepLink'] as String?,
+    sbolBankInvoiceId: json['sbolBankInvoiceId'] as String?,
+    sbolInactive: json['sbolInactive'] as bool?,
   );
 }
 

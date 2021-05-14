@@ -8,8 +8,8 @@ part of 'deposit_response.dart';
 
 DepositResponse _$DepositResponseFromJson(Map<String, dynamic> json) {
   return DepositResponse(
-    errorCode: json['errorCode'] as String,
-    errorMessage: json['errorMessage'] as String,
+    errorCode: json['errorCode'] as String?,
+    errorMessage: json['errorMessage'] as String?,
   );
 }
 

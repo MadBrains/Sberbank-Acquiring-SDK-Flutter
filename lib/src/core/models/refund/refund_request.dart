@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 
 import '../../../constants.dart';
 import '../base/acquiring_request.dart';
@@ -19,8 +18,8 @@ part 'refund_request.g.dart';
 class RefundRequest extends AcquiringRequest {
   /// {@macro refund_request}
   RefundRequest({
-    @required this.amount,
-    @required this.orderId,
+    required this.amount,
+    required this.orderId,
     this.jsonParams,
   });
 
@@ -35,7 +34,7 @@ class RefundRequest extends AcquiringRequest {
   Map<String, dynamic> toJson() => _$RefundRequestToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.amount: amount,
         JsonKeys.orderId: orderId,
@@ -44,9 +43,9 @@ class RefundRequest extends AcquiringRequest {
 
   @override
   RefundRequest copyWith({
-    int amount,
-    String orderId,
-    Map<String, dynamic> jsonParams,
+    int? amount,
+    String? orderId,
+    Map<String, dynamic>? jsonParams,
   }) {
     return RefundRequest(
       amount: amount ?? this.amount,
@@ -56,10 +55,7 @@ class RefundRequest extends AcquiringRequest {
   }
 
   @override
-  void validate() {
-    assert(amount != null);
-    assert(orderId != null);
-  }
+  void validate() {}
 
   /// Сумма платежа в минимальных единицах валюты.
   @JsonKey(name: JsonKeys.amount)
@@ -72,5 +68,5 @@ class RefundRequest extends AcquiringRequest {
 
   /// Дополнительные параметры запроса. Формат вида: {«Имя1»: «Значение1», «Имя2»: «Значение2»}.
   @JsonKey(name: JsonKeys.jsonParams)
-  final Map<String, dynamic> jsonParams;
+  final Map<String, dynamic>? jsonParams;
 }

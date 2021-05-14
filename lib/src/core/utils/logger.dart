@@ -1,7 +1,5 @@
 import 'dart:developer' as dev;
 
-import 'package:meta/meta.dart';
-
 /// {@template base_logger}
 /// Интерфейс базового логгера
 /// {@endtemplate}
@@ -11,10 +9,10 @@ abstract class BaseLogger {
 
   /// Метод логирует сообщение
   void log({
-    @required String message,
+    required String message,
     String name = '',
-    Object error,
-    StackTrace stackTrace,
+    Object? error,
+    StackTrace? stackTrace,
   });
 }
 
@@ -27,10 +25,10 @@ class Logger extends BaseLogger {
 
   @override
   void log({
-    @required String message,
+    required String message,
     String name = '',
-    Object error,
-    StackTrace stackTrace,
+    Object? error,
+    StackTrace? stackTrace,
   }) {
     dev.log(message, name: name, error: error, stackTrace: stackTrace);
   }

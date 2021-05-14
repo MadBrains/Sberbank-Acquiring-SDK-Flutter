@@ -8,9 +8,9 @@ part of 'bank_info.dart';
 
 BankInfo _$BankInfoFromJson(Map<String, dynamic> json) {
   return BankInfo(
-    bankName: json['bankName'] as String,
-    bankCountryCode: json['bankCountryCode'] as String,
-    bankCountryName: json['bankCountryName'] as String,
+    bankName: json['bankName'] as String?,
+    bankCountryCode: json['bankCountryCode'] as String?,
+    bankCountryName: json['bankCountryName'] as String?,
   );
 }
 

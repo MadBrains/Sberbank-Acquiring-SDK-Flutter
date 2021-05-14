@@ -8,8 +8,8 @@ part of 'attribute.dart';
 
 Attribute _$AttributeFromJson(Map<String, dynamic> json) {
   return Attribute(
-    name: json['name'] as String,
-    value: json['value'] as String,
+    name: json['name'] as String?,
+    value: json['value'] as String?,
   );
 }
 

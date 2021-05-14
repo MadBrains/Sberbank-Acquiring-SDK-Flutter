@@ -1,10 +1,11 @@
 import 'package:flutter/widgets.dart';
+import 'package:sberbank_acquiring/sberbank_acquiring_core.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 /// {@template on_finished}
 /// Коллбэк при успешной оплате
 /// {@endtemplate}
-typedef OnFinished = void Function(String orderId);
+typedef OnFinished = void Function(String? orderId);
 
 /// {@template on_load}
 /// Коллбэк при загрузки
@@ -22,15 +23,19 @@ typedef OnError = void Function();
 class WebViewPayment extends StatefulWidget {
   /// {@macro web_view_payment}
   const WebViewPayment({
-    Key key,
-    @required this.formUrl,
-    @required this.returnUrl,
+    Key? key,
+    required this.config,
+    required this.formUrl,
+    required this.returnUrl,
     this.failUrl,
     this.onFinished,
     this.onLoad,
     this.onError,
     this.onWebViewCreated,
   }) : super(key: key);
+
+  /// {@macro sberbank_acquiring_config}
+  final SberbankAcquiringConfig config;
 
   /// URL-адрес платёжной формы, на который нужно перенаправить браузер клиента.
   /// Не возвращается, если регистрация заказа не удалась по причине ошибки, детализированной в errorCode.
@@ -43,19 +48,19 @@ class WebViewPayment extends StatefulWidget {
 
   /// Адрес, на который требуется перенаправить пользователя в случае неуспешной оплаты.
   /// Можно получить из `RegisterRequest` поле `failUrl`.
-  final String failUrl;
+  final String? failUrl;
 
   /// {@macro on_finished}
-  final OnFinished onFinished;
+  final OnFinished? onFinished;
 
   /// {@macro on_load}
-  final OnLoad onLoad;
+  final OnLoad? onLoad;
 
   /// {@macro on_error}
-  final OnError onError;
+  final OnError? onError;
 
   /// Контроллер для управления webview
-  final WebViewCreatedCallback onWebViewCreated;
+  final WebViewCreatedCallback? onWebViewCreated;
 
   @override
   _WebViewPaymentState createState() => _WebViewPaymentState();
@@ -66,46 +71,53 @@ class _WebViewPaymentState extends State<WebViewPayment> {
 
   @override
   Widget build(BuildContext context) {
+    final String? failUrl = widget.failUrl;
+
     return WebView(
       initialUrl: widget.formUrl,
       gestureNavigationEnabled: true,
       javascriptMode: JavascriptMode.unrestricted,
       onWebViewCreated: widget.onWebViewCreated,
       onPageStarted: (String url) {
+        widget.config.logger
+            .log(name: 'WebViewPayment', message: 'onPageStarted: $url');
+
         if (url == widget.formUrl) {
-          widget.onLoad(true);
+          widget.onLoad?.call(true);
         }
 
         if (url.contains(widget.returnUrl)) {
           hasSent = true;
-          widget.onFinished(getOrderId(url));
+          widget.onFinished?.call(getOrderId(url));
         }
 
-        if (widget.failUrl != null && url.contains(widget.failUrl)) {
+        if (failUrl != null && url.contains(failUrl)) {
           hasSent = true;
-          widget.onError();
+          widget.onError?.call();
         }
       },
       onPageFinished: (String url) async {
+        widget.config.logger
+            .log(name: 'WebViewPayment', message: 'onPageFinished: $url');
+
         if (url == widget.formUrl) {
-          widget.onLoad(false);
+          widget.onLoad?.call(false);
         }
 
         if (!hasSent && url.contains(widget.returnUrl)) {
-          widget.onFinished(getOrderId(url));
+          widget.onFinished?.call(getOrderId(url));
         }
 
-        if (!hasSent &&
-            (widget.failUrl != null && url.contains(widget.failUrl))) {
-          widget.onError();
+        if (!hasSent && (failUrl != null && url.contains(failUrl))) {
+          widget.onError?.call();
         }
       },
     );
   }
 
-  String getOrderId(String url) {
-    final Uri _url = Uri.tryParse(url);
+  String? getOrderId(String url) {
+    final Uri? _url = Uri.tryParse(url);
 
-    return _url.queryParameters['orderId'];
+    return _url?.queryParameters['orderId'];
   }
 }

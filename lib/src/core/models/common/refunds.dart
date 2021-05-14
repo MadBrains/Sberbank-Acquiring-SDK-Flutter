@@ -26,7 +26,7 @@ class Refunds extends BaseResponse {
   Map<String, dynamic> toJson() => _$RefundsToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.referenceNumber: referenceNumber,
         JsonKeys.actionCode: actionCode,
@@ -36,17 +36,17 @@ class Refunds extends BaseResponse {
 
   /// Ссылочный номер транзакции, присваиваемый платёжным шлюзом после её завершения.
   @JsonKey(name: JsonKeys.referenceNumber)
-  final int referenceNumber;
+  final int? referenceNumber;
 
   /// Код ответа процессинга
   @JsonKey(name: JsonKeys.actionCode)
-  final int actionCode;
+  final int? actionCode;
 
   /// Сумма возврата в минимальных единицах валюты.
   @JsonKey(name: JsonKeys.amount)
-  final int amount;
+  final int? amount;
 
   /// Дата регистрации заказа в формате UNIX-времени (POSIX-времени).
   @JsonKey(name: JsonKeys.date)
-  final String date;
+  final String? date;
 }

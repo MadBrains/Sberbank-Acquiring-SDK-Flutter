@@ -31,7 +31,7 @@ class GetBindingsByCardOrIdRequest extends AcquiringRequest {
   Map<String, dynamic> toJson() => _$GetBindingsByCardOrIdRequestToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.pan: pan,
         JsonKeys.bindingId: bindingId,
@@ -40,9 +40,9 @@ class GetBindingsByCardOrIdRequest extends AcquiringRequest {
 
   @override
   GetBindingsByCardOrIdRequest copyWith({
-    String pan,
-    String bindingId,
-    bool showExpired,
+    String? pan,
+    String? bindingId,
+    bool? showExpired,
   }) {
     return GetBindingsByCardOrIdRequest(
       pan: pan ?? this.pan,
@@ -61,15 +61,15 @@ class GetBindingsByCardOrIdRequest extends AcquiringRequest {
   /// В случае оплаты через Apple Pay в качестве номера карты используется DPAN:
   /// номер, привязанный к мобильному устройству покупателя и выполняющий функции номера платёжной карты в системе Apple Pay.
   @JsonKey(name: JsonKeys.pan)
-  final String pan;
+  final String? pan;
 
   /// Идентификатор созданной ранее связки.
   /// Может использоваться, только если у продавца есть разрешение на работу со связками.
   @JsonKey(name: JsonKeys.bindingId)
-  final String bindingId;
+  final String? bindingId;
 
   /// Параметр определяет необходимость отображать связки с истёкшим сроком действия карты.
   /// Возможные значения: `true`, `false`. По умолчанию параметр принимает значение `false`.
   @JsonKey(name: JsonKeys.showExpired)
-  final bool showExpired;
+  final bool? showExpired;
 }

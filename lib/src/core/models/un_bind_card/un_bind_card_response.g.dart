@@ -8,8 +8,8 @@ part of 'un_bind_card_response.dart';
 
 UnBindCardResponse _$UnBindCardResponseFromJson(Map<String, dynamic> json) {
   return UnBindCardResponse(
-    errorCode: json['errorCode'] as String,
-    errorMessage: json['errorMessage'] as String,
+    errorCode: json['errorCode'] as String?,
+    errorMessage: json['errorMessage'] as String?,
   );
 }
 

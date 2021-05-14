@@ -33,7 +33,7 @@ class CardAuthInfo extends BaseResponse {
   Map<String, dynamic> toJson() => _$CardAuthInfoToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.maskedPan: maskedPan,
         JsonKeys.expiration: expiration,
@@ -49,51 +49,51 @@ class CardAuthInfo extends BaseResponse {
 
   /// Маскированный номер карты, которая использовалась для оплаты.
   @JsonKey(name: JsonKeys.maskedPan)
-  final String maskedPan;
+  final String? maskedPan;
 
   /// Срок истечения действия карты в формате `ГГГГММ`.
   @JsonKey(name: JsonKeys.expiration)
-  final String expiration;
+  final String? expiration;
 
   /// Имя держателя карты латиницей, если доступно.
   @JsonKey(name: JsonKeys.cardholderName)
-  final String cardholderName;
+  final String? cardholderName;
 
   /// Код авторизации международной платёжной системы.
   @JsonKey(name: JsonKeys.approvalCode)
-  final String approvalCode;
+  final String? approvalCode;
 
   /// Были ли средства принудительно возвращены покупателю банком.
   /// Возможны следующие значения:
   /// - true (истина) - средства были возвращены;
   /// - false (ложь) - средства не были возвращены.
   @JsonKey(name: JsonKeys.chargeback)
-  final bool chargeback;
+  final bool? chargeback;
 
   /// {@macro payment_system}
   @JsonKey(name: JsonKeys.paymentSystem)
-  final PaymentSystem paymentSystem;
+  final PaymentSystem? paymentSystem;
 
   /// {@macro secure_auth_info}
   @JsonKey(name: JsonKeys.secureAuthInfo)
-  final SecureAuthInfo secureAuthInfo;
+  final SecureAuthInfo? secureAuthInfo;
 
   /// Маскированный номер карты, которая использовалась для оплаты.
   @JsonKey(name: JsonKeys.pan)
-  final String pan;
+  final String? pan;
 
   /// Дополнительные сведения о категории корпоративных карт.
   /// Эти сведения заполняются службой технической поддержки в консоли управления.
   /// Если такие сведения отсутствуют, возвращается пустое значение.
   /// Возможные значения: DEBIT, CREDIT, PREPAID, NON_MASTERCARD, CHARGE, DIFFERED_DEBIT.
   @JsonKey(name: JsonKeys.productCategory)
-  final String productCategory;
+  final String? productCategory;
 
   /// Дополнительные сведения о корпоративных картах.
   /// Эти сведения заполняются службой технической поддержки.
   /// Если такие сведения отсутствуют, возвращается пустое значение.
   @JsonKey(name: JsonKeys.product)
-  final String product;
+  final String? product;
 }
 
 /// {@template secure_auth_info}
@@ -115,7 +115,7 @@ class SecureAuthInfo extends BaseResponse {
   Map<String, dynamic> toJson() => _$SecureAuthInfoToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.eci: eci,
         JsonKeys.threeDsInfo: threeDsInfo,
@@ -123,11 +123,11 @@ class SecureAuthInfo extends BaseResponse {
 
   /// Электронный коммерческий индикатор.
   @JsonKey(name: JsonKeys.eci)
-  final int eci;
+  final int? eci;
 
   /// {@macro three_ds_info}
   @JsonKey(name: JsonKeys.threeDsInfo)
-  final ThreeDsInfo threeDsInfo;
+  final ThreeDsInfo? threeDsInfo;
 }
 
 /// {@template three_ds_info}
@@ -149,7 +149,7 @@ class ThreeDsInfo extends BaseResponse {
   Map<String, dynamic> toJson() => _$ThreeDsInfoToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.cavv: cavv,
         JsonKeys.xid: xid,
@@ -158,10 +158,10 @@ class ThreeDsInfo extends BaseResponse {
   /// Значение проверки аутентификации владельца карты.
   /// Указано только после оплаты заказа и в случае соответствующего разрешения.
   @JsonKey(name: JsonKeys.cavv)
-  final String cavv;
+  final String? cavv;
 
   /// Электронный коммерческий идентификатор транзакции.
   /// Указан только после оплаты заказа и в случае соответствующего разрешения.
   @JsonKey(name: JsonKeys.xid)
-  final String xid;
+  final String? xid;
 }

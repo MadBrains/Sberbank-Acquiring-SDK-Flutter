@@ -14,8 +14,8 @@ part 'google_pay_response.g.dart';
 class GooglePayResponse extends AcquiringResponse {
   /// {@macro google_pay_response}
   GooglePayResponse({
-    String errorCode,
-    String errorMessage,
+    String? errorCode,
+    String? errorMessage,
     this.success,
     this.data,
     this.error,
@@ -32,7 +32,7 @@ class GooglePayResponse extends AcquiringResponse {
   Map<String, dynamic> toJson() => _$GooglePayResponseToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.success: success,
         JsonKeys.data: data,
@@ -43,15 +43,15 @@ class GooglePayResponse extends AcquiringResponse {
   /// - `true` (истина) - запрос обработан успешно;
   /// - `false` (ложь) - запрос не прошёл.
   @JsonKey(name: JsonKeys.success)
-  final bool success;
+  final bool? success;
 
   /// Номер заказа в платёжной системе.
   /// Уникален в пределах системы.
   /// Отсутствует, если регистрация заказа на удалась по причине ошибки.
   @JsonKey(name: JsonKeys.data)
-  final Data data;
+  final Data? data;
 
   /// {@macro error_info}
   @JsonKey(name: JsonKeys.error)
-  final ErrorInfo error;
+  final ErrorInfo? error;
 }

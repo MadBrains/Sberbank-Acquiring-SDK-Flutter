@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 
 import '../../../constants.dart';
 import '../base/acquiring_request.dart';
@@ -24,7 +23,7 @@ part 'reverse_request.g.dart';
 class ReverseRequest extends AcquiringRequest {
   /// {@macro reverse_request}
   ReverseRequest({
-    @required this.orderId,
+    required this.orderId,
     this.jsonParams,
     this.language,
   });
@@ -40,7 +39,7 @@ class ReverseRequest extends AcquiringRequest {
   Map<String, dynamic> toJson() => _$ReverseRequestToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.orderId: orderId,
         JsonKeys.jsonParams: jsonParams,
@@ -49,9 +48,9 @@ class ReverseRequest extends AcquiringRequest {
 
   @override
   ReverseRequest copyWith({
-    String orderId,
-    Map<String, dynamic> jsonParams,
-    String language,
+    String? orderId,
+    Map<String, dynamic>? jsonParams,
+    String? language,
   }) {
     return ReverseRequest(
       orderId: orderId ?? this.orderId,
@@ -61,9 +60,7 @@ class ReverseRequest extends AcquiringRequest {
   }
 
   @override
-  void validate() {
-    assert(orderId != null);
-  }
+  void validate() {}
 
   /// Номер заказа в платежной системе. Уникален в пределах системы.
   /// Отсутствует если регистрация заказа на удалась по причине ошибки, детализированной в ErrorCode.
@@ -72,10 +69,10 @@ class ReverseRequest extends AcquiringRequest {
 
   /// Дополнительные параметры запроса. Формат вида: {«Имя1»: «Значение1», «Имя2»: «Значение2»}.
   @JsonKey(name: JsonKeys.jsonParams)
-  final Map<String, dynamic> jsonParams;
+  final Map<String, dynamic>? jsonParams;
 
   /// Язык в кодировке ISO 639-1.
   /// Если не указан, будет использован язык, указанный в настройках магазина как язык по умолчанию.
   @JsonKey(name: JsonKeys.language)
-  final String language;
+  final String? language;
 }

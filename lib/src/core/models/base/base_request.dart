@@ -5,7 +5,7 @@ import 'package:comparer/comparer.dart';
 /// {@endtemplate}
 abstract class BaseRequest extends ComparerMap {
   @override
-  Map<String, Object> get equals => <String, Object>{};
+  Map<String, Object?> get equals => <String, Object?>{};
 
   /// {@macro toJson}
   Map<String, dynamic> toJson();

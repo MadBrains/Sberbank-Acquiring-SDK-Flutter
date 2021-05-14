@@ -8,9 +8,9 @@ part of 'error_info.dart';
 
 ErrorInfo _$ErrorInfoFromJson(Map<String, dynamic> json) {
   return ErrorInfo(
-    code: json['code'] as String,
-    description: json['description'] as String,
-    message: json['message'] as String,
+    code: json['code'] as String?,
+    description: json['description'] as String?,
+    message: json['message'] as String?,
   );
 }
 

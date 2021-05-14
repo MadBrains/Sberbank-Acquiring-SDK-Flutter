@@ -1,0 +1,7 @@
+targets:
+  $default:
+    builders:
+      json_serializable:
+        generate_for:
+          include:
+            - lib/src/core/models/**/**.dart

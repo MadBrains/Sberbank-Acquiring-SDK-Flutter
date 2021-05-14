@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 
 import '../../../constants.dart';
 import '../base/acquiring_request.dart';
@@ -15,8 +14,8 @@ part 'deposit_request.g.dart';
 class DepositRequest extends AcquiringRequest {
   /// {@macro deposit_request}
   DepositRequest({
-    @required this.amount,
-    @required this.orderId,
+    required this.amount,
+    required this.orderId,
   });
 
   /// {@macro fromJson}
@@ -30,7 +29,7 @@ class DepositRequest extends AcquiringRequest {
   Map<String, dynamic> toJson() => _$DepositRequestToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.amount: amount,
         JsonKeys.orderId: orderId,
@@ -38,8 +37,8 @@ class DepositRequest extends AcquiringRequest {
 
   @override
   DepositRequest copyWith({
-    int amount,
-    String orderId,
+    int? amount,
+    String? orderId,
   }) {
     return DepositRequest(
       amount: amount ?? this.amount,
@@ -48,10 +47,7 @@ class DepositRequest extends AcquiringRequest {
   }
 
   @override
-  void validate() {
-    assert(amount != null);
-    assert(orderId != null);
-  }
+  void validate() {}
 
   /// Сумма платежа в копейках (или центах).
   ///

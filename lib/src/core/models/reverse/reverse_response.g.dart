@@ -8,8 +8,8 @@ part of 'reverse_response.dart';
 
 ReverseResponse _$ReverseResponseFromJson(Map<String, dynamic> json) {
   return ReverseResponse(
-    errorCode: json['errorCode'] as String,
-    errorMessage: json['errorMessage'] as String,
+    errorCode: json['errorCode'] as String?,
+    errorMessage: json['errorMessage'] as String?,
   );
 }
 

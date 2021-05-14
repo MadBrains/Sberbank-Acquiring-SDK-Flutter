@@ -9,9 +9,9 @@ part of 'get_order_status_extended_request.dart';
 GetOrderStatusExtendedRequest _$GetOrderStatusExtendedRequestFromJson(
     Map<String, dynamic> json) {
   return GetOrderStatusExtendedRequest(
-    orderId: json['orderId'] as String,
-    orderNumber: json['orderNumber'] as String,
-    language: json['language'] as String,
+    orderId: json['orderId'] as String?,
+    orderNumber: json['orderNumber'] as String?,
+    language: json['language'] as String?,
   );
 }
 

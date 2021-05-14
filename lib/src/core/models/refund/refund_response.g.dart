@@ -8,8 +8,8 @@ part of 'refund_response.dart';
 
 RefundResponse _$RefundResponseFromJson(Map<String, dynamic> json) {
   return RefundResponse(
-    errorCode: json['errorCode'] as String,
-    errorMessage: json['errorMessage'] as String,
+    errorCode: json['errorCode'] as String?,
+    errorMessage: json['errorMessage'] as String?,
   );
 }
 

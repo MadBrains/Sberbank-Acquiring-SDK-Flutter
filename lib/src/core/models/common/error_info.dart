@@ -25,7 +25,7 @@ class ErrorInfo extends BaseResponse {
   Map<String, dynamic> toJson() => _$ErrorInfoToJson(this);
 
   @override
-  Map<String, Object> get equals => <String, Object>{
+  Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.code: code,
         JsonKeys.description: description,
@@ -34,13 +34,13 @@ class ErrorInfo extends BaseResponse {
 
   /// Код ошибки
   @JsonKey(name: JsonKeys.code)
-  final String code;
+  final String? code;
 
   /// Подробное техническое объяснение ошибки - содержимое этого параметра не предназначено для отображения пользователю.
   @JsonKey(name: JsonKeys.description)
-  final String description;
+  final String? description;
 
   /// Понятное описание ошибки - предназначено для отображения пользователю
   @JsonKey(name: JsonKeys.message)
-  final String message;
+  final String? message;
 }

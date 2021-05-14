@@ -9,12 +9,12 @@ part of 'get_receipt_status_response.dart';
 GetReceiptStatusResponse _$GetReceiptStatusResponseFromJson(
     Map<String, dynamic> json) {
   return GetReceiptStatusResponse(
-    errorCode: json['errorCode'] as String,
-    errorMessage: json['errorMessage'] as String,
-    orderNumber: json['orderNumber'] as String,
-    orderId: json['orderId'] as String,
-    daemonCode: json['daemonCode'] as String,
-    ecrRegistrationNumber: json['ecr_registration_number'] as String,
+    errorCode: json['errorCode'] as String?,
+    errorMessage: json['errorMessage'] as String?,
+    orderNumber: json['orderNumber'] as String?,
+    orderId: json['orderId'] as String?,
+    daemonCode: json['daemonCode'] as String?,
+    ecrRegistrationNumber: json['ecr_registration_number'] as String?,
     receipt: json['receipt'] == null
         ? null
         : Receipt.fromJson(json['receipt'] as Map<String, dynamic>),
@@ -45,17 +45,17 @@ Receipt _$ReceiptFromJson(Map<String, dynamic> json) {
   return Receipt(
     receiptStatus:
         _$enumDecodeNullable(_$ReceiptStatusEnumMap, json['receiptStatus']),
-    uuid: json['uuid'] as String,
-    shiftNumber: json['shift_number'] as int,
-    receiptNumber: json['receipt_number'] as int,
-    receiptDatetime: json['receipt_datetime'] as String,
-    fnNumber: json['fn_number'] as String,
-    ecrRegistrationNumber: json['ecr_registration_number'] as String,
-    fiscalDocumentNumber: json['fiscal_document_number'] as int,
-    fiscalDocumentAttribute: json['fiscal_document_attribute'] as String,
-    amountTotal: json['amount_total'] as String,
-    serialNumber: json['serial_number'] as String,
-    fnsSite: json['fnsSite'] as String,
+    uuid: json['uuid'] as String?,
+    shiftNumber: json['shift_number'] as int?,
+    receiptNumber: json['receipt_number'] as int?,
+    receiptDatetime: json['receipt_datetime'] as String?,
+    fnNumber: json['fn_number'] as String?,
+    ecrRegistrationNumber: json['ecr_registration_number'] as String?,
+    fiscalDocumentNumber: json['fiscal_document_number'] as int?,
+    fiscalDocumentAttribute: json['fiscal_document_attribute'] as String?,
+    amountTotal: json['amount_total'] as String?,
+    serialNumber: json['serial_number'] as String?,
+    fnsSite: json['fnsSite'] as String?,
     ofd: json['OFD'] == null
         ? null
         : OFD.fromJson(json['OFD'] as Map<String, dynamic>),
@@ -87,36 +87,41 @@ Map<String, dynamic> _$ReceiptToJson(Receipt instance) {
   return val;
 }
 
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
+K _$enumDecode<K, V>(
+  Map<K, V> enumValues,
+  Object? source, {
+  K? unknownValue,
 }) {
   if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
+    throw ArgumentError(
+      'A value must be provided. Supported values: '
+      '${enumValues.values.join(', ')}',
+    );
   }
 
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
+  return enumValues.entries.singleWhere(
+    (e) => e.value == source,
+    orElse: () {
+      if (unknownValue == null) {
+        throw ArgumentError(
+          '`$source` is not one of the supported values: '
+          '${enumValues.values.join(', ')}',
+        );
+      }
+      return MapEntry(unknownValue, enumValues.values.first);
+    },
+  ).key;
 }
 
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
+K? _$enumDecodeNullable<K, V>(
+  Map<K, V> enumValues,
   dynamic source, {
-  T unknownValue,
+  K? unknownValue,
 }) {
   if (source == null) {
     return null;
   }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
+  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
 const _$ReceiptStatusEnumMap = {
@@ -130,9 +135,9 @@ const _$ReceiptStatusEnumMap = {
 
 OFD _$OFDFromJson(Map<String, dynamic> json) {
   return OFD(
-    name: json['name'] as String,
-    website: json['website'] as String,
-    inn: json['INN'] as String,
+    name: json['name'] as String?,
+    website: json['website'] as String?,
+    inn: json['INN'] as String?,
   );
 }
 

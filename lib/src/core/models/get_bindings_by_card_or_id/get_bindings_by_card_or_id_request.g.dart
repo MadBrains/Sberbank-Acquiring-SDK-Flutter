@@ -9,9 +9,9 @@ part of 'get_bindings_by_card_or_id_request.dart';
 GetBindingsByCardOrIdRequest _$GetBindingsByCardOrIdRequestFromJson(
     Map<String, dynamic> json) {
   return GetBindingsByCardOrIdRequest(
-    pan: json['pan'] as String,
-    bindingId: json['bindingId'] as String,
-    showExpired: json['showExpired'] as bool,
+    pan: json['pan'] as String?,
+    bindingId: json['bindingId'] as String?,
+    showExpired: json['showExpired'] as bool?,
   );
 }
 
