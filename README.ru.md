@@ -17,7 +17,7 @@ Acquiring SDK позволяет интегрировать [Интернет-Э
 Для подключения добавьте в файл pubspec.yaml зависимости:
 ```yaml
 dependencies:
-  sberbank_acquiring: 2.0.0
+  sberbank_acquiring: <lastles>
 ```
 
 ## Подготовка к работе
@@ -66,6 +66,6 @@ final SberbankAcquiring acquiring = SberbankAcquiring(
 Пример работы SDK доступен в [Example][example]
 
 
-[documentation]: https://securepayments.sberbank.ru/wiki/doku.php/integration:paymentpage:paymentpage_design
+[documentation]: https://securepayments.sberbank.ru/wiki/doku.php/integration:api:rest:start
 [acquiring]: https://securepayments.sberbank.ru/wiki/doku.php/main_page
 [example]: https://github.com/MadBrains/Sberbank-Acquiring-SDK-Flutter/tree/main/example/

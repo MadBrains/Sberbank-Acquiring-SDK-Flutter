@@ -19,7 +19,7 @@ Acquiring SDK allows you to integrate [Sberbank Internet Acquiring][acquiring] i
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  sberbank_acquiring: 2.0.0
+  sberbank_acquiring: <lastles>
 ```
 
 ## Before usage
@@ -68,6 +68,6 @@ final SberbankAcquiring acquiring = SberbankAcquiring(
 The [Example][example] is in the corresponding folder
 
 
-[documentation]: https://securepayments.sberbank.ru/wiki/doku.php/integration:paymentpage:paymentpage_design
+[documentation]: https://securepayments.sberbank.ru/wiki/doku.php/integration:api:rest:start
 [acquiring]: https://securepayments.sberbank.ru/wiki/doku.php/main_page
 [example]: https://github.com/MadBrains/Sberbank-Acquiring-SDK-Flutter/tree/main/example/
