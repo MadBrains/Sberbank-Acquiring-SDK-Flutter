@@ -73,7 +73,8 @@ class NetworkClient {
 
   dynamic _modifyRequest(AcquiringRequest request) {
     final Map<String, String?> temp = request.toJson().map<String, String?>(
-        (String k, dynamic v) => MapEntry<String, String?>(k, v?.toString()));
+          (String k, dynamic v) => MapEntry<String, String?>(k, v?.toString()),
+        );
 
     temp.removeWhere((_, String? v) => v == null || v.isEmpty);
 

@@ -148,7 +148,8 @@ class RegisterRequest extends AcquiringRequest {
         final bool hasComma =
             jsonParams.keys.last != jsonParams.keys.toList()[i];
         temp.write(
-            '"${jsonParams.keys.toList()[i]}":"${jsonParams.values.toList()[i]}"${hasComma ? "," : ""}');
+          '"${jsonParams.keys.toList()[i]}":"${jsonParams.values.toList()[i]}"${hasComma ? "," : ""}',
+        );
       }
 
       temp.write('}');

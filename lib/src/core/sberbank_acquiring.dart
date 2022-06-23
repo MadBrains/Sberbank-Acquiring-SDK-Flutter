@@ -10,8 +10,7 @@ import 'sberbank_acquiring_config.dart';
 /// {@endtemplate}
 class SberbankAcquiring {
   /// {@macro sberbank_acquiring}
-  SberbankAcquiring(this.config)
-      : _network = NetworkClient(config);
+  SberbankAcquiring(this.config) : _network = NetworkClient(config);
 
   /// {@macro sberbank_acquiring_config}
   final SberbankAcquiringConfig config;
@@ -28,7 +27,8 @@ class SberbankAcquiring {
 
   /// {@macro apple_pay_recurrent_request}
   Future<ApplePayRecurrentResponse> applePayRecurrent(
-      ApplePayRecurrentRequest request) {
+    ApplePayRecurrentRequest request,
+  ) {
     return _network(
       request,
       (Map<String, dynamic> json) => ApplePayRecurrentResponse.fromJson(json),
@@ -77,7 +77,8 @@ class SberbankAcquiring {
 
   /// {@macro get_bindings_by_card_or_id_request}
   Future<GetBindingsByCardOrIdResponse> getBindingsByCardOrId(
-      GetBindingsByCardOrIdRequest request) {
+    GetBindingsByCardOrIdRequest request,
+  ) {
     return _network(
       request,
       (Map<String, dynamic> json) =>
@@ -87,7 +88,8 @@ class SberbankAcquiring {
 
   /// {@macro get_order_status_extended_request}
   Future<GetOrderStatusExtendedResponse> getOrderStatusExtended(
-      GetOrderStatusExtendedRequest request) {
+    GetOrderStatusExtendedRequest request,
+  ) {
     return _network(
       request,
       (Map<String, dynamic> json) =>
@@ -97,7 +99,8 @@ class SberbankAcquiring {
 
   /// {@macro get_receipt_status_request}
   Future<GetReceiptStatusResponse> getReceiptStatus(
-      GetReceiptStatusRequest request) {
+    GetReceiptStatusRequest request,
+  ) {
     return _network(
       request,
       (Map<String, dynamic> json) => GetReceiptStatusResponse.fromJson(json),
@@ -146,7 +149,8 @@ class SberbankAcquiring {
 
   /// {@macro verify_enrollment_request}
   Future<VerifyEnrollmentResponse> verifyEnrollment(
-      VerifyEnrollmentRequest request) {
+    VerifyEnrollmentRequest request,
+  ) {
     return _network(
       request,
       (Map<String, dynamic> json) => VerifyEnrollmentResponse.fromJson(json),

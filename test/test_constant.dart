@@ -2,10 +2,12 @@ import 'dart:math';
 
 import 'package:sberbank_acquiring/sberbank_acquiring_core.dart';
 
-final SberbankAcquiring acquiring = SberbankAcquiring(SberbankAcquiringConfig(
-  userName: '',
-  password: '',
-));
+final SberbankAcquiring acquiring = SberbankAcquiring(
+  SberbankAcquiringConfig(
+    userName: '',
+    password: '',
+  ),
+);
 
 const String orderId = '';
 const String pan = '4111111111111111';
