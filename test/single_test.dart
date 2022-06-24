@@ -111,6 +111,7 @@ void start() {
     final GetBindingsResponse value = await acquiring.getBindings(
       GetBindingsRequest(
         clientId: clientId,
+        bindingType: BindingType.c,
       ),
     );
 
@@ -144,6 +145,21 @@ void start() {
     expect(value.hasError, false);
     expect(value.runtimeType, ExtendBindingResponse);
   });
+  test('createBindingNoPayment', () async {
+    final CreateBindingNoPaymentResponse value =
+        await acquiring.createBindingNoPayment(
+      CreateBindingNoPaymentRequest(
+        clientId: clientId,
+        cardholderName: 'Test',
+        pan: pan,
+        expiryDate: 202812,
+      ),
+    );
+
+    expect(value.hasError, false);
+    expect(value.runtimeType, CreateBindingNoPaymentResponse);
+  });
+
   test('unBindCard', () async {
     final UnBindCardResponse value = await acquiring.unBindCard(
       UnBindCardRequest(

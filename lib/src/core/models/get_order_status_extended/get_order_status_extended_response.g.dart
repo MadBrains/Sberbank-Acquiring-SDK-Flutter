@@ -7,55 +7,55 @@ part of 'get_order_status_extended_response.dart';
 // **************************************************************************
 
 GetOrderStatusExtendedResponse _$GetOrderStatusExtendedResponseFromJson(
-    Map<String, dynamic> json) {
-  return GetOrderStatusExtendedResponse(
-    errorCode: json['errorCode'] as String?,
-    errorMessage: json['errorMessage'] as String?,
-    orderNumber: json['orderNumber'] as String?,
-    orderStatus:
-        _$enumDecodeNullable(_$OrderStatusEnumMap, json['orderStatus']),
-    actionCode: json['actionCode'] as int?,
-    actionCodeDescription: json['actionCodeDescription'] as String?,
-    amount: json['amount'] as int?,
-    currency: json['currency'] as String?,
-    date: json['date'] as int?,
-    depositedDate: json['depositedDate'] as int?,
-    orderDescription: json['orderDescription'] as String?,
-    ip: json['ip'] as String?,
-    authRefNum: json['authRefNum'] as String?,
-    refundedDate: json['refundedDate'] as String?,
-    paymentWay: _$enumDecodeNullable(_$PaymentWayEnumMap, json['paymentWay']),
-    merchantOrderParams: (json['merchantOrderParams'] as List<dynamic>?)
-        ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    attributes: (json['attributes'] as List<dynamic>?)
-        ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    transactionAttributes: (json['transactionAttributes'] as List<dynamic>?)
-        ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    cardAuthInfo: json['cardAuthInfo'] == null
-        ? null
-        : CardAuthInfo.fromJson(json['cardAuthInfo'] as Map<String, dynamic>),
-    terminalId: json['terminalId'] as String?,
-    paymentAmountInfo: json['paymentAmountInfo'] == null
-        ? null
-        : PaymentAmountInfo.fromJson(
-            json['paymentAmountInfo'] as Map<String, dynamic>),
-    bankInfo: json['bankInfo'] == null
-        ? null
-        : BankInfo.fromJson(json['bankInfo'] as Map<String, dynamic>),
-    bindingInfo: json['bindingInfo'] == null
-        ? null
-        : BindingInfo.fromJson(json['bindingInfo'] as Map<String, dynamic>),
-    payerData: json['payerData'] == null
-        ? null
-        : PayerData.fromJson(json['payerData'] as Map<String, dynamic>),
-    refunds: json['refunds'] == null
-        ? null
-        : Refunds.fromJson(json['refunds'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    GetOrderStatusExtendedResponse(
+      errorCode: json['errorCode'] as String?,
+      errorMessage: json['errorMessage'] as String?,
+      orderNumber: json['orderNumber'] as String?,
+      orderStatus:
+          $enumDecodeNullable(_$OrderStatusEnumMap, json['orderStatus']),
+      actionCode: json['actionCode'] as int?,
+      actionCodeDescription: json['actionCodeDescription'] as String?,
+      amount: json['amount'] as int?,
+      currency: json['currency'] as String?,
+      date: json['date'] as int?,
+      depositedDate: json['depositedDate'] as int?,
+      orderDescription: json['orderDescription'] as String?,
+      ip: json['ip'] as String?,
+      authRefNum: json['authRefNum'] as String?,
+      refundedDate: json['refundedDate'] as String?,
+      paymentWay: $enumDecodeNullable(_$PaymentWayEnumMap, json['paymentWay']),
+      avsCode: $enumDecodeNullable(_$AvsCodeEnumMap, json['avsCode']),
+      merchantOrderParams: (json['merchantOrderParams'] as List<dynamic>?)
+          ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      attributes: (json['attributes'] as List<dynamic>?)
+          ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      transactionAttributes: (json['transactionAttributes'] as List<dynamic>?)
+          ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cardAuthInfo: json['cardAuthInfo'] == null
+          ? null
+          : CardAuthInfo.fromJson(json['cardAuthInfo'] as Map<String, dynamic>),
+      terminalId: json['terminalId'] as String?,
+      paymentAmountInfo: json['paymentAmountInfo'] == null
+          ? null
+          : PaymentAmountInfo.fromJson(
+              json['paymentAmountInfo'] as Map<String, dynamic>),
+      bankInfo: json['bankInfo'] == null
+          ? null
+          : BankInfo.fromJson(json['bankInfo'] as Map<String, dynamic>),
+      bindingInfo: json['bindingInfo'] == null
+          ? null
+          : BindingInfo.fromJson(json['bindingInfo'] as Map<String, dynamic>),
+      payerData: json['payerData'] == null
+          ? null
+          : PayerData.fromJson(json['payerData'] as Map<String, dynamic>),
+      refunds: json['refunds'] == null
+          ? null
+          : Refunds.fromJson(json['refunds'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$GetOrderStatusExtendedResponseToJson(
     GetOrderStatusExtendedResponse instance) {
@@ -82,6 +82,7 @@ Map<String, dynamic> _$GetOrderStatusExtendedResponseToJson(
   writeNotNull('authRefNum', instance.authRefNum);
   writeNotNull('refundedDate', instance.refundedDate);
   writeNotNull('paymentWay', _$PaymentWayEnumMap[instance.paymentWay]);
+  writeNotNull('avsCode', _$AvsCodeEnumMap[instance.avsCode]);
   writeNotNull('merchantOrderParams', instance.merchantOrderParams);
   writeNotNull('attributes', instance.attributes);
   writeNotNull('transactionAttributes', instance.transactionAttributes);
@@ -93,43 +94,6 @@ Map<String, dynamic> _$GetOrderStatusExtendedResponseToJson(
   writeNotNull('payerData', instance.payerData);
   writeNotNull('refunds', instance.refunds);
   return val;
-}
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
-
-K? _$enumDecodeNullable<K, V>(
-  Map<K, V> enumValues,
-  dynamic source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
 const _$OrderStatusEnumMap = {
@@ -168,4 +132,13 @@ const _$PaymentWayEnumMap = {
   PaymentWay.iPOS: 'IPOS',
   PaymentWay.sberPay: 'SBERPAY',
   PaymentWay.sberId: 'SBERID',
+};
+
+const _$AvsCodeEnumMap = {
+  AvsCode.a: 'A',
+  AvsCode.b: 'B',
+  AvsCode.c: 'С',
+  AvsCode.d: 'D',
+  AvsCode.e: 'E',
+  AvsCode.f: 'F',
 };

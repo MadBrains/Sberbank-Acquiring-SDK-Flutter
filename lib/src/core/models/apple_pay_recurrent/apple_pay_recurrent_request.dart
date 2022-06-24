@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../../../constants.dart';
 import '../base/acquiring_request.dart';
+import '../common/billing_payer_data.dart';
 
 part 'apple_pay_recurrent_request.g.dart';
 
@@ -15,10 +16,12 @@ class ApplePayRecurrentRequest extends AcquiringRequest {
     required this.orderNumber,
     required this.bindingId,
     required this.amount,
+    this.feeInput,
     this.language,
     this.currency,
     this.description,
     this.additionalParameters,
+    this.billingPayerData,
   });
 
   /// {@macro fromJson}
@@ -35,32 +38,38 @@ class ApplePayRecurrentRequest extends AcquiringRequest {
   Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.orderNumber: orderNumber,
+        JsonKeys.feeInput: feeInput,
         JsonKeys.language: language,
         JsonKeys.bindingId: bindingId,
         JsonKeys.amount: amount,
         JsonKeys.currency: currency,
         JsonKeys.description: description,
         JsonKeys.additionalParameters: additionalParameters,
+        JsonKeys.billingPayerData: billingPayerData,
       };
 
   @override
   ApplePayRecurrentRequest copyWith({
     String? orderNumber,
+    int? feeInput,
     String? language,
     String? bindingId,
     int? amount,
     int? currency,
     String? description,
     Map<String, dynamic>? additionalParameters,
+    BillingPayerData? billingPayerData,
   }) {
     return ApplePayRecurrentRequest(
       orderNumber: orderNumber ?? this.orderNumber,
+      feeInput: feeInput ?? this.feeInput,
       language: language ?? this.language,
       bindingId: bindingId ?? this.bindingId,
       amount: amount ?? this.amount,
       currency: currency ?? this.currency,
       description: description ?? this.description,
       additionalParameters: additionalParameters ?? this.additionalParameters,
+      billingPayerData: billingPayerData ?? this.billingPayerData,
     );
   }
 
@@ -71,6 +80,12 @@ class ApplePayRecurrentRequest extends AcquiringRequest {
   /// Если номер заказа генерируется на стороне платёжного шлюза, этот параметр передавать необязательно.
   @JsonKey(name: JsonKeys.orderNumber)
   final String orderNumber;
+
+  /// Сумма комиссии в минимальных единицах валюты.
+  ///
+  /// Параметр передается только при включении соответствующей пермиссии.
+  @JsonKey(name: JsonKeys.feeInput)
+  final int? feeInput;
 
   /// Язык в кодировке ISO 639-1.
   /// Если не указан, будет использован язык, указанный в настройках магазина как язык по умолчанию.
@@ -99,4 +114,8 @@ class ApplePayRecurrentRequest extends AcquiringRequest {
   /// и/или phone (номер сотового телефона покупателя) эти параметры в первую очередь используются для отправки фискального чека.
   @JsonKey(name: JsonKeys.additionalParameters)
   final Map<String, dynamic>? additionalParameters;
+
+  /// {@macro billing_payer_data}
+  @JsonKey(name: JsonKeys.billingPayerData)
+  final BillingPayerData? billingPayerData;
 }

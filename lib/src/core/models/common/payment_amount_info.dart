@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../base/base_response.dart';
 import '../../../constants.dart';
+import '../base/base_response.dart';
 import '../enums/payment_state.dart';
 
 part 'payment_amount_info.g.dart';
@@ -18,6 +18,7 @@ class PaymentAmountInfo extends BaseResponse {
     this.refundedAmount,
     this.paymentState,
     this.feeAmount,
+    this.totalAmount,
   });
 
   /// {@macro fromJson}
@@ -35,6 +36,7 @@ class PaymentAmountInfo extends BaseResponse {
         JsonKeys.refundedAmount: refundedAmount,
         JsonKeys.paymentState: paymentState,
         JsonKeys.feeAmount: feeAmount,
+        JsonKeys.totalAmount: totalAmount,
       };
 
   /// Сумма, подтверждённая к списанию
@@ -56,4 +58,8 @@ class PaymentAmountInfo extends BaseResponse {
   /// Сумма комиссии в минимальных единицах валюты
   @JsonKey(name: JsonKeys.feeAmount)
   final int? feeAmount;
+
+  /// Сумма заказа + fee (комиссия, если она была использована в заказе).
+  @JsonKey(name: JsonKeys.totalAmount)
+  final int? totalAmount;
 }

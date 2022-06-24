@@ -6,12 +6,10 @@ part of 'attribute.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Attribute _$AttributeFromJson(Map<String, dynamic> json) {
-  return Attribute(
-    name: json['name'] as String?,
-    value: json['value'] as String?,
-  );
-}
+Attribute _$AttributeFromJson(Map<String, dynamic> json) => Attribute(
+      name: json['name'] as String?,
+      value: json['value'] as String?,
+    );
 
 Map<String, dynamic> _$AttributeToJson(Attribute instance) {
   final val = <String, dynamic>{};

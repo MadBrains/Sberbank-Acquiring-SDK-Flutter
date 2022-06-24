@@ -154,6 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
         if (Platform.isAndroid) {
           final GooglePayResponse googlePay = await acquiring.googlePay(
             GooglePayRequest(
+              orderNumber: '',
               merchant: 'test',
               language: 'ru',
               amount: items

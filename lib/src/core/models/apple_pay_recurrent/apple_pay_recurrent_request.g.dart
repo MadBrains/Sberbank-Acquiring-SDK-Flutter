@@ -7,17 +7,22 @@ part of 'apple_pay_recurrent_request.dart';
 // **************************************************************************
 
 ApplePayRecurrentRequest _$ApplePayRecurrentRequestFromJson(
-    Map<String, dynamic> json) {
-  return ApplePayRecurrentRequest(
-    orderNumber: json['orderNumber'] as String,
-    bindingId: json['bindingId'] as String,
-    amount: json['amount'] as int,
-    language: json['language'] as String?,
-    currency: json['currency'] as int?,
-    description: json['description'] as String?,
-    additionalParameters: json['additionalParameters'] as Map<String, dynamic>?,
-  );
-}
+        Map<String, dynamic> json) =>
+    ApplePayRecurrentRequest(
+      orderNumber: json['orderNumber'] as String,
+      bindingId: json['bindingId'] as String,
+      amount: json['amount'] as int,
+      feeInput: json['feeInput'] as int?,
+      language: json['language'] as String?,
+      currency: json['currency'] as int?,
+      description: json['description'] as String?,
+      additionalParameters:
+          json['additionalParameters'] as Map<String, dynamic>?,
+      billingPayerData: json['billingPayerData'] == null
+          ? null
+          : BillingPayerData.fromJson(
+              json['billingPayerData'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$ApplePayRecurrentRequestToJson(
     ApplePayRecurrentRequest instance) {
@@ -31,11 +36,13 @@ Map<String, dynamic> _$ApplePayRecurrentRequestToJson(
     }
   }
 
+  writeNotNull('feeInput', instance.feeInput);
   writeNotNull('language', instance.language);
   val['bindingId'] = instance.bindingId;
   val['amount'] = instance.amount;
   writeNotNull('currency', instance.currency);
   writeNotNull('description', instance.description);
   writeNotNull('additionalParameters', instance.additionalParameters);
+  writeNotNull('billingPayerData', instance.billingPayerData);
   return val;
 }

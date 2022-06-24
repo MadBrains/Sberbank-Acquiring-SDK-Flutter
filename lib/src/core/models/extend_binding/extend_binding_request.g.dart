@@ -6,13 +6,13 @@ part of 'extend_binding_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ExtendBindingRequest _$ExtendBindingRequestFromJson(Map<String, dynamic> json) {
-  return ExtendBindingRequest(
-    bindingId: json['bindingId'] as String,
-    newExpiry: json['newExpiry'] as int,
-    language: json['language'] as String?,
-  );
-}
+ExtendBindingRequest _$ExtendBindingRequestFromJson(
+        Map<String, dynamic> json) =>
+    ExtendBindingRequest(
+      bindingId: json['bindingId'] as String,
+      newExpiry: json['newExpiry'] as int,
+      language: json['language'] as String?,
+    );
 
 Map<String, dynamic> _$ExtendBindingRequestToJson(
     ExtendBindingRequest instance) {

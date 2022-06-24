@@ -75,6 +75,14 @@ class SberbankAcquiring {
     );
   }
 
+  /// {@macro get_all_bindings_request}
+  Future<GetBindingsResponse> getAllBindings(GetAllBindingsRequest request) {
+    return _network(
+      request,
+      (Map<String, dynamic> json) => GetBindingsResponse.fromJson(json),
+    );
+  }
+
   /// {@macro get_bindings_by_card_or_id_request}
   Future<GetBindingsByCardOrIdResponse> getBindingsByCardOrId(
     GetBindingsByCardOrIdRequest request,
@@ -154,6 +162,17 @@ class SberbankAcquiring {
     return _network(
       request,
       (Map<String, dynamic> json) => VerifyEnrollmentResponse.fromJson(json),
+    );
+  }
+
+  /// {@macro create_binding_no_payment_request}
+  Future<CreateBindingNoPaymentResponse> createBindingNoPayment(
+    CreateBindingNoPaymentRequest request,
+  ) {
+    return _network(
+      request,
+      (Map<String, dynamic> json) =>
+          CreateBindingNoPaymentResponse.fromJson(json),
     );
   }
 }
