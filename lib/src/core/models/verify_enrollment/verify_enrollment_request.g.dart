@@ -7,11 +7,10 @@ part of 'verify_enrollment_request.dart';
 // **************************************************************************
 
 VerifyEnrollmentRequest _$VerifyEnrollmentRequestFromJson(
-    Map<String, dynamic> json) {
-  return VerifyEnrollmentRequest(
-    pan: json['pan'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    VerifyEnrollmentRequest(
+      pan: json['pan'] as String,
+    );
 
 Map<String, dynamic> _$VerifyEnrollmentRequestToJson(
         VerifyEnrollmentRequest instance) =>

@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-
 import 'package:sberbank_acquiring/src/core/models/enums/receipt_status.dart';
 
 import '../../../constants.dart';
@@ -74,8 +73,9 @@ class Receipt extends BaseResponse {
   Receipt({
     this.receiptStatus,
     this.uuid,
+    this.originalOfdUuid,
     this.shiftNumber,
-    this.receiptNumber,
+    this.fiscalReceiptNumber,
     this.receiptDatetime,
     this.fnNumber,
     this.ecrRegistrationNumber,
@@ -84,6 +84,7 @@ class Receipt extends BaseResponse {
     this.amountTotal,
     this.serialNumber,
     this.fnsSite,
+    this.ofdReceiptUrl,
     this.ofd,
   });
 
@@ -99,8 +100,9 @@ class Receipt extends BaseResponse {
         ...super.equals,
         JsonKeys.receiptStatus: receiptStatus,
         JsonKeys.uuid: uuid,
+        JsonKeys.originalOfdUuid: originalOfdUuid,
         JsonKeys.shiftNumber: shiftNumber,
-        JsonKeys.receiptNumber: receiptNumber,
+        JsonKeys.fiscalReceiptNumber: fiscalReceiptNumber,
         JsonKeys.receiptDatetime: receiptDatetime,
         JsonKeys.fnNumber: fnNumber,
         JsonKeys.ecrRegistrationNumber: ecrRegistrationNumber,
@@ -109,6 +111,7 @@ class Receipt extends BaseResponse {
         JsonKeys.amountTotal: amountTotal,
         JsonKeys.serialNumber: serialNumber,
         JsonKeys.fnsSite: fnsSite,
+        JsonKeys.ofdReceiptUrl: ofdReceiptUrl,
         JsonKeys.ofd: ofd,
       };
 
@@ -120,13 +123,17 @@ class Receipt extends BaseResponse {
   @JsonKey(name: JsonKeys.uuid)
   final String? uuid;
 
+  /// Идентификатор чека в ОФД системе.
+  @JsonKey(name: JsonKeys.originalOfdUuid)
+  final String? originalOfdUuid;
+
   /// Номер смены.
   @JsonKey(name: JsonKeys.shiftNumber)
   final int? shiftNumber;
 
   /// Номер чека в смене.
-  @JsonKey(name: JsonKeys.receiptNumber)
-  final int? receiptNumber;
+  @JsonKey(name: JsonKeys.fiscalReceiptNumber)
+  final int? fiscalReceiptNumber;
 
   /// Дата и время чека в фискальном накопителе.
   @JsonKey(name: JsonKeys.receiptDatetime)
@@ -159,6 +166,12 @@ class Receipt extends BaseResponse {
   /// Адрес сайта ФНС.
   @JsonKey(name: JsonKeys.fnsSite)
   final String? fnsSite;
+
+  /// Ссылка на чек.
+  ///
+  /// Не все ОФД системы возвращают ссылку на чек, поэтому поле может быть пустым.
+  @JsonKey(name: JsonKeys.ofdReceiptUrl)
+  final String? ofdReceiptUrl;
 
   /// {@macro ofd}
   @JsonKey(name: JsonKeys.ofd)

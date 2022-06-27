@@ -1,3 +1,5 @@
+export 'avs_code.dart';
+export 'binding_type.dart';
 export 'enrolled.dart';
 export 'features.dart';
 export 'order_status.dart';

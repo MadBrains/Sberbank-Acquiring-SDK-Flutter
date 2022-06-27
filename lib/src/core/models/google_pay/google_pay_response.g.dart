@@ -6,19 +6,18 @@ part of 'google_pay_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GooglePayResponse _$GooglePayResponseFromJson(Map<String, dynamic> json) {
-  return GooglePayResponse(
-    errorCode: json['errorCode'] as String?,
-    errorMessage: json['errorMessage'] as String?,
-    success: json['success'] as bool?,
-    data: json['data'] == null
-        ? null
-        : Data.fromJson(json['data'] as Map<String, dynamic>),
-    error: json['error'] == null
-        ? null
-        : ErrorInfo.fromJson(json['error'] as Map<String, dynamic>),
-  );
-}
+GooglePayResponse _$GooglePayResponseFromJson(Map<String, dynamic> json) =>
+    GooglePayResponse(
+      errorCode: json['errorCode'] as String?,
+      errorMessage: json['errorMessage'] as String?,
+      success: json['success'] as bool?,
+      data: json['data'] == null
+          ? null
+          : Data.fromJson(json['data'] as Map<String, dynamic>),
+      error: json['error'] == null
+          ? null
+          : ErrorInfo.fromJson(json['error'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$GooglePayResponseToJson(GooglePayResponse instance) {
   final val = <String, dynamic>{};

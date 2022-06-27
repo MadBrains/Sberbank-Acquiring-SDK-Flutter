@@ -14,7 +14,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  mad_pay: 2.1.2
+  mad_pay: 2.2.12
   sberbank_acquiring:
     path: ../
 

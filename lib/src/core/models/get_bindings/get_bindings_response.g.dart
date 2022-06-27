@@ -6,15 +6,14 @@ part of 'get_bindings_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetBindingsResponse _$GetBindingsResponseFromJson(Map<String, dynamic> json) {
-  return GetBindingsResponse(
-    errorCode: json['errorCode'] as String?,
-    errorMessage: json['errorMessage'] as String?,
-    bindings: (json['bindings'] as List<dynamic>?)
-        ?.map((e) => Binding.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+GetBindingsResponse _$GetBindingsResponseFromJson(Map<String, dynamic> json) =>
+    GetBindingsResponse(
+      errorCode: json['errorCode'] as String?,
+      errorMessage: json['errorMessage'] as String?,
+      bindings: (json['bindings'] as List<dynamic>?)
+          ?.map((e) => Binding.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$GetBindingsResponseToJson(GetBindingsResponse instance) {
   final val = <String, dynamic>{};

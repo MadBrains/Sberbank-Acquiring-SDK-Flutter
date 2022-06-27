@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../base/base_response.dart';
 import '../../../constants.dart';
+import '../base/base_response.dart';
 import '../enums/payment_system.dart';
 
 part 'card_auth_info.g.dart';
@@ -14,13 +14,13 @@ class CardAuthInfo extends BaseResponse {
   /// {@macro card_auth_info}
   CardAuthInfo({
     this.maskedPan,
+    this.expiration,
+    this.cardholderName,
     this.approvalCode,
     this.chargeback,
     this.paymentSystem,
-    this.productCategory,
     this.product,
-    this.expiration,
-    this.cardholderName,
+    this.productCategory,
     this.secureAuthInfo,
     this.pan,
   });

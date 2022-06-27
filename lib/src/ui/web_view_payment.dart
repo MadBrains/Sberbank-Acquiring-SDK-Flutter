@@ -24,7 +24,7 @@ class WebViewPayment extends StatefulWidget {
   /// {@macro web_view_payment}
   const WebViewPayment({
     Key? key,
-    required this.config,
+    required this.logger,
     required this.formUrl,
     required this.returnUrl,
     this.failUrl,
@@ -35,7 +35,7 @@ class WebViewPayment extends StatefulWidget {
   }) : super(key: key);
 
   /// {@macro sberbank_acquiring_config}
-  final SberbankAcquiringConfig config;
+  final BaseLogger logger;
 
   /// URL-адрес платёжной формы, на который нужно перенаправить браузер клиента.
   /// Не возвращается, если регистрация заказа не удалась по причине ошибки, детализированной в errorCode.
@@ -79,7 +79,7 @@ class _WebViewPaymentState extends State<WebViewPayment> {
       javascriptMode: JavascriptMode.unrestricted,
       onWebViewCreated: widget.onWebViewCreated,
       onPageStarted: (String url) {
-        widget.config.logger
+        widget.logger
             .log(name: 'WebViewPayment', message: 'onPageStarted: $url');
 
         if (url == widget.formUrl) {
@@ -97,7 +97,7 @@ class _WebViewPaymentState extends State<WebViewPayment> {
         }
       },
       onPageFinished: (String url) async {
-        widget.config.logger
+        widget.logger
             .log(name: 'WebViewPayment', message: 'onPageFinished: $url');
 
         if (url == widget.formUrl) {

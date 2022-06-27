@@ -19,7 +19,7 @@ Acquiring SDK allows you to integrate [Sberbank Internet Acquiring][acquiring] i
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  sberbank_acquiring: 2.0.0
+  sberbank_acquiring: <lastles>
 ```
 
 ## Before usage
@@ -37,10 +37,10 @@ The SDK also allows you to configure request proxying, by default all requests g
 To configure the operation mode, set the following parameters:
 ```dart
 final SberbankAcquiring acquiring = SberbankAcquiring(
-  SberbankAcquiringConfig(
+  SberbankAcquiringConfig.credential(
     userName: userName,
     password: password,
-    debug: false,
+    isDebugMode: false,
   ),
 );
 ```
@@ -50,6 +50,7 @@ If you want to use `token`, use the following constructor:
 final SberbankAcquiring acquiring = SberbankAcquiring(
   SberbankAcquiringConfig.token(
     token: token,
+    isDebugMode: false,
   ),
 );
 ```
@@ -58,7 +59,13 @@ If you want to use a `proxy`, use the following constructor:
 ```dart
 final SberbankAcquiring acquiring = SberbankAcquiring(
   SberbankAcquiringConfig.proxy(
-    proxyUrl: 'https://server.com/',
+    proxyDomain: 'server.com',
+    proxyPath: 'api/v1/',
+    globalHeaders: <String, String>{'auth': 'test'},
+    mapping: (AcquiringRequest request, bool isDebugMode) {
+      if(request is RegisterRequest) return ProxyMapping(path: '/register');
+      return;
+    }
   ),
 );
 ```
@@ -68,6 +75,6 @@ final SberbankAcquiring acquiring = SberbankAcquiring(
 The [Example][example] is in the corresponding folder
 
 
-[documentation]: https://securepayments.sberbank.ru/wiki/doku.php/integration:paymentpage:paymentpage_design
+[documentation]: https://securepayments.sberbank.ru/wiki/doku.php/integration:api:rest:start
 [acquiring]: https://securepayments.sberbank.ru/wiki/doku.php/main_page
 [example]: https://github.com/MadBrains/Sberbank-Acquiring-SDK-Flutter/tree/main/example/

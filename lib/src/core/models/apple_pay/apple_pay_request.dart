@@ -17,8 +17,11 @@ class ApplePayRequest extends AcquiringRequest {
     this.orderNumber,
     this.description,
     this.language,
+    this.feeInput,
+    this.clientId,
     this.additionalParameters,
     this.preAuth,
+    this.dynamicCallbackUrl,
   });
 
   /// {@macro fromJson}
@@ -43,9 +46,12 @@ class ApplePayRequest extends AcquiringRequest {
         JsonKeys.orderNumber: orderNumber,
         JsonKeys.description: description,
         JsonKeys.language: language,
+        JsonKeys.feeInput: feeInput,
+        JsonKeys.clientId: clientId,
         JsonKeys.additionalParameters: additionalParameters,
         JsonKeys.preAuth: preAuth,
         JsonKeys.paymentToken: paymentToken,
+        JsonKeys.dynamicCallbackUrl: dynamicCallbackUrl,
       };
 
   @override
@@ -54,18 +60,24 @@ class ApplePayRequest extends AcquiringRequest {
     String? orderNumber,
     String? description,
     String? language,
+    int? feeInput,
+    String? clientId,
     Map<String, dynamic>? additionalParameters,
     bool? preAuth,
     String? paymentToken,
+    String? dynamicCallbackUrl,
   }) {
     return ApplePayRequest(
       merchant: merchant ?? this.merchant,
       orderNumber: orderNumber ?? this.orderNumber,
       description: description ?? this.description,
       language: language ?? this.language,
+      feeInput: feeInput ?? this.feeInput,
+      clientId: clientId ?? this.clientId,
       additionalParameters: additionalParameters ?? this.additionalParameters,
       preAuth: preAuth ?? this.preAuth,
       paymentToken: paymentToken ?? this.paymentToken,
+      dynamicCallbackUrl: dynamicCallbackUrl ?? this.dynamicCallbackUrl,
     );
   }
 
@@ -89,6 +101,16 @@ class ApplePayRequest extends AcquiringRequest {
   /// Если не указан, будет использован язык, указанный в настройках магазина как язык по умолчанию.
   @JsonKey(name: JsonKeys.language)
   final String? language;
+
+  /// Сумма комиссии в минимальных единицах валюты.
+  ///
+  /// Параметр передается только при включении соответствующей пермиссии.
+  @JsonKey(name: JsonKeys.feeInput)
+  final int? feeInput;
+
+  /// Номер (идентификатор) клиента в системе магазина. Используется для реализации функциональности связок.
+  @JsonKey(name: JsonKeys.clientId)
+  final String? clientId;
 
   /// Дополнительные параметры заказа, которые сохраняются для просмотра из личного кабинета продавца.
   ///
@@ -117,4 +139,18 @@ class ApplePayRequest extends AcquiringRequest {
   /// Примечание: можно воспользоваться пакетом [mad_pay](https://pub.dev/packages/mad_pay)
   @JsonKey(name: JsonKeys.paymentToken)
   final String paymentToken;
+
+  /// Параметр позволяет воспользоваться функциональность динамической отправки callback-уведомлений.
+  /// В нем можно передать адрес, на который будут отправляться все «платежные» callback-уведомления, активированные для продавца.
+  /// Под платежными понимаются callback-уведомления о следующих событиях: успешный холд, платеж отклонен по таймауту,
+  /// платеж cardpresent отклонен, успешное списание, возврат, отмена.
+  /// При этом активированные для мерчанта callback-уведомления, не относящиеся к платежам (включение/выключение связки, создание связки),
+  /// будут отправляться на статический адрес для callback-ов.
+  ///
+  /// Для использования функциональности динамической отправки callback-уведомлений необходимо,
+  /// чтобы у мерчанта была выставлена соответствующая настройка: Тип callback-а: Динамический (CALLBACK_TYPE = DYNAMIC).
+  ///
+  /// Чтобы мерчант мог получать callback-уведомления, для него необходима активация пермиссии: Разрешено выполнять callback операции.
+  @JsonKey(name: JsonKeys.dynamicCallbackUrl)
+  final String? dynamicCallbackUrl;
 }

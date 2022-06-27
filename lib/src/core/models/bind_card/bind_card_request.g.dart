@@ -6,11 +6,10 @@ part of 'bind_card_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BindCardRequest _$BindCardRequestFromJson(Map<String, dynamic> json) {
-  return BindCardRequest(
-    bindingId: json['bindingId'] as String?,
-  );
-}
+BindCardRequest _$BindCardRequestFromJson(Map<String, dynamic> json) =>
+    BindCardRequest(
+      bindingId: json['bindingId'] as String?,
+    );
 
 Map<String, dynamic> _$BindCardRequestToJson(BindCardRequest instance) {
   final val = <String, dynamic>{};

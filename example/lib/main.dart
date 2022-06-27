@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -30,10 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   MadPay madPay = MadPay();
   SberbankAcquiring acquiring = SberbankAcquiring(
-    SberbankAcquiringConfig(
-      userName: '',
-      password: '',
-    ),
+    SberbankAcquiringConfig.token(token: 'YRF3C5RFICWISEWFR6GJ'),
   );
 
   OrderStatus? orderStatus;
@@ -65,13 +64,15 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> webviewPayment() async {
-    final RegisterResponse register = await acquiring.register(RegisterRequest(
-      amount: 1000,
-      returnUrl: 'https://test.ru/return.html',
-      failUrl: 'https://test.ru/fail.html',
-      orderNumber: 'test',
-      pageView: 'MOBILE',
-    ));
+    final RegisterResponse register = await acquiring.register(
+      RegisterRequest(
+        amount: 1000,
+        returnUrl: 'https://test.ru/return.html',
+        failUrl: 'https://test.ru/fail.html',
+        orderNumber: 'test',
+        pageView: 'MOBILE',
+      ),
+    );
 
     final String? formUrl = register.formUrl;
 
@@ -80,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
         MaterialPageRoute<void>(
           builder: (BuildContext context) => Scaffold(
             body: WebViewPayment(
-              config: acquiring.config,
+              logger: acquiring.logger,
               formUrl: formUrl,
               returnUrl: 'https://test.ru/return.html',
               failUrl: 'https://test.ru/fail.html',
@@ -93,7 +94,8 @@ class _MyHomePageState extends State<MyHomePage> {
               onFinished: (String? v) async {
                 final GetOrderStatusExtendedResponse status =
                     await acquiring.getOrderStatusExtended(
-                        GetOrderStatusExtendedRequest(orderId: v));
+                  GetOrderStatusExtendedRequest(orderId: v),
+                );
 
                 orderStatus = status.orderStatus;
                 setState(() {});
@@ -109,21 +111,23 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> tokenPayment() async {
     if (await madPay.checkPayments()) {
       final String? token = (await madPay.processingPayment(
-        google: GoogleParameters(
-          gatewayName: 'sberbank',
-          gatewayMerchantId: 'example_id',
-          merchantId: 'example_id',
+        PaymentRequest(
+          google: GoogleParameters(
+            gatewayName: 'sberbank',
+            gatewayMerchantId: 'example_id',
+            merchantId: 'example_id',
+          ),
+          apple: AppleParameters(
+            merchantIdentifier: 'example_id',
+          ),
+          currencyCode: 'RUB',
+          countryCode: 'RU',
+          paymentItems: items,
+          paymentNetworks: <PaymentNetwork>[
+            PaymentNetwork.mastercard,
+            PaymentNetwork.visa,
+          ],
         ),
-        apple: AppleParameters(
-          merchantIdentifier: 'example_id',
-        ),
-        currencyCode: 'RUB',
-        countryCode: 'RU',
-        paymentItems: items,
-        paymentNetworks: <PaymentNetwork>[
-          PaymentNetwork.mastercard,
-          PaymentNetwork.visa,
-        ],
       ))
           ?.token;
 
@@ -147,6 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
         if (Platform.isAndroid) {
           final GooglePayResponse googlePay = await acquiring.googlePay(
             GooglePayRequest(
+              orderNumber: '',
               merchant: 'test',
               language: 'ru',
               amount: items
@@ -165,11 +170,13 @@ class _MyHomePageState extends State<MyHomePage> {
         }
 
         if (orderId.isNotEmpty) {
-          final GetOrderStatusExtendedResponse status = await acquiring
-              .getOrderStatusExtended(GetOrderStatusExtendedRequest(
-            orderId: orderId,
-            language: 'ru',
-          ));
+          final GetOrderStatusExtendedResponse status =
+              await acquiring.getOrderStatusExtended(
+            GetOrderStatusExtendedRequest(
+              orderId: orderId,
+              language: 'ru',
+            ),
+          );
 
           orderStatus = status.orderStatus;
           setState(() {});

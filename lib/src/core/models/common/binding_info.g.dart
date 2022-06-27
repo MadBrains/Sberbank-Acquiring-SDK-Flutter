@@ -6,14 +6,12 @@ part of 'binding_info.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BindingInfo _$BindingInfoFromJson(Map<String, dynamic> json) {
-  return BindingInfo(
-    clientId: json['clientId'] as String?,
-    bindingId: json['bindingId'] as String?,
-    authDateTime: json['authDateTime'] as String?,
-    terminalId: json['terminalId'] as String?,
-  );
-}
+BindingInfo _$BindingInfoFromJson(Map<String, dynamic> json) => BindingInfo(
+      clientId: json['clientId'] as String?,
+      bindingId: json['bindingId'] as String?,
+      authDateTime: json['authDateTime'] as String?,
+      terminalId: json['terminalId'] as String?,
+    );
 
 Map<String, dynamic> _$BindingInfoToJson(BindingInfo instance) {
   final val = <String, dynamic>{};
