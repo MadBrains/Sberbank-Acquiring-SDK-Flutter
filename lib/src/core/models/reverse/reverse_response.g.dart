@@ -6,12 +6,11 @@ part of 'reverse_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ReverseResponse _$ReverseResponseFromJson(Map<String, dynamic> json) {
-  return ReverseResponse(
-    errorCode: json['errorCode'] as String?,
-    errorMessage: json['errorMessage'] as String?,
-  );
-}
+ReverseResponse _$ReverseResponseFromJson(Map<String, dynamic> json) =>
+    ReverseResponse(
+      errorCode: json['errorCode'] as String?,
+      errorMessage: json['errorMessage'] as String?,
+    );
 
 Map<String, dynamic> _$ReverseResponseToJson(ReverseResponse instance) {
   final val = <String, dynamic>{};

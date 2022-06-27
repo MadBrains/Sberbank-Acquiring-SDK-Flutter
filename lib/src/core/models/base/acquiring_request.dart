@@ -1,3 +1,4 @@
+import '../../../constants.dart';
 import 'base_request.dart';
 
 /// {@template acquiring_request}
@@ -5,9 +6,7 @@ import 'base_request.dart';
 /// {@endtemplate}
 abstract class AcquiringRequest extends BaseRequest {
   /// Заголовок метода
-  Map<String, String> get headers => <String, String>{
-        'content-type': 'application/x-www-form-urlencoded',
-      };
+  Map<String, String> get headers => NetworkSettings.baseHeaders;
 
   /// Метод запроса
   String get apiMethod;

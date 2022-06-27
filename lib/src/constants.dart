@@ -1,9 +1,17 @@
 // ignore_for_file: public_member_api_docs
 
 abstract class NetworkSettings {
-  static const String apiPath = 'payment/';
   static const String domainRelease = 'securepayments.sberbank.ru';
   static const String domainDebug = '3dsec.sberbank.ru';
+  static const String apiPath = 'payment/';
+
+  static const String contentType = 'content-type';
+  static const String contentTypeJson = 'application/json';
+  static const String contentTypeFormUrlencoded =
+      'application/x-www-form-urlencoded';
+  static const Map<String, String> baseHeaders = <String, String>{
+    contentType: contentTypeFormUrlencoded,
+  };
 
   static const Duration timeout = Duration(seconds: 40);
 }
@@ -24,14 +32,17 @@ abstract class ApiMethods {
   static const String unBindCard = 'rest/unBindCard.do';
   static const String bindCard = 'rest/bindCard.do';
   static const String getBindings = 'rest/getBindings.do';
+  static const String getAllBindings = 'rest/getAllBindings.do';
   static const String getBindingsByCardOrId = 'rest/getBindingsByCardOrId.do';
   static const String extendBinding = 'rest/extendBinding.do';
+  static const String createBindingNoPayment = 'rest/createBindingNoPayment.do';
 }
 
 abstract class JsonValues {
   static const String desktop = 'DESKTOP';
   static const String mobile = 'MOBILE';
   static const String autoPayment = 'AUTO_PAYMENT';
+  static const String verify = 'VERIFY';
   static const String forceTDS = 'FORCE_TDS';
   static const String forceSSL = 'FORCE_SSL';
   static const String forceFullTDS = 'FORCE_FULL_TDS';
@@ -76,9 +87,18 @@ abstract class JsonValues {
   static const String jcb = 'JCB';
   static const String cup = 'CUP';
   static const String mir = 'MIR';
+  static const String a = 'A';
+  static const String b = 'B';
+  static const String c = 'С';
+  static const String d = 'D';
+  static const String e = 'E';
+  static const String f = 'F';
   static const String y = 'Y';
   static const String n = 'N';
   static const String u = 'U';
+  static const String i = 'I';
+  static const String r = 'R';
+  static const String rc = 'RC';
   static const String created = 'CREATED';
   static const String approved = 'APPROVED';
   static const String deposited = 'DEPOSITED';
@@ -91,6 +111,8 @@ abstract class JsonValues {
   static const int refundSent = 3;
   static const int refundDelivered = 4;
   static const int refundError = 5;
+  static const String ecv1 = 'ECv1';
+  static const String ecv2 = 'ECv2';
 }
 
 abstract class JsonKeys {
@@ -101,6 +123,7 @@ abstract class JsonKeys {
   static const String currency = 'currency';
   static const String returnUrl = 'returnUrl';
   static const String failUrl = 'failUrl';
+  static const String dynamicCallbackUrl = 'dynamicCallbackUrl';
   static const String description = 'description';
   static const String language = 'language';
   static const String pageView = 'pageView';
@@ -117,6 +140,8 @@ abstract class JsonKeys {
   static const String osType = 'app.osType';
   static const String deepLink = 'app.deepLink';
   static const String back2app = 'back2app';
+  static const String autocompletionDate = 'autocompletionDate';
+  static const String billingPayerData = 'billingPayerData';
   static const String orderId = 'orderId';
   static const String formUrl = 'formUrl';
   static const String externalParams = 'externalParams';
@@ -133,6 +158,7 @@ abstract class JsonKeys {
   static const String authRefNum = 'authRefNum';
   static const String refundedDate = 'refundedDate';
   static const String paymentWay = 'paymentWay';
+  static const String avsCode = 'avsCode';
   static const String merchantOrderParams = 'merchantOrderParams';
   static const String attributes = 'attributes';
   static const String transactionAttributes = 'transactionAttributes';
@@ -167,9 +193,10 @@ abstract class JsonKeys {
   static const String refundedAmount = 'refundedAmount';
   static const String paymentState = 'paymentState';
   static const String feeAmount = 'feeAmount';
+  static const String totalAmount = 'totalAmount';
   static const String authDateTime = 'authDateTime';
   static const String referenceNumber = 'referenceNumber';
-  static const String enrolled = 'enrolled';
+  static const String isEnrolled = 'isEnrolled';
   static const String emitterName = 'emitterName';
   static const String emitterCountryCode = 'emitterCountryCode';
   static const String merchant = 'merchant';
@@ -187,11 +214,12 @@ abstract class JsonKeys {
   static const String termUrl = 'termUrl';
   static const String userMessage = 'userMessage';
   static const String uuid = 'uuid';
+  static const String originalOfdUuid = 'original_ofd_uuid';
   static const String daemonCode = 'daemonCode';
   static const String ecrRegistrationNumber = 'ecr_registration_number';
   static const String receiptStatus = 'receiptStatus';
   static const String shiftNumber = 'shift_number';
-  static const String receiptNumber = 'receipt_number';
+  static const String fiscalReceiptNumber = 'fiscal_receipt_number';
   static const String receiptDatetime = 'receipt_datetime';
   static const String fnNumber = 'fn_number';
   static const String fiscalDocumentNumber = 'fiscal_document_number';
@@ -199,6 +227,7 @@ abstract class JsonKeys {
   static const String amountTotal = 'amount_total';
   static const String serialNumber = 'serial_number';
   static const String fnsSite = 'fnsSite';
+  static const String ofdReceiptUrl = 'ofd_receipt_url';
   static const String ofd = 'OFD';
   static const String website = 'website';
   static const String inn = 'INN';
@@ -210,4 +239,16 @@ abstract class JsonKeys {
   static const String userName = 'userName';
   static const String password = 'password';
   static const String token = 'token';
+  static const String bindingType = 'bindingType';
+  static const String bindingCategory = 'bindingCategory';
+  static const String displayLabel = 'displayLabel';
+  static const String feeInput = 'feeInput';
+  static const String billingCity = 'billingCity';
+  static const String billingCountry = 'billingCountry';
+  static const String billingAddressLine1 = 'billingAddressLine1';
+  static const String billingAddressLine2 = 'billingAddressLine2';
+  static const String billingAddressLine3 = 'billingAddressLine3';
+  static const String billingPostalCode = 'billingPostalCode';
+  static const String billingState = 'billingState';
+  static const String protocolVersion = 'protocolVersion';
 }

@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import '../../../constants.dart';
 import '../base/acquiring_request.dart';
 import '../base/base_request.dart';
+import '../common/billing_payer_data.dart';
 import '../enums/features.dart';
 import '../enums/os_type.dart';
 
@@ -17,14 +18,16 @@ part 'register_request.g.dart';
 class RegisterRequest extends AcquiringRequest {
   /// {@macro register_request}
   RegisterRequest({
+    required this.orderNumber,
     required this.amount,
     required this.returnUrl,
     this.preAuth = false,
-    this.orderNumber,
     this.currency,
     this.failUrl,
+    this.dynamicCallbackUrl,
     this.description,
     this.language,
+    this.feeInput,
     this.pageView,
     this.clientId,
     this.merchantLogin,
@@ -37,6 +40,8 @@ class RegisterRequest extends AcquiringRequest {
     this.phone,
     this.app2app,
     this.back2app,
+    this.autocompletionDate,
+    this.billingPayerData,
   }) : jsonParams = jsonParams ?? <String, dynamic>{} {
     final AppToApp? _app2app = app2app;
     if (_app2app != null) {
@@ -69,8 +74,10 @@ class RegisterRequest extends AcquiringRequest {
         JsonKeys.currency: currency,
         JsonKeys.returnUrl: returnUrl,
         JsonKeys.failUrl: failUrl,
+        JsonKeys.dynamicCallbackUrl: dynamicCallbackUrl,
         JsonKeys.description: description,
         JsonKeys.language: language,
+        JsonKeys.feeInput: feeInput,
         JsonKeys.pageView: pageView,
         JsonKeys.clientId: clientId,
         JsonKeys.merchantLogin: merchantLogin,
@@ -81,6 +88,8 @@ class RegisterRequest extends AcquiringRequest {
         JsonKeys.features: features,
         JsonKeys.email: email,
         JsonKeys.phone: phone,
+        JsonKeys.autocompletionDate: autocompletionDate,
+        JsonKeys.billingPayerData: billingPayerData,
       };
 
   @override
@@ -91,8 +100,10 @@ class RegisterRequest extends AcquiringRequest {
     int? currency,
     String? returnUrl,
     String? failUrl,
+    String? dynamicCallbackUrl,
     String? description,
     String? language,
+    int? feeInput,
     String? pageView,
     String? clientId,
     String? merchantLogin,
@@ -105,6 +116,8 @@ class RegisterRequest extends AcquiringRequest {
     int? phone,
     AppToApp? app2app,
     BackToApp? back2app,
+    String? autocompletionDate,
+    BillingPayerData? billingPayerData,
   }) {
     return RegisterRequest(
       preAuth: preAuth ?? this.preAuth,
@@ -113,8 +126,10 @@ class RegisterRequest extends AcquiringRequest {
       currency: currency ?? this.currency,
       returnUrl: returnUrl ?? this.returnUrl,
       failUrl: failUrl ?? this.failUrl,
+      dynamicCallbackUrl: dynamicCallbackUrl ?? this.dynamicCallbackUrl,
       description: description ?? this.description,
       language: language ?? this.language,
+      feeInput: feeInput ?? this.feeInput,
       pageView: pageView ?? this.pageView,
       clientId: clientId ?? this.clientId,
       merchantLogin: merchantLogin ?? this.merchantLogin,
@@ -127,6 +142,8 @@ class RegisterRequest extends AcquiringRequest {
       phone: phone ?? this.phone,
       app2app: app2app ?? this.app2app,
       back2app: back2app ?? this.back2app,
+      autocompletionDate: autocompletionDate ?? this.autocompletionDate,
+      billingPayerData: billingPayerData ?? this.billingPayerData,
     );
   }
 
@@ -148,7 +165,8 @@ class RegisterRequest extends AcquiringRequest {
         final bool hasComma =
             jsonParams.keys.last != jsonParams.keys.toList()[i];
         temp.write(
-            '"${jsonParams.keys.toList()[i]}":"${jsonParams.values.toList()[i]}"${hasComma ? "," : ""}');
+          '"${jsonParams.keys.toList()[i]}":"${jsonParams.values.toList()[i]}"${hasComma ? "," : ""}',
+        );
       }
 
       temp.write('}');
@@ -168,7 +186,7 @@ class RegisterRequest extends AcquiringRequest {
   /// Номер (идентификатор) заказа в системе магазина, уникален для каждого магазина в пределах системы.
   /// Если номер заказа генерируется на стороне платёжного шлюза, этот параметр передавать необязательно.
   @JsonKey(name: JsonKeys.orderNumber)
-  final String? orderNumber;
+  final String orderNumber;
 
   /// Сумма возврата в минимальных единицах валюты.
   @JsonKey(name: JsonKeys.amount)
@@ -190,6 +208,18 @@ class RegisterRequest extends AcquiringRequest {
   @JsonKey(name: JsonKeys.failUrl)
   final String? failUrl;
 
+  /// Параметр позволяет воспользоваться функциональность динамической отправки callback-уведомлений.
+  /// В нем можно передать адрес, на который будут отправляться все «платежные» callback-уведомления, активированные для продавца.
+  /// Под платежными понимаются callback-уведомления о следующих событиях: успешный холд, платеж отклонен по таймауту,  платеж cardpresent отклонен, успешное списание, возврат, отмена.
+  /// При этом активированные для мерчанта callback-уведомления, не относящиеся к платежам (включение/выключение связки, создание связки), будут отправляться на статический адрес для callback-ов.
+  ///
+  /// Для использования функциональности динамической отправки callback-уведомлений необходимо,
+  /// чтобы у мерчанта была выставлена соответствующая настройка: Тип callback-а: Динамический (CALLBACK_TYPE = DYNAMIC).
+  ///
+  /// Чтобы мерчант мог получать callback-уведомления, для него необходима активация пермиссии: Разрешено выполнять callback операции.
+  @JsonKey(name: JsonKeys.dynamicCallbackUrl)
+  final String? dynamicCallbackUrl;
+
   /// Описание заказа в свободной форме.
   ///
   /// Чтобы получить возможность отправлять это поле в процессинг, обратитесь в техническую поддержку.
@@ -200,6 +230,12 @@ class RegisterRequest extends AcquiringRequest {
   /// Если не указан, будет использован язык, указанный в настройках магазина как язык по умолчанию.
   @JsonKey(name: JsonKeys.language)
   final String? language;
+
+  /// Сумма комиссии в минимальных единицах валюты.
+  ///
+  /// Параметр передается только при включении соответствующей пермиссии.
+  @JsonKey(name: JsonKeys.feeInput)
+  final int? feeInput;
 
   /// По значению данного параметра определяется, какие страницы платёжного интерфейса должны загружаться для клиента. Возможны следующие значения.
   /// - DESKTOP – для загрузки страниц, вёрстка которых предназначена для отображения на экранах ПК (в архиве страниц платёжного интерфейса будет осуществляться поиск страниц с названиями payment_<locale>.html и errors_<locale>.html).
@@ -275,6 +311,16 @@ class RegisterRequest extends AcquiringRequest {
   /// {@macro back_to_app}
   @JsonKey(name: JsonKeys.back2app, ignore: true)
   final BackToApp? back2app;
+
+  /// Дата и время автозавершения двухстадийного платежа в следующем формате: `2017-12-29T13:02:51`
+  ///
+  /// Чтобы подключить эту функциональность, обратитесь в службу технической поддержки.
+  @JsonKey(name: JsonKeys.autocompletionDate)
+  final String? autocompletionDate;
+
+  /// {@macro billing_payer_data}
+  @JsonKey(name: JsonKeys.billingPayerData)
+  final BillingPayerData? billingPayerData;
 }
 
 /// {@template app_to_app}

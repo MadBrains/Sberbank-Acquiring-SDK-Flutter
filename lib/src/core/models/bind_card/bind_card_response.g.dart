@@ -6,12 +6,11 @@ part of 'bind_card_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BindCardResponse _$BindCardResponseFromJson(Map<String, dynamic> json) {
-  return BindCardResponse(
-    errorCode: json['errorCode'] as String?,
-    errorMessage: json['errorMessage'] as String?,
-  );
-}
+BindCardResponse _$BindCardResponseFromJson(Map<String, dynamic> json) =>
+    BindCardResponse(
+      errorCode: json['errorCode'] as String?,
+      errorMessage: json['errorMessage'] as String?,
+    );
 
 Map<String, dynamic> _$BindCardResponseToJson(BindCardResponse instance) {
   final val = <String, dynamic>{};

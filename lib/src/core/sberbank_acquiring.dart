@@ -2,6 +2,7 @@ import 'package:sberbank_acquiring/src/core/utils/network_client.dart';
 
 import 'models/models.dart';
 import 'sberbank_acquiring_config.dart';
+import 'utils/logger.dart';
 
 /// {@template sberbank_acquiring}
 /// Класс позволяет осуществлять взаимодействие с `Sberbank Acquiring API`.
@@ -10,13 +11,15 @@ import 'sberbank_acquiring_config.dart';
 /// {@endtemplate}
 class SberbankAcquiring {
   /// {@macro sberbank_acquiring}
-  SberbankAcquiring(this.config)
-      : _network = NetworkClient(config);
+  SberbankAcquiring(this._config) : _network = NetworkClient(_config);
 
   /// {@macro sberbank_acquiring_config}
-  final SberbankAcquiringConfig config;
+  final SberbankAcquiringConfig _config;
 
   final NetworkClient _network;
+
+  /// {@macro logger}
+  BaseLogger get logger => _config.logger;
 
   /// {@macro apple_pay_request}
   Future<ApplePayResponse> applePay(ApplePayRequest request) {
@@ -28,7 +31,8 @@ class SberbankAcquiring {
 
   /// {@macro apple_pay_recurrent_request}
   Future<ApplePayRecurrentResponse> applePayRecurrent(
-      ApplePayRecurrentRequest request) {
+    ApplePayRecurrentRequest request,
+  ) {
     return _network(
       request,
       (Map<String, dynamic> json) => ApplePayRecurrentResponse.fromJson(json),
@@ -75,9 +79,18 @@ class SberbankAcquiring {
     );
   }
 
+  /// {@macro get_all_bindings_request}
+  Future<GetBindingsResponse> getAllBindings(GetAllBindingsRequest request) {
+    return _network(
+      request,
+      (Map<String, dynamic> json) => GetBindingsResponse.fromJson(json),
+    );
+  }
+
   /// {@macro get_bindings_by_card_or_id_request}
   Future<GetBindingsByCardOrIdResponse> getBindingsByCardOrId(
-      GetBindingsByCardOrIdRequest request) {
+    GetBindingsByCardOrIdRequest request,
+  ) {
     return _network(
       request,
       (Map<String, dynamic> json) =>
@@ -87,7 +100,8 @@ class SberbankAcquiring {
 
   /// {@macro get_order_status_extended_request}
   Future<GetOrderStatusExtendedResponse> getOrderStatusExtended(
-      GetOrderStatusExtendedRequest request) {
+    GetOrderStatusExtendedRequest request,
+  ) {
     return _network(
       request,
       (Map<String, dynamic> json) =>
@@ -97,7 +111,8 @@ class SberbankAcquiring {
 
   /// {@macro get_receipt_status_request}
   Future<GetReceiptStatusResponse> getReceiptStatus(
-      GetReceiptStatusRequest request) {
+    GetReceiptStatusRequest request,
+  ) {
     return _network(
       request,
       (Map<String, dynamic> json) => GetReceiptStatusResponse.fromJson(json),
@@ -146,10 +161,22 @@ class SberbankAcquiring {
 
   /// {@macro verify_enrollment_request}
   Future<VerifyEnrollmentResponse> verifyEnrollment(
-      VerifyEnrollmentRequest request) {
+    VerifyEnrollmentRequest request,
+  ) {
     return _network(
       request,
       (Map<String, dynamic> json) => VerifyEnrollmentResponse.fromJson(json),
+    );
+  }
+
+  /// {@macro create_binding_no_payment_request}
+  Future<CreateBindingNoPaymentResponse> createBindingNoPayment(
+    CreateBindingNoPaymentRequest request,
+  ) {
+    return _network(
+      request,
+      (Map<String, dynamic> json) =>
+          CreateBindingNoPaymentResponse.fromJson(json),
     );
   }
 }

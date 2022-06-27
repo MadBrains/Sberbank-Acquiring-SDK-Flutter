@@ -7,12 +7,11 @@ part of 'extend_binding_response.dart';
 // **************************************************************************
 
 ExtendBindingResponse _$ExtendBindingResponseFromJson(
-    Map<String, dynamic> json) {
-  return ExtendBindingResponse(
-    errorCode: json['errorCode'] as String?,
-    errorMessage: json['errorMessage'] as String?,
-  );
-}
+        Map<String, dynamic> json) =>
+    ExtendBindingResponse(
+      errorCode: json['errorCode'] as String?,
+      errorMessage: json['errorMessage'] as String?,
+    );
 
 Map<String, dynamic> _$ExtendBindingResponseToJson(
     ExtendBindingResponse instance) {

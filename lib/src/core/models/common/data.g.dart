@@ -6,15 +6,13 @@ part of 'data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Data _$DataFromJson(Map<String, dynamic> json) {
-  return Data(
-    orderId: json['orderId'] as String?,
-    bindingId: json['bindingId'] as String?,
-    acsUrl: json['acsUrl'] as String?,
-    paReq: json['paReq'] as String?,
-    termUrl: json['termUrl'] as String?,
-  );
-}
+Data _$DataFromJson(Map<String, dynamic> json) => Data(
+      orderId: json['orderId'] as String?,
+      bindingId: json['bindingId'] as String?,
+      acsUrl: json['acsUrl'] as String?,
+      paReq: json['paReq'] as String?,
+      termUrl: json['termUrl'] as String?,
+    );
 
 Map<String, dynamic> _$DataToJson(Data instance) {
   final val = <String, dynamic>{};

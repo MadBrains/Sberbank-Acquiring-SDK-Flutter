@@ -6,13 +6,11 @@ part of 'error_info.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ErrorInfo _$ErrorInfoFromJson(Map<String, dynamic> json) {
-  return ErrorInfo(
-    code: json['code'] as String?,
-    description: json['description'] as String?,
-    message: json['message'] as String?,
-  );
-}
+ErrorInfo _$ErrorInfoFromJson(Map<String, dynamic> json) => ErrorInfo(
+      code: json['code'] as String?,
+      description: json['description'] as String?,
+      message: json['message'] as String?,
+    );
 
 Map<String, dynamic> _$ErrorInfoToJson(ErrorInfo instance) {
   final val = <String, dynamic>{};

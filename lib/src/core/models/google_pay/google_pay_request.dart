@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../../../constants.dart';
 import '../base/acquiring_request.dart';
+import '../common/billing_payer_data.dart';
 
 part 'google_pay_request.g.dart';
 
@@ -13,13 +14,14 @@ class GooglePayRequest extends AcquiringRequest {
   /// {@macro google_pay_request}
   GooglePayRequest({
     required this.merchant,
+    required this.orderNumber,
     required this.paymentToken,
     required this.amount,
     required this.returnUrl,
-    this.failUrl,
-    this.orderNumber,
+    this.protocolVersion,
     this.description,
     this.language,
+    this.feeInput,
     this.additionalParameters,
     this.preAuth,
     this.clientId,
@@ -27,6 +29,9 @@ class GooglePayRequest extends AcquiringRequest {
     this.currencyCode,
     this.email,
     this.phone,
+    this.failUrl,
+    this.dynamicCallbackUrl,
+    this.billingPayerData,
   });
 
   /// {@macro fromJson}
@@ -49,8 +54,10 @@ class GooglePayRequest extends AcquiringRequest {
         ...super.equals,
         JsonKeys.merchant: merchant,
         JsonKeys.orderNumber: orderNumber,
+        JsonKeys.protocolVersion: protocolVersion,
         JsonKeys.description: description,
         JsonKeys.language: language,
+        JsonKeys.feeInput: feeInput,
         JsonKeys.additionalParameters: additionalParameters,
         JsonKeys.preAuth: preAuth,
         JsonKeys.clientId: clientId,
@@ -62,6 +69,8 @@ class GooglePayRequest extends AcquiringRequest {
         JsonKeys.phone: phone,
         JsonKeys.returnUrl: returnUrl,
         JsonKeys.failUrl: failUrl,
+        JsonKeys.dynamicCallbackUrl: dynamicCallbackUrl,
+        JsonKeys.billingPayerData: billingPayerData,
       };
 
   @override
@@ -81,6 +90,10 @@ class GooglePayRequest extends AcquiringRequest {
     int? phone,
     String? returnUrl,
     String? failUrl,
+    ProtocolVersion? protocolVersion,
+    int? feeInput,
+    String? dynamicCallbackUrl,
+    BillingPayerData? billingPayerData,
   }) {
     return GooglePayRequest(
       merchant: merchant ?? this.merchant,
@@ -98,6 +111,10 @@ class GooglePayRequest extends AcquiringRequest {
       phone: phone ?? this.phone,
       returnUrl: returnUrl ?? this.returnUrl,
       failUrl: failUrl ?? this.failUrl,
+      protocolVersion: protocolVersion ?? this.protocolVersion,
+      feeInput: feeInput ?? this.feeInput,
+      dynamicCallbackUrl: dynamicCallbackUrl ?? this.dynamicCallbackUrl,
+      billingPayerData: billingPayerData ?? this.billingPayerData,
     );
   }
 
@@ -111,7 +128,7 @@ class GooglePayRequest extends AcquiringRequest {
   /// Номер (идентификатор) заказа в системе магазина, уникален для каждого магазина в пределах системы.
   /// Если номер заказа генерируется на стороне платёжного шлюза, этот параметр передавать необязательно.
   @JsonKey(name: JsonKeys.orderNumber)
-  final String? orderNumber;
+  final String orderNumber;
 
   /// Описание заказа в свободной форме.
   @JsonKey(name: JsonKeys.description)
@@ -196,4 +213,45 @@ class GooglePayRequest extends AcquiringRequest {
   /// В противном случае пользователь будет перенаправлен по адресу следующего вида: http://<адрес_платёжного_шлюза>/<адрес_продавца>.
   @JsonKey(name: JsonKeys.failUrl)
   final String? failUrl;
+
+  /// {@macro protocol_version}
+  @JsonKey(name: JsonKeys.protocolVersion)
+  final ProtocolVersion? protocolVersion;
+
+  /// Сумма комиссии в минимальных единицах валюты.
+  @JsonKey(name: JsonKeys.feeInput)
+  final int? feeInput;
+
+  /// Параметр позволяет воспользоваться функциональность динамической отправки callback-уведомлений.
+  /// В нем можно передать адрес, на который будут отправляться все «платежные» callback-уведомления, активированные для продавца.
+  /// Под платежными понимаются callback-уведомления о следующих событиях: успешный холд, платеж отклонен по таймауту,
+  /// платеж cardpresent отклонен, успешное списание, возврат, отмена.
+  /// При этом активированные для мерчанта callback-уведомления, не относящиеся к платежам (включение/выключение связки, создание связки),
+  /// будут отправляться на статический адрес для callback-ов.
+  ///
+  /// Для использования функциональности динамической отправки callback-уведомлений необходимо,
+  /// чтобы у мерчанта была выставлена соответствующая настройка: Тип callback-а: Динамический (CALLBACK_TYPE = DYNAMIC).
+  ///
+  /// Чтобы мерчант мог получать callback-уведомления, для него необходима активация пермиссии: Разрешено выполнять callback операции.
+  @JsonKey(name: JsonKeys.dynamicCallbackUrl)
+  final String? dynamicCallbackUrl;
+
+  /// {@macro billing_payer_data}
+  @JsonKey(name: JsonKeys.billingPayerData)
+  final BillingPayerData? billingPayerData;
+}
+
+/// {@template protocol_version}
+/// Версия протокола сообщения, получаемого от Google.
+///
+/// По умолчанию (в случае, если данный параметр не указан) работа будет идти по версии ECv1.
+/// {@endtemplate}
+enum ProtocolVersion {
+  /// ECv1
+  @JsonValue(JsonValues.ecv1)
+  ecv1,
+
+  /// ECv2
+  @JsonValue(JsonValues.ecv2)
+  ecv2,
 }

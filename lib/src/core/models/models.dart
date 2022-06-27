@@ -3,6 +3,7 @@ export 'apple_pay_recurrent/apple_pay_recurrent.dart';
 export 'base/base.dart';
 export 'bind_card/bind_card.dart';
 export 'common/common.dart';
+export 'create_binding_no_payment/create_binding_no_payment.dart';
 export 'decline/decline.dart';
 export 'deposit/deposit.dart';
 export 'enums/enums.dart';

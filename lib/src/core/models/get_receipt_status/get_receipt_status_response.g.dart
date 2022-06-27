@@ -7,19 +7,18 @@ part of 'get_receipt_status_response.dart';
 // **************************************************************************
 
 GetReceiptStatusResponse _$GetReceiptStatusResponseFromJson(
-    Map<String, dynamic> json) {
-  return GetReceiptStatusResponse(
-    errorCode: json['errorCode'] as String?,
-    errorMessage: json['errorMessage'] as String?,
-    orderNumber: json['orderNumber'] as String?,
-    orderId: json['orderId'] as String?,
-    daemonCode: json['daemonCode'] as String?,
-    ecrRegistrationNumber: json['ecr_registration_number'] as String?,
-    receipt: json['receipt'] == null
-        ? null
-        : Receipt.fromJson(json['receipt'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    GetReceiptStatusResponse(
+      errorCode: json['errorCode'] as String?,
+      errorMessage: json['errorMessage'] as String?,
+      orderNumber: json['orderNumber'] as String?,
+      orderId: json['orderId'] as String?,
+      daemonCode: json['daemonCode'] as String?,
+      ecrRegistrationNumber: json['ecr_registration_number'] as String?,
+      receipt: json['receipt'] == null
+          ? null
+          : Receipt.fromJson(json['receipt'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$GetReceiptStatusResponseToJson(
     GetReceiptStatusResponse instance) {
@@ -41,26 +40,26 @@ Map<String, dynamic> _$GetReceiptStatusResponseToJson(
   return val;
 }
 
-Receipt _$ReceiptFromJson(Map<String, dynamic> json) {
-  return Receipt(
-    receiptStatus:
-        _$enumDecodeNullable(_$ReceiptStatusEnumMap, json['receiptStatus']),
-    uuid: json['uuid'] as String?,
-    shiftNumber: json['shift_number'] as int?,
-    receiptNumber: json['receipt_number'] as int?,
-    receiptDatetime: json['receipt_datetime'] as String?,
-    fnNumber: json['fn_number'] as String?,
-    ecrRegistrationNumber: json['ecr_registration_number'] as String?,
-    fiscalDocumentNumber: json['fiscal_document_number'] as int?,
-    fiscalDocumentAttribute: json['fiscal_document_attribute'] as String?,
-    amountTotal: json['amount_total'] as String?,
-    serialNumber: json['serial_number'] as String?,
-    fnsSite: json['fnsSite'] as String?,
-    ofd: json['OFD'] == null
-        ? null
-        : OFD.fromJson(json['OFD'] as Map<String, dynamic>),
-  );
-}
+Receipt _$ReceiptFromJson(Map<String, dynamic> json) => Receipt(
+      receiptStatus:
+          $enumDecodeNullable(_$ReceiptStatusEnumMap, json['receiptStatus']),
+      uuid: json['uuid'] as String?,
+      originalOfdUuid: json['original_ofd_uuid'] as String?,
+      shiftNumber: json['shift_number'] as int?,
+      fiscalReceiptNumber: json['fiscal_receipt_number'] as int?,
+      receiptDatetime: json['receipt_datetime'] as String?,
+      fnNumber: json['fn_number'] as String?,
+      ecrRegistrationNumber: json['ecr_registration_number'] as String?,
+      fiscalDocumentNumber: json['fiscal_document_number'] as int?,
+      fiscalDocumentAttribute: json['fiscal_document_attribute'] as String?,
+      amountTotal: json['amount_total'] as String?,
+      serialNumber: json['serial_number'] as String?,
+      fnsSite: json['fnsSite'] as String?,
+      ofdReceiptUrl: json['ofd_receipt_url'] as String?,
+      ofd: json['OFD'] == null
+          ? null
+          : OFD.fromJson(json['OFD'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$ReceiptToJson(Receipt instance) {
   final val = <String, dynamic>{};
@@ -73,8 +72,9 @@ Map<String, dynamic> _$ReceiptToJson(Receipt instance) {
 
   writeNotNull('receiptStatus', _$ReceiptStatusEnumMap[instance.receiptStatus]);
   writeNotNull('uuid', instance.uuid);
+  writeNotNull('original_ofd_uuid', instance.originalOfdUuid);
   writeNotNull('shift_number', instance.shiftNumber);
-  writeNotNull('receipt_number', instance.receiptNumber);
+  writeNotNull('fiscal_receipt_number', instance.fiscalReceiptNumber);
   writeNotNull('receipt_datetime', instance.receiptDatetime);
   writeNotNull('fn_number', instance.fnNumber);
   writeNotNull('ecr_registration_number', instance.ecrRegistrationNumber);
@@ -83,45 +83,9 @@ Map<String, dynamic> _$ReceiptToJson(Receipt instance) {
   writeNotNull('amount_total', instance.amountTotal);
   writeNotNull('serial_number', instance.serialNumber);
   writeNotNull('fnsSite', instance.fnsSite);
+  writeNotNull('ofd_receipt_url', instance.ofdReceiptUrl);
   writeNotNull('OFD', instance.ofd);
   return val;
-}
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
-
-K? _$enumDecodeNullable<K, V>(
-  Map<K, V> enumValues,
-  dynamic source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
 const _$ReceiptStatusEnumMap = {
@@ -133,13 +97,11 @@ const _$ReceiptStatusEnumMap = {
   ReceiptStatus.refundError: 5,
 };
 
-OFD _$OFDFromJson(Map<String, dynamic> json) {
-  return OFD(
-    name: json['name'] as String?,
-    website: json['website'] as String?,
-    inn: json['INN'] as String?,
-  );
-}
+OFD _$OFDFromJson(Map<String, dynamic> json) => OFD(
+      name: json['name'] as String?,
+      website: json['website'] as String?,
+      inn: json['INN'] as String?,
+    );
 
 Map<String, dynamic> _$OFDToJson(OFD instance) {
   final val = <String, dynamic>{};

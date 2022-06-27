@@ -6,14 +6,12 @@ part of 'payer_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PayerData _$PayerDataFromJson(Map<String, dynamic> json) {
-  return PayerData(
-    email: json['email'] as String?,
-    transactionAttributes: (json['transactionAttributes'] as List<dynamic>?)
-        ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+PayerData _$PayerDataFromJson(Map<String, dynamic> json) => PayerData(
+      email: json['email'] as String?,
+      transactionAttributes: (json['transactionAttributes'] as List<dynamic>?)
+          ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$PayerDataToJson(PayerData instance) {
   final val = <String, dynamic>{};

@@ -24,6 +24,7 @@ class ReverseRequest extends AcquiringRequest {
   /// {@macro reverse_request}
   ReverseRequest({
     required this.orderId,
+    this.amount,
     this.jsonParams,
     this.language,
   });
@@ -42,6 +43,7 @@ class ReverseRequest extends AcquiringRequest {
   Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
         JsonKeys.orderId: orderId,
+        JsonKeys.amount: amount,
         JsonKeys.jsonParams: jsonParams,
         JsonKeys.language: language,
       };
@@ -49,11 +51,13 @@ class ReverseRequest extends AcquiringRequest {
   @override
   ReverseRequest copyWith({
     String? orderId,
+    int? amount,
     Map<String, dynamic>? jsonParams,
     String? language,
   }) {
     return ReverseRequest(
       orderId: orderId ?? this.orderId,
+      amount: amount ?? this.amount,
       jsonParams: jsonParams ?? this.jsonParams,
       language: language ?? this.language,
     );
@@ -66,6 +70,10 @@ class ReverseRequest extends AcquiringRequest {
   /// Отсутствует если регистрация заказа на удалась по причине ошибки, детализированной в ErrorCode.
   @JsonKey(name: JsonKeys.orderId)
   final String orderId;
+
+  /// Сумма частичной отмены. Параметр, обязательный для частичной отмены.
+  @JsonKey(name: JsonKeys.amount)
+  final int? amount;
 
   /// Дополнительные параметры запроса. Формат вида: {«Имя1»: «Значение1», «Имя2»: «Значение2»}.
   @JsonKey(name: JsonKeys.jsonParams)

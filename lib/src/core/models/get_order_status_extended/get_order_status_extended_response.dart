@@ -9,6 +9,7 @@ import '../common/card_auth_info.dart';
 import '../common/payer_data.dart';
 import '../common/payment_amount_info.dart';
 import '../common/refunds.dart';
+import '../enums/avs_code.dart';
 import '../enums/order_status.dart';
 import '../enums/payment_way.dart';
 
@@ -36,6 +37,7 @@ class GetOrderStatusExtendedResponse extends AcquiringResponse {
     this.authRefNum,
     this.refundedDate,
     this.paymentWay,
+    this.avsCode,
     this.merchantOrderParams,
     this.attributes,
     this.transactionAttributes,
@@ -74,6 +76,7 @@ class GetOrderStatusExtendedResponse extends AcquiringResponse {
         JsonKeys.authRefNum: authRefNum,
         JsonKeys.refundedDate: refundedDate,
         JsonKeys.paymentWay: paymentWay,
+        JsonKeys.avsCode: avsCode,
         JsonKeys.merchantOrderParams: merchantOrderParams,
         JsonKeys.attributes: attributes,
         JsonKeys.transactionAttributes: transactionAttributes,
@@ -138,6 +141,10 @@ class GetOrderStatusExtendedResponse extends AcquiringResponse {
   /// {@macro payment_way}
   @JsonKey(name: JsonKeys.paymentWay)
   final PaymentWay? paymentWay;
+
+  /// {@macro avs_code}
+  @JsonKey(name: JsonKeys.avsCode)
+  final AvsCode? avsCode;
 
   /// Параметры продавца
   @JsonKey(name: JsonKeys.merchantOrderParams)

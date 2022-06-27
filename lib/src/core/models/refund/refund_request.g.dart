@@ -6,13 +6,12 @@ part of 'refund_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-RefundRequest _$RefundRequestFromJson(Map<String, dynamic> json) {
-  return RefundRequest(
-    amount: json['amount'] as int,
-    orderId: json['orderId'] as String,
-    jsonParams: json['jsonParams'] as Map<String, dynamic>?,
-  );
-}
+RefundRequest _$RefundRequestFromJson(Map<String, dynamic> json) =>
+    RefundRequest(
+      amount: json['amount'] as int,
+      orderId: json['orderId'] as String,
+      jsonParams: json['jsonParams'] as Map<String, dynamic>?,
+    );
 
 Map<String, dynamic> _$RefundRequestToJson(RefundRequest instance) {
   final val = <String, dynamic>{

@@ -6,12 +6,11 @@ part of 'deposit_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-DepositResponse _$DepositResponseFromJson(Map<String, dynamic> json) {
-  return DepositResponse(
-    errorCode: json['errorCode'] as String?,
-    errorMessage: json['errorMessage'] as String?,
-  );
-}
+DepositResponse _$DepositResponseFromJson(Map<String, dynamic> json) =>
+    DepositResponse(
+      errorCode: json['errorCode'] as String?,
+      errorMessage: json['errorMessage'] as String?,
+    );
 
 Map<String, dynamic> _$DepositResponseToJson(DepositResponse instance) {
   final val = <String, dynamic>{};

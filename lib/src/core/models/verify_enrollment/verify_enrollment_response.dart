@@ -15,7 +15,7 @@ class VerifyEnrollmentResponse extends AcquiringResponse {
   VerifyEnrollmentResponse({
     String? errorCode,
     String? errorMessage,
-    this.enrolled,
+    this.isEnrolled,
     this.emitterName,
     this.emitterCountryCode,
   }) : super(
@@ -33,14 +33,14 @@ class VerifyEnrollmentResponse extends AcquiringResponse {
   @override
   Map<String, Object?> get equals => <String, Object?>{
         ...super.equals,
-        JsonKeys.enrolled: enrolled,
+        JsonKeys.isEnrolled: isEnrolled,
         JsonKeys.emitterName: emitterName,
         JsonKeys.emitterCountryCode: emitterCountryCode,
       };
 
   /// {@macro enrolled}
-  @JsonKey(name: JsonKeys.enrolled)
-  final Enrolled? enrolled;
+  @JsonKey(name: JsonKeys.isEnrolled)
+  final Enrolled? isEnrolled;
 
   /// Наименование банка-эмитента.
   @JsonKey(name: JsonKeys.emitterName)
