@@ -1,9 +1,17 @@
 // ignore_for_file: public_member_api_docs
 
 abstract class NetworkSettings {
-  static const String apiPath = 'payment/';
   static const String domainRelease = 'securepayments.sberbank.ru';
   static const String domainDebug = '3dsec.sberbank.ru';
+  static const String apiPath = 'payment/';
+
+  static const String contentType = 'content-type';
+  static const String contentTypeJson = 'application/json';
+  static const String contentTypeFormUrlencoded =
+      'application/x-www-form-urlencoded';
+  static const Map<String, String> baseHeaders = <String, String>{
+    contentType: contentTypeFormUrlencoded,
+  };
 
   static const Duration timeout = Duration(seconds: 40);
 }

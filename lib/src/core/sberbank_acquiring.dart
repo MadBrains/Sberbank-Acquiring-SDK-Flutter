@@ -2,6 +2,7 @@ import 'package:sberbank_acquiring/src/core/utils/network_client.dart';
 
 import 'models/models.dart';
 import 'sberbank_acquiring_config.dart';
+import 'utils/logger.dart';
 
 /// {@template sberbank_acquiring}
 /// Класс позволяет осуществлять взаимодействие с `Sberbank Acquiring API`.
@@ -10,12 +11,15 @@ import 'sberbank_acquiring_config.dart';
 /// {@endtemplate}
 class SberbankAcquiring {
   /// {@macro sberbank_acquiring}
-  SberbankAcquiring(this.config) : _network = NetworkClient(config);
+  SberbankAcquiring(this._config) : _network = NetworkClient(_config);
 
   /// {@macro sberbank_acquiring_config}
-  final SberbankAcquiringConfig config;
+  final SberbankAcquiringConfig _config;
 
   final NetworkClient _network;
+
+  /// {@macro logger}
+  BaseLogger get logger => _config.logger;
 
   /// {@macro apple_pay_request}
   Future<ApplePayResponse> applePay(ApplePayRequest request) {

@@ -32,10 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   MadPay madPay = MadPay();
   SberbankAcquiring acquiring = SberbankAcquiring(
-    SberbankAcquiringConfig(
-      userName: 'oleg',
-      password: 'querty123',
-    ),
+    SberbankAcquiringConfig.token(token: 'YRF3C5RFICWISEWFR6GJ'),
   );
 
   OrderStatus? orderStatus;
@@ -84,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
         MaterialPageRoute<void>(
           builder: (BuildContext context) => Scaffold(
             body: WebViewPayment(
-              config: acquiring.config,
+              logger: acquiring.logger,
               formUrl: formUrl,
               returnUrl: 'https://test.ru/return.html',
               failUrl: 'https://test.ru/fail.html',
