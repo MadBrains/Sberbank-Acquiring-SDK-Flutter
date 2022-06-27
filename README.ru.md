@@ -35,10 +35,10 @@ SDK позволяет настроить режим работы (debug/prod), 
 Чтобы настроить режим работы, установите параметры:
 ```dart
 final SberbankAcquiring acquiring = SberbankAcquiring(
-  SberbankAcquiringConfig(
+  SberbankAcquiringConfig.credential(
     userName: userName,
     password: password,
-    debug: false,
+    isDebugMode: false,
   ),
 );
 ```
@@ -48,6 +48,7 @@ final SberbankAcquiring acquiring = SberbankAcquiring(
 final SberbankAcquiring acquiring = SberbankAcquiring(
   SberbankAcquiringConfig.token(
     token: token,
+    isDebugMode: false,
   ),
 );
 ```
@@ -56,7 +57,13 @@ final SberbankAcquiring acquiring = SberbankAcquiring(
 ```dart
 final SberbankAcquiring acquiring = SberbankAcquiring(
   SberbankAcquiringConfig.proxy(
-    proxyUrl: 'https://server.com/',
+    proxyDomain: 'server.com',
+    proxyPath: 'api/v1/',
+    globalHeaders: <String, String>{'auth': 'test'},
+    mapping: (AcquiringRequest request, bool isDebugMode) {
+      if(request is RegisterRequest) return ProxyMapping(path: '/register');
+      return;
+    }
   ),
 );
 ```
