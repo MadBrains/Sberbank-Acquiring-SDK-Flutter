@@ -1,10 +1,21 @@
+<a href="https://madbrains.ru/?utm_source=gthb"><img src="docs/banner.png"></a>
+<img align="left" src="docs/sber_sdk.png" width="480" height="360" /></a>
+
 <h1 align="center">Flutter Sberbank Acquiring SDK</h1>
 
-<a href="https://madbrains.ru/"><img src="https://firebasestorage.googleapis.com/v0/b/mad-brains-web.appspot.com/o/logo.png?alt=media" width="200" align="right" style="margin: 20px;"/></a>
- 
 Acquiring SDK позволяет интегрировать [Интернет-Эквайринг Sberbank][acquiring] в мобильные приложения для платформы iOS и Android. 
 
 [Документация по доступным API][documentation].
+
+<p><h4> Мы создаем мобильные приложения и корпоративные сервисы, реализуем сложные IT-проекты для крупного и среднего бизнеса.</h4>
+<a href="https://madbrains.ru/?utm_source=gthb">
+<img src="docs/get_started_stroke.png" width="249" height="45"></a>
+</p>
+<p><h5>Подпишитесь на обновления:</h5>
+<a href="https://github.com/MadBrains" >
+<img src="docs/follow_us_stroke.png" width="138" height="24"></a></p>
+</br>
+
 
 ## Возможности SDK
 
