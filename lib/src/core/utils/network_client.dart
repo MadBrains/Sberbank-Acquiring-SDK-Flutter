@@ -12,7 +12,7 @@ import '../sberbank_acquiring_config.dart';
 /// {@endtemplate}
 class NetworkClient {
   /// {@macro network_client}
-  NetworkClient(this._config);
+  const NetworkClient(this._config);
 
   final SberbankAcquiringConfig _config;
 
@@ -29,13 +29,10 @@ class NetworkClient {
     if (config is SberbankAcquiringConfigProxy) {
       final ProxyRequest? setting = config.mapping?.call(
         request,
-        _config.isDebugMode,
+        isDebugMode: _config.isDebugMode,
       );
 
-      proxyHeaders = <String, String>{
-        ...?config.globalHeaders,
-        ...?setting?.headers
-      };
+      proxyHeaders = <String, String>{...?config.globalHeaders, ...?setting?.headers};
 
       final String? path = setting?.path;
       final String? proxyPath = path != null ? config.proxyPath + path : null;
@@ -51,9 +48,7 @@ class NetworkClient {
     };
 
     url ??= Uri.https(
-      config.isDebugMode
-          ? NetworkSettings.domainDebug
-          : NetworkSettings.domainRelease,
+      config.isDebugMode ? NetworkSettings.domainDebug : NetworkSettings.domainRelease,
       NetworkSettings.apiPath + request.apiMethod,
     );
 
@@ -115,22 +110,26 @@ class NetworkClient {
 
     temp.removeWhere((_, String? v) => v == null || v.isEmpty);
 
-    if (config is SberbankAcquiringConfigProxy) return temp;
-
-    if (request.apiMethod != ApiMethods.applePay &&
-        request.apiMethod != ApiMethods.googlePay) {
-      if (config is SberbankAcquiringConfigCredential) {
-        temp.addAll(<String, String>{
-          JsonKeys.userName: config.userName,
-          JsonKeys.password: config.password,
-        });
-      }
-
-      if (config is SberbankAcquiringConfigToken) {
-        temp.addAll(<String, String>{
-          JsonKeys.token: config.token,
-        });
-      }
+    switch (config) {
+      case SberbankAcquiringConfigProxy():
+        return temp;
+      case SberbankAcquiringConfigCredential():
+        if (request.apiMethod != ApiMethods.applePay && request.apiMethod != ApiMethods.googlePay) {
+          temp.addAll(
+            <String, String>{
+              JsonKeys.userName: config.userName,
+              JsonKeys.password: config.password,
+            },
+          );
+        }
+      case SberbankAcquiringConfigToken():
+        if (request.apiMethod != ApiMethods.applePay && request.apiMethod != ApiMethods.googlePay) {
+          temp.addAll(
+            <String, String>{
+              JsonKeys.token: config.token,
+            },
+          );
+        }
     }
 
     switch (request.headers[NetworkSettings.contentType]) {

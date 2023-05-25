@@ -10,7 +10,7 @@ typedef OnFinished = void Function(String? orderId);
 /// {@template on_load}
 /// Коллбэк при загрузке
 /// {@endtemplate}
-typedef OnLoad = void Function(bool isLoading);
+typedef OnLoad = void Function({required bool isLoading});
 
 /// {@template on_error}
 /// Коллбэк при ошибке
@@ -83,7 +83,7 @@ class _WebViewPaymentState extends State<WebViewPayment> {
             widget.logger.log(name: 'WebViewPayment', message: 'onPageStarted: $url');
 
             if (url == widget.formUrl) {
-              widget.onLoad?.call(true);
+              widget.onLoad?.call(isLoading: true);
             }
 
             if (url.contains(widget.returnUrl)) {
@@ -100,7 +100,7 @@ class _WebViewPaymentState extends State<WebViewPayment> {
             widget.logger.log(name: 'WebViewPayment', message: 'onPageFinished: $url');
 
             if (url == widget.formUrl) {
-              widget.onLoad?.call(false);
+              widget.onLoad?.call(isLoading: false);
             }
 
             if (!hasSent && url.contains(widget.returnUrl)) {
@@ -115,22 +115,16 @@ class _WebViewPaymentState extends State<WebViewPayment> {
       );
   }
 
-  // @override
-  // void dispose() {
-  //   _webViewController.clearLocalStorage();
-  //   super.dispose();
-  // }
+  String? getOrderId(String url) {
+    final Uri? _url = Uri.tryParse(url);
+
+    return _url?.queryParameters['orderId'];
+  }
 
   @override
   Widget build(BuildContext context) {
     return WebViewWidget(
       controller: _webViewController,
     );
-  }
-
-  String? getOrderId(String url) {
-    final Uri? _url = Uri.tryParse(url);
-
-    return _url?.queryParameters['orderId'];
   }
 }

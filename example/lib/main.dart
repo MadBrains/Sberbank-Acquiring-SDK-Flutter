@@ -85,8 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
               formUrl: formUrl,
               returnUrl: 'https://test.ru/return.html',
               failUrl: 'https://test.ru/fail.html',
-              onLoad: (bool v) {
-                debugPrint('WebView load: $v');
+              onLoad: ({required bool isLoading}) {
+                debugPrint('WebView load: $isLoading');
               },
               onError: () {
                 debugPrint('WebView Error');
