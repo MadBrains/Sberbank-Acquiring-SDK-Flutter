@@ -80,7 +80,8 @@ class _WebViewPaymentState extends State<WebViewPayment> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onPageStarted: (String url) {
-            widget.logger.log(name: 'WebViewPayment', message: 'onPageStarted: $url');
+            widget.logger
+                .log(name: 'WebViewPayment', message: 'onPageStarted: $url');
 
             if (url == widget.formUrl) {
               widget.onLoad?.call(isLoading: true);
@@ -97,7 +98,8 @@ class _WebViewPaymentState extends State<WebViewPayment> {
             }
           },
           onPageFinished: (String url) async {
-            widget.logger.log(name: 'WebViewPayment', message: 'onPageFinished: $url');
+            widget.logger
+                .log(name: 'WebViewPayment', message: 'onPageFinished: $url');
 
             if (url == widget.formUrl) {
               widget.onLoad?.call(isLoading: false);

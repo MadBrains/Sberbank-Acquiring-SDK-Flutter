@@ -309,7 +309,8 @@ class RegisterRequest extends AcquiringRequest {
   final AppToApp? app2app;
 
   /// {@macro back_to_app}
-  @JsonKey(name: JsonKeys.back2app, includeFromJson: false, includeToJson: false)
+  @JsonKey(
+      name: JsonKeys.back2app, includeFromJson: false, includeToJson: false)
   final BackToApp? back2app;
 
   /// Дата и время автозавершения двухстадийного платежа в следующем формате: `2017-12-29T13:02:51`

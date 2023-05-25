@@ -7,7 +7,8 @@ abstract final class NetworkSettings {
 
   static const String contentType = 'content-type';
   static const String contentTypeJson = 'application/json';
-  static const String contentTypeFormUrlencoded = 'application/x-www-form-urlencoded';
+  static const String contentTypeFormUrlencoded =
+      'application/x-www-form-urlencoded';
   static const Map<String, String> baseHeaders = <String, String>{
     contentType: contentTypeFormUrlencoded,
   };
@@ -73,7 +74,8 @@ abstract final class JsonValues {
   static const String googlePayCard = 'GOOGLE_PAY_CARD';
   static const String googlePayCardBinding = 'GOOGLE_PAY_CARD_BINDING';
   static const String googlePayTokenized = 'GOOGLE_PAY_TOKENIZED';
-  static const String googlePayTokenizedBinding = 'GOOGLE_PAY_TOKENIZED_BINDING';
+  static const String googlePayTokenizedBinding =
+      'GOOGLE_PAY_TOKENIZED_BINDING';
   static const String samsungPay = 'SAMSUNG_PAY';
   static const String samsungPayBinding = 'SAMSUNG_PAY_BINDING';
   static const String iPOS = 'IPOS';

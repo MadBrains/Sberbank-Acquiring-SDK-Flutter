@@ -56,8 +56,7 @@ Map<String, dynamic> _$RegisterRequestToJson(RegisterRequest instance) {
   writeNotNull('pageView', instance.pageView);
   writeNotNull('clientId', instance.clientId);
   writeNotNull('merchantLogin', instance.merchantLogin);
-  writeNotNull(
-      'jsonParams', RegisterRequest._jsonParamsToString(instance.jsonParams));
+  val['jsonParams'] = RegisterRequest._jsonParamsToString(instance.jsonParams);
   writeNotNull('sessionTimeoutSecs', instance.sessionTimeoutSecs);
   writeNotNull('expirationDate', instance.expirationDate);
   writeNotNull('bindingId', instance.bindingId);
@@ -85,7 +84,7 @@ AppToApp _$AppToAppFromJson(Map<String, dynamic> json) => AppToApp(
 
 Map<String, dynamic> _$AppToAppToJson(AppToApp instance) => <String, dynamic>{
       'app2app': instance.app2app,
-      'app.osType': _$OSTypeEnumMap[instance.osType],
+      'app.osType': _$OSTypeEnumMap[instance.osType]!,
       'app.deepLink': instance.deepLink,
     };
 

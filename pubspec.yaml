@@ -4,7 +4,6 @@ version: 2.0.2
 repository: https://github.com/MadBrains/Sberbank-Acquiring-SDK-Flutter
 issue_tracker: https://github.com/MadBrains/Sberbank-Acquiring-SDK-Flutter/issues
 homepage: https://madbrains.ru/
-
 environment:
   sdk: ">=3.0.0 <4.0.0"
 
