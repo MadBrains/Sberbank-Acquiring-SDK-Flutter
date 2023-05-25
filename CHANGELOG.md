@@ -1,3 +1,8 @@
+## [2.0.2]
+
+* Dart 3 and Flutter 3.10.2 support
+* Upgraded dependencies
+
 ## [2.0.1]
 
 * Update models & add new
