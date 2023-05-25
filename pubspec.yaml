@@ -1,23 +1,23 @@
 name: sberbank_acquiring
 description: Flutter Sberbank Acquiring SDK is a simple way to integrate payments into your mobile application.
-version: 2.0.1
+version: 2.0.2
 repository: https://github.com/MadBrains/Sberbank-Acquiring-SDK-Flutter
 issue_tracker: https://github.com/MadBrains/Sberbank-Acquiring-SDK-Flutter/issues
 homepage: https://madbrains.ru/
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   comparer: ^2.0.1
-  http: ^0.13.4
-  webview_flutter: ^3.0.4
-  json_annotation: ^4.5.0
+  http: ^1.0.0
+  webview_flutter: ^4.2.1
+  json_annotation: ^4.8.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^2.1.11
-  json_serializable: ^6.2.0
+  build_runner: ^2.4.4
+  json_serializable: ^6.7.0
