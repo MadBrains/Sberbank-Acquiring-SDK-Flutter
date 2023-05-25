@@ -2,6 +2,7 @@
 
 * Dart 3 and Flutter 3.10.2 support
 * Upgraded dependencies
+* BREAKING CHANGES: Android minSdkVersion is now 21, iOS MinimumOSVersion is 11.0
 
 ## [2.0.1]
 
