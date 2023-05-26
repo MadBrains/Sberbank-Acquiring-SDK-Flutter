@@ -6,14 +6,14 @@ import 'utils/logger.dart';
 /// Позволяет изменять путь и загаловок запроса.
 /// {@endtemplate}
 typedef ProxyMapping = ProxyRequest? Function(
-  AcquiringRequest request,
-  bool isDebugMode,
-);
+  AcquiringRequest request, {
+  required bool isDebugMode,
+});
 
 /// {@template sberbank_acquiring_config}
 /// Класс позволяет конфигурировать SDK.
 /// {@endtemplate}
-abstract class SberbankAcquiringConfig {
+sealed class SberbankAcquiringConfig {
   /// {@macro sberbank_acquiring}
   ///
   /// [userName]:

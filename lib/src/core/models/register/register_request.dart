@@ -180,7 +180,7 @@ class RegisterRequest extends AcquiringRequest {
   /// - `false` (ложь) - параметр выключен, производится одностадийная оплата (средства списываются сразу), запрос идет на `register`.
   ///
   /// Если параметр не указан в запросе, происходит одностадийная оплата.
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   final bool? preAuth;
 
   /// Номер (идентификатор) заказа в системе магазина, уникален для каждого магазина в пределах системы.
@@ -305,11 +305,12 @@ class RegisterRequest extends AcquiringRequest {
   final int? phone;
 
   /// {@macro app_to_app}
-  @JsonKey(name: JsonKeys.app2app, ignore: true)
+  @JsonKey(name: JsonKeys.app2app, includeFromJson: false, includeToJson: false)
   final AppToApp? app2app;
 
   /// {@macro back_to_app}
-  @JsonKey(name: JsonKeys.back2app, ignore: true)
+  @JsonKey(
+      name: JsonKeys.back2app, includeFromJson: false, includeToJson: false)
   final BackToApp? back2app;
 
   /// Дата и время автозавершения двухстадийного платежа в следующем формате: `2017-12-29T13:02:51`

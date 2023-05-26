@@ -28,7 +28,7 @@ Map<String, dynamic> _$GetBindingsRequestToJson(GetBindingsRequest instance) {
 
   writeNotNull('bindingId', instance.bindingId);
   writeNotNull('showExpired', instance.showExpired);
-  val['bindingType'] = _$BindingTypeEnumMap[instance.bindingType];
+  val['bindingType'] = _$BindingTypeEnumMap[instance.bindingType]!;
   writeNotNull('language', instance.language);
   return val;
 }
@@ -64,7 +64,7 @@ Map<String, dynamic> _$GetAllBindingsRequestToJson(
 
   writeNotNull('bindingId', instance.bindingId);
   writeNotNull('showExpired', instance.showExpired);
-  val['bindingType'] = _$BindingTypeEnumMap[instance.bindingType];
+  val['bindingType'] = _$BindingTypeEnumMap[instance.bindingType]!;
   writeNotNull('language', instance.language);
   return val;
 }

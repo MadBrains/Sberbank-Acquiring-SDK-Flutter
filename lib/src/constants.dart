@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
-abstract class NetworkSettings {
+abstract final class NetworkSettings {
   static const String domainRelease = 'securepayments.sberbank.ru';
   static const String domainDebug = '3dsec.sberbank.ru';
   static const String apiPath = 'payment/';
@@ -16,7 +16,7 @@ abstract class NetworkSettings {
   static const Duration timeout = Duration(seconds: 40);
 }
 
-abstract class ApiMethods {
+abstract final class ApiMethods {
   static const String register = 'rest/register.do';
   static const String registerPreAuth = 'rest/registerPreAuth.do';
   static const String deposit = 'rest/deposit.do';
@@ -38,7 +38,7 @@ abstract class ApiMethods {
   static const String createBindingNoPayment = 'rest/createBindingNoPayment.do';
 }
 
-abstract class JsonValues {
+abstract final class JsonValues {
   static const String desktop = 'DESKTOP';
   static const String mobile = 'MOBILE';
   static const String autoPayment = 'AUTO_PAYMENT';
@@ -115,7 +115,7 @@ abstract class JsonValues {
   static const String ecv2 = 'ECv2';
 }
 
-abstract class JsonKeys {
+abstract final class JsonKeys {
   static const String errorCode = 'errorCode';
   static const String errorMessage = 'errorMessage';
   static const String orderNumber = 'orderNumber';

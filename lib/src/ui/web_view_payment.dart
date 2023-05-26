@@ -8,12 +8,12 @@ import 'package:webview_flutter/webview_flutter.dart';
 typedef OnFinished = void Function(String? orderId);
 
 /// {@template on_load}
-/// Коллбэк при загрузки
+/// Коллбэк при загрузке
 /// {@endtemplate}
-typedef OnLoad = void Function(bool isLoading);
+typedef OnLoad = void Function({required bool isLoading});
 
 /// {@template on_error}
-/// Коллбэк при ошибки
+/// Коллбэк при ошибке
 /// {@endtemplate}
 typedef OnError = void Function();
 
@@ -31,7 +31,6 @@ class WebViewPayment extends StatefulWidget {
     this.onFinished,
     this.onLoad,
     this.onError,
-    this.onWebViewCreated,
   }) : super(key: key);
 
   /// {@macro sberbank_acquiring_config}
@@ -59,9 +58,6 @@ class WebViewPayment extends StatefulWidget {
   /// {@macro on_error}
   final OnError? onError;
 
-  /// Контроллер для управления webview
-  final WebViewCreatedCallback? onWebViewCreated;
-
   @override
   _WebViewPaymentState createState() => _WebViewPaymentState();
 }
@@ -69,55 +65,68 @@ class WebViewPayment extends StatefulWidget {
 class _WebViewPaymentState extends State<WebViewPayment> {
   bool hasSent = false;
 
+  late final WebViewController _webViewController;
+
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+
     final String? failUrl = widget.failUrl;
 
-    return WebView(
-      initialUrl: widget.formUrl,
-      gestureNavigationEnabled: true,
-      javascriptMode: JavascriptMode.unrestricted,
-      onWebViewCreated: widget.onWebViewCreated,
-      onPageStarted: (String url) {
-        widget.logger
-            .log(name: 'WebViewPayment', message: 'onPageStarted: $url');
+    _webViewController = WebViewController()
+      ..loadRequest(Uri.parse(widget.formUrl))
+      ..enableZoom(true)
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onPageStarted: (String url) {
+            widget.logger
+                .log(name: 'WebViewPayment', message: 'onPageStarted: $url');
 
-        if (url == widget.formUrl) {
-          widget.onLoad?.call(true);
-        }
+            if (url == widget.formUrl) {
+              widget.onLoad?.call(isLoading: true);
+            }
 
-        if (url.contains(widget.returnUrl)) {
-          hasSent = true;
-          widget.onFinished?.call(getOrderId(url));
-        }
+            if (url.contains(widget.returnUrl)) {
+              hasSent = true;
+              widget.onFinished?.call(getOrderId(url));
+            }
 
-        if (failUrl != null && url.contains(failUrl)) {
-          hasSent = true;
-          widget.onError?.call();
-        }
-      },
-      onPageFinished: (String url) async {
-        widget.logger
-            .log(name: 'WebViewPayment', message: 'onPageFinished: $url');
+            if (failUrl != null && url.contains(failUrl)) {
+              hasSent = true;
+              widget.onError?.call();
+            }
+          },
+          onPageFinished: (String url) async {
+            widget.logger
+                .log(name: 'WebViewPayment', message: 'onPageFinished: $url');
 
-        if (url == widget.formUrl) {
-          widget.onLoad?.call(false);
-        }
+            if (url == widget.formUrl) {
+              widget.onLoad?.call(isLoading: false);
+            }
 
-        if (!hasSent && url.contains(widget.returnUrl)) {
-          widget.onFinished?.call(getOrderId(url));
-        }
+            if (!hasSent && url.contains(widget.returnUrl)) {
+              widget.onFinished?.call(getOrderId(url));
+            }
 
-        if (!hasSent && (failUrl != null && url.contains(failUrl))) {
-          widget.onError?.call();
-        }
-      },
-    );
+            if (!hasSent && (failUrl != null && url.contains(failUrl))) {
+              widget.onError?.call();
+            }
+          },
+        ),
+      );
   }
 
   String? getOrderId(String url) {
     final Uri? _url = Uri.tryParse(url);
 
     return _url?.queryParameters['orderId'];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return WebViewWidget(
+      controller: _webViewController,
+    );
   }
 }

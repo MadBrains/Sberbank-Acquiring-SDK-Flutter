@@ -3,7 +3,7 @@ import 'dart:developer' as dev;
 /// {@template base_logger}
 /// Интерфейс базового логгера
 /// {@endtemplate}
-abstract class BaseLogger {
+abstract interface class BaseLogger {
   /// {@macro base_logger}
   const BaseLogger();
 
